@@ -1,5 +1,7 @@
 ---
 disqus: ""
+description: Hola! 👋 Soy Luis Correa Leyva. Ciber Emprendedor. Desarrollador de software. Siempre inventando.
+og_image: /assets/images/avatar.jpg
 ---
 
 # Hola! 👋 Soy Luis Correa Leyva
