@@ -10,7 +10,7 @@ og_image: assets/images/avatar.jpg
 
 <codersrank-summary username="correaleyval"></codersrank-summary>
 
-Me gusta programar en diferentes lenguajes como Dart, Python, Javascript, Ruby y cualquier nuevo lenguaje interesante. En este blog publico mis ideas y los proyetos que voy realizando relacionados con la Ciencia de la computación. Además de algunos artículos sobre temas de los que siempre estoy aprendiendo, principalmente Machine Learning, Data Science y análisis e implementación de algoritmos.
+Me gusta programar en diferentes lenguajes como Dart, Python, Javascript, Ruby y cualquier nuevo lenguaje interesante. En este blog publico mis ideas y los proyectos que voy realizando relacionados con la Ciencia de la computación. Además de algunos artículos sobre temas de los que siempre estoy aprendiendo, principalmente Machine Learning, Data Science y análisis e implementación de algoritmos.
 
 > ❤️ Dart Code
 
