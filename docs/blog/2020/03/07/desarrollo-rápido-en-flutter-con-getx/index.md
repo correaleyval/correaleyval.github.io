@@ -50,7 +50,7 @@ Lo primero es crear el proyecto, ya sabes:
 
 **¡PUES NO!**
 
-Sucede que GetX también tiene un cli: [get_cli](https://pub.dev/packages/get_cli), que nos permite generar código automáticamente para nuestra aplicación y este es un punto clave para reducir el tiempo de desarrollo. Contar con un generador de código es crucial para automatizar procesos como la creación de archivos, estructurar el proyecto, escribir lo que siempre escribimos cada vez que vamos a crear una página o widget, o establecer una conexión con una API.
+Sucede que GetX también tiene un cli: [get_cli](https://pub.dev/packages/get_cli){:target="_blank"}, que nos permite generar código automáticamente para nuestra aplicación y este es un punto clave para reducir el tiempo de desarrollo. Contar con un generador de código es crucial para automatizar procesos como la creación de archivos, estructurar el proyecto, escribir lo que siempre escribimos cada vez que vamos a crear una página o widget, o establecer una conexión con una API.
 
 > El desarrollador no debería tener que preocuparse por esas cosas, pienso que en la actualidad todos los frameworks deberían contar con generadores de código. Luego trataré de crear mis propios generadores de códigos para las herramientas que más utilizo e iré documentando el proceso en este blog.
 
