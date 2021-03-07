@@ -74,9 +74,9 @@ Esta es la estructura inicial que nos genera el cli
 
 ![Estructura de directorios](images/dirs.png)
 
-Como se puede ver un sólo comando nos ha generado la vista inicial, el controllador para el manejo de estados, el binding para la inyección de dependencias, y los archivos `app_pages.dart` y `app_routes.dart` con la declaración de las rutas de las vistas. Todo muy bien estructurado para mantener la organización del proyecto.
+Como se puede ver un sólo comando nos ha generado la vista inicial, el controlador para el manejo de estados, el binding para la inyección de dependencias, y los archivos `app_pages.dart` y `app_routes.dart` con la declaración de las rutas de las vistas. Todo muy bien estructurado para mantener la organización del proyecto.
 
-> Si no entienedes que es **Vista**, **Controlador**, **Binding**, **Inyección de dependencias**, **Declaración de rutas** es porque debes revisar la documentación de [GetX](https://pub.dev/packages/get){:target="_blank"}. Además te recomiendo investigar más sobre [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html){:target="_blank"} y como se aplica al desarrollo con Flutter.
+> Si no entiendes que es **Vista**, **Controlador**, **Binding**, **Inyección de dependencias**, **Declaración de rutas** es porque debes revisar la documentación de [GetX](https://pub.dev/packages/get){:target="_blank"}. Además te recomiendo investigar más sobre [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html){:target="_blank"} y como se aplica al desarrollo con Flutter.
 
 ## Hora de escribir código
 
@@ -182,7 +182,7 @@ class HomeView extends GetView<HomeController> {
 }
 ```
 
-Esta sería la pantalla incial. Al usar `GetView<HomeController>` para la clase de la vista (en lugar de `StatelessWidget` o `StatefulWidget`). La vista automáticamente posee la propiedad `controller` que es una instancia de `HomeController` y es la utilizada para manejar el estado de la vista. Gracias al archivo `lib/app/modules/home/bindings/home_binding.dart` el controllador es "inyectado" o inicializado automáticamente para que esté listo para ser usado en la vista.
+Esta sería la pantalla incial. Al usar `GetView<HomeController>` para la clase de la vista (en lugar de `StatelessWidget` o `StatefulWidget`). La vista automáticamente posee la propiedad `controller` que es una instancia de `HomeController` y es la utilizada para manejar el estado de la vista. Gracias al archivo `lib/app/modules/home/bindings/home_binding.dart` el controlador es "inyectado" o inicializado automáticamente para que esté listo para ser usado en la vista.
 
 > No mostraré el código de este archivo ya que no he tenido necesidad de modificarlo, ha sido generado automáticamente por el cli, solo mostraré código de los archivos que tengan modificaciones. Al final del post dejaré el link del repo en github para que puedas descargar la app y revisar todo el código.
 
@@ -893,6 +893,10 @@ Este ha sido sólo un pequeño esfuerzo que hago para compartir como trato de lo
 
 ---
 
-Acá está el link para que puedas descargar todo el código de la app desde Github:
+Acá está el link para que puedas descargar todo el código terminado de la app desde Github:
 
-[https://github.com/correaleyval/rick_and_morty](https://github.com/correaleyval/rick_and_morty)
+[https://github.com/correaleyval/rick_and_morty](https://github.com/correaleyval/rick_and_morty){:target="_blank"}
+
+Y la sorpresa es que este proyecto ha sido desarrollado utilizando [Flutter 2.0](https://developers.googleblog.com/2021/03/announcing-flutter-2.html){:target="_blank"}. Por lo que lo he compilado para web y puedes verlo funcionando en este sitio: 
+
+[https://flutter-rickandmorty.netlify.app/](https://flutter-rickandmorty.netlify.app/){:target="_blank"}
