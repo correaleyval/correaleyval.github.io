@@ -69,7 +69,7 @@ Ahora sí creamos el proyecto:
 ![Creando projecto](images/get_cli_create.png)
 ![Seleccionando patrón](images/get_cli_pattern.png)
 
-> Si estoy usando Windows 😅; cosas de la uni. Pero mi [Manjaro i3](https://www.manjaro.org/downloads/community/i3/) sigue aquí en mi PC listo para la acción.
+> Si estoy usando Windows 😅; cosas de la uni. Pero mi [Manjaro i3](https://www.manjaro.org/downloads/community/i3/){:target="_blank"} sigue aquí en mi PC listo para la acción.
 
 Esta es la estructura inicial que nos genera el cli
 
