@@ -1,7 +1,7 @@
 ---
 disqus: ""
-description: Aplicaciones y proyectos
-od_image: header.jpg
+description: Hola! 👋 Soy Luis Correa Leyva. Ciber Emprendedor. Desarrollador de software. Siempre inventando. Estas son mis aplicaciones y proyectos.
+og_image: header.jpg
 ---
 
 # Apps
