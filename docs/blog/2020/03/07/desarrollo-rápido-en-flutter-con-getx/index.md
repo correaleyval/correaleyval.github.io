@@ -290,7 +290,7 @@ Primero descargaremos exactamente la información que nos devolvió la API y la 
 > get generate model with assets/models/character.json`
 ```
 
-El cli nos genera automáticamente los archivos `lib/app/data/models/character_model.dart` y `lib/app/data/providers/character_provider.dart`. Esta vez si mostraré el código de estos archivos aunque no halla tenido que tocarlos para nada. Sólo para que puedas ver la *magia*.
+El cli nos genera automáticamente los archivos `lib/app/data/models/character_model.dart` y `lib/app/data/providers/character_provider.dart`. Esta vez si mostraré el código de estos archivos aunque no haya tenido que tocarlos para nada. Sólo para que puedas ver la *magia*.
 
 `lib/app/data/models/character_model.dart`
 
@@ -533,7 +533,7 @@ class CharactersBinding extends Bindings {
 }
 ```
 
-Para no ponernos técnicos los **bindings** se encargan de ir creando los objetos que necesita la app e ir colocándolos en su lugar. En cualquier parte de nuestro código podemos utilizar `Get.find()` para encontrar un objeto que necesitemos utilizar y que halla sido "inyectado" anteriormente, pero lo correcto para mantener nuestro código limpio es hacerlo de esta manera, cada objeto que necesite nuestra clase se declara que llegará a la clase como un parámetro en el constructor de la clase y luego utlizamos los bindings para ir contruyendo los objetos con los parámetros que necesitan.
+Para no ponernos técnicos los **bindings** se encargan de ir creando los objetos que necesita la app e ir colocándolos en su lugar. En cualquier parte de nuestro código podemos utilizar `Get.find()` para encontrar un objeto que necesitemos utilizar y que haya sido "inyectado" anteriormente, pero lo correcto para mantener nuestro código limpio es hacerlo de esta manera, cada objeto que necesite nuestra clase se declara que llegará a la clase como un parámetro en el constructor de la clase y luego utlizamos los bindings para ir contruyendo los objetos con los parámetros que necesitan.
 
 > Sonó a trabalenguas, pero es mejor que se enrede la lengua y no el código. 😜
 
@@ -890,7 +890,7 @@ Ahora corresponde continuar con el resto de las pantallas. Pero sería un proces
 
 El tiempo es lo más valioso que tenemos, incluso cuando lo aprovechamos en cosas productivas: como trabajar en nuestros proyectos personales, programar, estudiar, etc. Debemos asegurarnos de que lo estamos empleando de la mejor forma posible, los programadores somos adictos a optimizar procesos, de querer automatizar las cosas, de evitarle trabajo mecánico a las personas y dárselo a las máquinas, para que el ser humano tenga tiempo para el trabajo creativo. Si hacemos eso en distintas industrias, ayudando a personas de distintas profesiones, podemos hacerlo también para nosotros mismos, para optimizar nuestro tiempo, quitarnos de encima el trabajo mecánico y dedicarnos a la parte creativa de nuestros proyectos. 
 
-Este ha sido sólo un pequeño esfuerzo que hago para compartir como trato de lograr esto, todavía me queda mucho por aprender pero estaré compartiendo todo lo que aprenda a través de este este blog, espero que te halla sido de utilidad este primer post y si conoces alguna forma de ahorrar más tiempo de desarrollo puedes dejar un comentario al final del post.
+Este ha sido sólo un pequeño esfuerzo que hago para compartir como trato de lograr esto, todavía me queda mucho por aprender pero estaré compartiendo todo lo que aprenda a través de este este blog, espero que te haya sido de utilidad este primer post y si conoces alguna forma de ahorrar más tiempo de desarrollo puedes dejar un comentario al final del post.
 
 ---
 
