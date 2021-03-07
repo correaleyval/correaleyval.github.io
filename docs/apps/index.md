@@ -4,7 +4,7 @@ description: Hola! 👋 Soy Luis Correa Leyva. Ciber Emprendedor. Desarrollador 
 og_image: header.jpg
 ---
 
-# Apps
+# Aplicaciones y proyectos
 
 ---
 
