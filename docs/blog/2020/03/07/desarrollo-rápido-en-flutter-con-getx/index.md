@@ -5,7 +5,7 @@ og_image: header.jpg
 ---
 # Desarrollo rápido en Flutter con GetX
 
-> 7 de noviembre de 2021
+> 7 de marzo de 2021
 
 ## Lo primero, "el problema"
 

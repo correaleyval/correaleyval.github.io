@@ -8,7 +8,7 @@ og_image: header.jpg
 ---
 
 ### [Desarrollo rápido en Flutter con GetX](2020/03/07/desarrollo-rápido-en-flutter-con-getx)
-> 7 de noviembre de 2021
+> 7 de marzo de 2021
 
 ![Desarrollo rápido en Flutter con GetX](2020/03/07/desarrollo-rápido-en-flutter-con-getx/header.jpg)
 
