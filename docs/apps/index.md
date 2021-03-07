@@ -1,7 +1,7 @@
 ---
 disqus: ""
 description: Aplicaciones y proyectos
-od_image: assets/images/startup.jpg
+od_image: header.jpg
 ---
 
 # Apps

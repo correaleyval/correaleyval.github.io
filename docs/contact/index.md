@@ -1,11 +1,14 @@
 ---
 description: Hola! 👋 Soy Luis Correa Leyva. Ciber Emprendedor. Desarrollador de software. Siempre inventando. Esta es mi información de contacto.
-og_image: assets/images/avatar.jpg
+og_image: header.jpg
 ---
 
 # Contácto
 
-Hola, puedes contactarme y mantenerte infromado sobre mis proyectos y publicaciones por las siguientes vías:
+
+![me](header.jpg){width=64}
+
+Hola, puedes contactarme y mantenerte informado sobre mis proyectos y publicaciones por las siguientes vías:
 
 ---
 
