@@ -1,5 +1,6 @@
 ---
-description: Desarrollo rápido en Flutter con GetX
+description: Desarrollo rápido en Flutter con GetX. En este post te mostraré como utilizo GetX para desarrollar aplicaciones móviles utilizando Flutter y terminar las aplicaciones en el menor tiempo posible. A modo de ejemplo desarrollaremos una aplicación que se conectará a The Rick and Morty API, para mostrar de una manera práctica lo que trato de explicar.
+
 og_image: header.jpg
 ---
 # Desarrollo rápido en Flutter con GetX
