@@ -54,7 +54,7 @@ Sucede que GetX también tiene un cli: [get_cli](https://pub.dev/packages/get_cl
 
 > El desarrollador no debería tener que preocuparse por esas cosas, pienso que en la actualidad todos los frameworks deberían contar con generadores de código. Luego trataré de crear mis propios generadores de códigos para las herramientas que más utilizo e iré documentando el proceso en este blog.
 
-Así que lo primero será instalar [get_cli](https://pub.dev/packages/get_cli):
+Así que lo primero será instalar [get_cli](https://pub.dev/packages/get_cli){:target="_blank"}:
 
 ```
 > flutter pub global activate get_cli 
