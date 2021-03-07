@@ -35,7 +35,7 @@ markdown_extensions:
 copyright: Copyright &copy; Luis Antonio Correa Leyva
 
 extra:
-  disqus: "luis_ciber"
+  disqus: "correaleyval"
   manifest: manifest.json
   social:
     - icon: fontawesome/brands/linkedin
