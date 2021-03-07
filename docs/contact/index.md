@@ -20,6 +20,12 @@ Hola, puedes contactarme y mantenerte informado sobre mis proyectos y publicacio
   
   &nbsp;&nbsp;&nbsp;&nbsp;
 
+  <a href="https://github.com/correaleyval" target="blank">
+    <img align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/github.svg" alt="luis_ciber" height="48" width="48" />
+  </a>
+
+  &nbsp;&nbsp;&nbsp;&nbsp;
+
   <a href="https://gitlab.com/correaleyval" target="blank">
     <img align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/gitlab.svg" alt="luis_ciber" height="48" width="48" />
   </a>
