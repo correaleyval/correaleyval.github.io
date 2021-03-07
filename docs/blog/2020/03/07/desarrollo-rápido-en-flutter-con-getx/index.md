@@ -404,7 +404,7 @@ class CharacterProvider extends GetConnect {
 }
 ```
 
-Creo que estamos de acuerdo en que este simple comando nos ha ahorrado muchísimo tiempo y esfuerzo, tiempo que ahora aporvecharemos para enfocarnos en la UI y el manejo de estado de la app. Pero primero hay que hacerle modificaciones al provider, get cli no es adivino, debemos especificar la url de la API y además agregar una función extra para poder obtener una lista de *characters*, esta API también tiene paginación y esto es algo que debemos tener en cuenta.
+Creo que estamos de acuerdo en que este simple comando nos ha ahorrado muchísimo tiempo y esfuerzo, tiempo que ahora aprovecharemos para enfocarnos en la UI y el manejo de estado de la app. Pero primero hay que hacerle modificaciones al provider, get cli no es adivino, debemos especificar la url de la API y además agregar una función extra para poder obtener una lista de *characters*, esta API también tiene paginación y esto es algo que debemos tener en cuenta.
 
 `lib/api.dart`
 
