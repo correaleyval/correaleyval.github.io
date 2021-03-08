@@ -34,3 +34,15 @@
   <meta name="twitter:image" content="{{ page.canonical_url ~ image_url }}" />
 
 {% endblock %}
+
+{% block analytics %}
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HBW40C5MRJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HBW40C5MRJ');
+</script>
+{% endblock %}

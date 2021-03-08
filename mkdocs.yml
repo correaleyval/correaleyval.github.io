@@ -66,10 +66,6 @@ extra:
       link: mailto:correaleyval@gmail.com
       name: Gmail
 
-google_analytics:
-  - G-HBW40C5MRJ
-  - auto
-
 nav:
   - Inicio:
       - Hola Mundo: index.md
