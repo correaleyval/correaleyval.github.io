@@ -1,6 +1,6 @@
 ---
 disqus: ""
-description: Hola! 👋 Soy Luis Correa Leyva. Ciber Emprendedor. Desarrollador de software. Siempre inventando. Estos son mis post recientes en Telegram.
+description: Hola! 👋 Soy Luis Correa Leyva. Ciber Emprendedor. Desarrollador de software. Siempre inventando. Estos son mis posts recientes en Telegram.
 og_image: header.png
 ---
 
