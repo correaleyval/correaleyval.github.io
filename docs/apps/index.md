@@ -20,3 +20,11 @@ Aplicación de ejemplo creada mientras escribía este post:
 [https://flutter-rickandmorty.netlify.app/](https://flutter-rickandmorty.netlify.app/){:target="_blank"}
 
 ---
+
+## BarQRder
+
+Bot de Telegram para generar códigos QR y códigos de barras.
+
+[@BarQRder_bot](https://t.me/BarQRder_bot){:target="_blank"}
+
+---
