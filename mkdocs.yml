@@ -72,9 +72,10 @@ nav:
       - Publicaciones recientes: blog/index.md
       - Aplicaciones y proyectos: apps/index.md
       - Información de contacto: contact/index.md
+      - Telegram Posts: telegram/index.md
   - Blog: blog/index.md
   - Todos los posts: 
     - Desarrollo rápido en Flutter con GetX: blog/2020/03/07/desarrollo-rápido-en-flutter-con-getx/index.md
   - Aplicaciones y proyectos: apps/index.md
   - Información de contacto: contact/index.md
-  - Telegram Post: telegram/index.md
+  - Telegram Posts: telegram/index.md

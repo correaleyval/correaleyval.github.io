@@ -4,9 +4,9 @@ description: Hola! 👋 Soy Luis Correa Leyva. Ciber Emprendedor. Desarrollador 
 og_image: header.png
 ---
 
-# Telegram Post
+# Telegram Posts
 
-Estos son mis post recientes en Telegram.
+Estos son mis posts recientes en Telegram.
 
 <p>
     <script
