@@ -20,7 +20,7 @@ Aplicación de ejemplo creada mientras escribía este post:
 [https://flutter-rickandmorty.netlify.app/](https://flutter-rickandmorty.netlify.app/){:target="_blank"}
 
 ### Código en Github
-[https://github.com/correaleyval/rick_and_morty](https://github.com/correaleyval/rick_and_morty){:targe="_blank"}
+[https://github.com/correaleyval/rick_and_morty](https://github.com/correaleyval/rick_and_morty){:target="_blank"}
 
 ---
 
