@@ -19,12 +19,19 @@ Aplicación de ejemplo creada mientras escribía este post:
 ### Sitio web 
 [https://flutter-rickandmorty.netlify.app/](https://flutter-rickandmorty.netlify.app/){:target="_blank"}
 
+### Código en Github
+[https://github.com/correaleyval/rick_and_morty](https://github.com/correaleyval/rick_and_morty){:targe="_blank"}
+
 ---
 
 ## BarQRder
 
 Bot de Telegram para generar códigos QR y códigos de barras.
 
+### Enlace
 [@BarQRder_bot](https://t.me/BarQRder_bot){:target="_blank"}
+
+### Código en Github
+[https://github.com/correaleyval/BarQRder_bot](https://github.com/correaleyval/BarQRder_bot){:target="_blank"}
 
 ---
