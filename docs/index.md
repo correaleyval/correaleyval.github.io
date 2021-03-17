@@ -1,22 +1,23 @@
 ---
 disqus: ""
-description: Hola! 👋 Soy Luis Correa Leyva. Ciber Emprendedor. Desarrollador de software. Siempre inventando.
+description: Hi! 👋 I'm Luis Correa Leyva. Software Developer. Developing applications with Flutter and learning Data Science.
+
 og_image: /assets/images/avatar.jpg
 ---
 
-# Hola! 👋 Soy Luis Correa Leyva
+# Hi! 👋 I'm Luis Correa Leyva
 
-### Ciber Emprendedor. Desarrollador de software. Siempre inventando.
+### Computer Scientist. Software Developer. Developing applications with Flutter and learning Data Science.
 
 <codersrank-summary username="correaleyval"></codersrank-summary>
 
-Me gusta programar en diferentes lenguajes como Dart, Python, Javascript, Ruby y cualquier nuevo lenguaje interesante. En este blog publico mis ideas y los proyectos que voy realizando relacionados con la Ciencia de la computación. Además de algunos artículos sobre temas de los que siempre estoy aprendiendo, principalmente Machine Learning, Data Science y análisis e implementación de algoritmos.
+I like to program in different languages like Dart, Python, Javascript, Ruby and any new interesting language. In this blog I publish my ideas and the projects that I am carrying out related to Computer Science. In addition to some articles on topics that I am always learning about, mainly Machine Learning, Data Science and analysis and implementation of algorithms.
 
 > ❤️ Dart Code
 
 ```dart
 void main() {
-    print('Bienvenido a mi blog.');
+    print('Welcome to my blog.');
 }
 ```
 

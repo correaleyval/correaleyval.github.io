@@ -1,14 +1,14 @@
 ---
-description: Hola! 👋 Soy Luis Correa Leyva. Ciber Emprendedor. Desarrollador de software. Siempre inventando. Esta es mi información de contacto.
+description: Contact. Hi! 👋 I'm Luis Correa Leyva. Software Developer. Developing applications with Flutter and learning Data Science.
 og_image: header.jpg
 ---
 
-# Contácto
+# Contact
 
 
 ![me](header.jpg){width=64}
 
-Hola, puedes contactarme y mantenerte informado sobre mis proyectos y publicaciones por las siguientes vías:
+Hello, you can contact me and learn more about my projects and publications in the following ways:
 
 ---
 
@@ -56,5 +56,3 @@ Hola, puedes contactarme y mantenerte informado sobre mis proyectos y publicacio
 </p>
 
 ---
-
-Además puedes dejarme un comentario acá, con tus sugerencias u opiniones sobre este blog:

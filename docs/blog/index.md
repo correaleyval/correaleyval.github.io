@@ -1,10 +1,10 @@
 ---
 disqus: ""
-description: Hola! 👋 Soy Luis Correa Leyva. Ciber Emprendedor. Desarrollador de software. Siempre inventando. Estas son mis publicaciones recientes.
+description: Hi! 👋 I'm Luis Correa Leyva. Software Developer. Developing applications with Flutter and learning Data Science. These are my latests posts.
 og_image: header.jpg
 ---
 
-# Publicaciones recientes
+# Latests posts
 ---
 
 ### [Desarrollo rápido en Flutter con GetX](2020/03/07/desarrollo-rápido-en-flutter-con-getx)
