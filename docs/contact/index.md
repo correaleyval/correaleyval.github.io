@@ -1,14 +1,12 @@
 ---
-description: Contact. Hi! 👋 I'm Luis Correa Leyva. Software Developer. Developing applications with Flutter and learning Data Science.
+description: Hi! 👋 I'm Luis Antonio Correa Leyva. Computer Scientist. Software Developer. Developing applications with Flutter and looking for Data Science projects. This is my contact information.
 og_image: header.jpg
+disqus: ""
 ---
 
 # Contact
 
-
-![me](header.jpg){width=64}
-
-Hello, you can contact me and learn more about my projects and publications in the following ways:
+Hi, you can contact me and learn more about my projects and publications in the following ways:
 
 ---
 
