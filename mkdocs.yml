@@ -70,6 +70,7 @@ nav:
       - 👋 Hello World!: index.md
       - 📄 Latests posts: blog/index.md
       - 💻 Applications and projects: apps/index.md
+      - 🗒 Notebooks: notebooks/index.md
       - ℹ️ Contact: contact/index.md
   - Blog: blog/index.md
   - All posts: 
