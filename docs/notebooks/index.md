@@ -6,4 +6,4 @@ og_image: header.jpg
 
 # Notebooks
 
-### [ETECSA-Ofertas de conectividad para Programadores de equipos de computo](ETECSA-Ofertas de conectividad para Programadores de equipos de computo.html){:target="_blank"}
+### [ETECSA-Ofertas de conectividad para Programadores de equipos de cómputo](ETECSA-Ofertas de conectividad para Programadores de equipos de computo.html){:target="_blank"}
