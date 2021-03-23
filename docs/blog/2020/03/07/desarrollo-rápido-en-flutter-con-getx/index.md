@@ -30,7 +30,7 @@ GetX posee clases y funciones para:
 
 * Manejo de estados.
 * Administración de rutas (Navegación)
-* Administración de depencencias (Inyección de dependencias)
+* Administración de dependencias (Inyección de dependencias)
 * Cliente http para conexiones a API REST
 
 Todo estas clases y funciones escritas de un modo que son fáciles de usar y lo más importante "sin
