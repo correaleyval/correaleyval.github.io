@@ -24,12 +24,9 @@ Aplicación de ejemplo creada mientras escribía este post:
 
 > En este post te mostraré como utilizo GetX para desarrollar aplicaciones móviles utilizando Flutter y terminar las aplicaciones en el menor tiempo posible. A modo de ejemplo desarrollaremos una aplicación que se conectará a The Rick and Morty API, para mostrar de una manera práctica lo que trato de explicar.
 
-### Sitio web 
-[https://flutter-rickandmorty.netlify.app/](https://flutter-rickandmorty.netlify.app/){:target="_blank"}
-
 [![Github Card](https://github-readme-stats.vercel.app/api/pin/?username=correaleyval&repo=rick_and_morty)](https://github.com/correaleyval/rick_and_morty){:target="_blank"}
 
-<iframe src="https://flutter-rickandmorty.netlify.app/" with="360" height="600" frameBorder="0">
+<iframe src="https://flutter-rickandmorty.netlify.app/" width="360" height="600" frameBorder="0">
 </iframe>
 
 ---
@@ -38,7 +35,6 @@ Aplicación de ejemplo creada mientras escribía este post:
 
 Telegram bot to generate QR codes and barcodes.
 
-### Link
 [@BarQRder_bot](https://t.me/BarQRder_bot){:target="_blank"}
 
 [![Github Card](https://github-readme-stats.vercel.app/api/pin/?username=correaleyval&repo=BarQRder_bot)](https://github.com/correaleyval/BarQRder_bot){:target="_blank"}
@@ -49,9 +45,11 @@ Telegram bot to generate QR codes and barcodes.
 
 University project to apply the deep search algorithm to solve a maze.
 
-### Link
-[Maze Solver](https://correaleyval.github.io/game-ia-1/){:target="_blank"}
+[Maze Solver](https://luis-ciber.is-a.dev/game-ia-1/){:target="_blank"}
 
 [![Github Card](https://github-readme-stats.vercel.app/api/pin/?username=correaleyval&repo=game-ia-1)](https://github.com/correaleyval/game-ia-1){:target="_blank"}
+
+<iframe src="https://luis-ciber.is-a.dev/game-ia-1/" width="800" height="600" frameBorder="0">
+</iframe>
 
 ---
