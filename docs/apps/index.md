@@ -29,6 +29,9 @@ Aplicación de ejemplo creada mientras escribía este post:
 
 [![Github Card](https://github-readme-stats.vercel.app/api/pin/?username=correaleyval&repo=rick_and_morty)](https://github.com/correaleyval/rick_and_morty){:target="_blank"}
 
+<iframe src="https://flutter-rickandmorty.netlify.app/" with="360" height="600" frameBorder="0">
+</iframe>
+
 ---
 
 ## [BarQRder](https://t.me/BarQRder_bot){:target="_blank"}

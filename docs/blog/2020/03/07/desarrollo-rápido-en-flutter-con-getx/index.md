@@ -901,3 +901,8 @@ Acá está el link para que puedas descargar todo el código terminado de la app
 Y la sorpresa es que este proyecto ha sido desarrollado utilizando [Flutter 2.0](https://developers.googleblog.com/2021/03/announcing-flutter-2.html){:target="_blank"}. Por lo que lo he compilado para web y puedes verlo funcionando en este sitio: 
 
 [https://flutter-rickandmorty.netlify.app/](https://flutter-rickandmorty.netlify.app/){:target="_blank"}
+
+O simplemente probarlo desde acá:
+
+<iframe src="https://flutter-rickandmorty.netlify.app/" with="360" height="600" frameBorder="0">
+</iframe>
