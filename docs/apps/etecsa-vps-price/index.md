@@ -1,5 +1,6 @@
 ---
 disqus: ""
+description: Simple ETECSA VPS Price Calculator
 ---
 
 # ETECSA VPS Price

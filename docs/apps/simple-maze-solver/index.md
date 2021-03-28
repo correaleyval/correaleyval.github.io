@@ -1,5 +1,6 @@
 ---
 disqus: ""
+description: University project to apply the deep search algorithm to solve a maze.
 ---
 
 # Simple Maze Solver
