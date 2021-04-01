@@ -1,6 +1,6 @@
 ---
 disqus: ""
-description: Hi! 👋 I'm Luis Antonio Correa Leyva. Computer Scientist. Software Developer. Developing applications with Flutter and looking for Data Science projects. These are my applications and projects
+description: Hi! 👋 I'm Luis Antonio Correa Leyva. Computer Scientist. 💻 Software Developer. 🚀 Deep Working. These are my applications and projects
 og_image: header.jpg
 ---
 

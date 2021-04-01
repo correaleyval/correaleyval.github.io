@@ -1,5 +1,6 @@
 ---
 disqus: ""
+description: Flutter Getx Pattern example.
 ---
 
 # Rick and Morty

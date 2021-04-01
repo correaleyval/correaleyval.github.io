@@ -1,5 +1,5 @@
-site_name: '@luis__ciber'
-site_description: Hi! 👋 I'm Luis Antonio Correa Leyva. Computer Scientist. Software Developer. Developing applications with Flutter and looking for Data Science projects.
+site_name: '@luis_ciber'
+site_description: Hi! 👋 I'm Luis Antonio Correa Leyva. Computer Scientist. 💻 Software Developer. 🚀 Deep Working.
 site_url: https://luis-ciber.is-a.dev
 repo_url: https://github.com/correaleyval
 edit_uri: ""
@@ -37,29 +37,29 @@ extra:
   disqus: "correaleyval"
   manifest: manifest.json
   social:
-    - icon: fontawesome/brands/linkedin
-      link: https://www.linkedin.com/in/luis-antonio-correa-leyva-605a251a4/
-      name: LinkedIn
+    # - icon: fontawesome/brands/linkedin
+    #   link: https://www.linkedin.com/in/luis-antonio-correa-leyva-605a251a4/
+    #   name: LinkedIn
     
     - icon: fontawesome/brands/github
       link: https://github.com/correaleyval
       name: GitHub
     
-    - icon: fontawesome/brands/gitlab
-      link: https://gitlab.com/correaleyval
-      name: GitLab
+    # - icon: fontawesome/brands/gitlab
+    #   link: https://gitlab.com/correaleyval
+    #   name: GitLab
     
-    - icon: fontawesome/solid/code
-      link: https://profile.codersrank.io/user/correaleyval
-      name: Codersrank
+    # - icon: fontawesome/solid/code
+    #   link: https://profile.codersrank.io/user/correaleyval
+    #   name: Codersrank
 
-    - icon: fontawesome/brands/twitter
-      link: https://twitter.com/luis__ciber
-      name: Twitter
+    # - icon: fontawesome/brands/twitter
+    #   link: https://twitter.com/luis__ciber
+    #   name: Twitter
 
-    - icon: fontawesome/brands/telegram
-      link: https://t.me/luis_ciber
-      name: Telegram
+    # - icon: fontawesome/brands/telegram
+    #   link: https://t.me/luis_ciber
+    #   name: Telegram
 
     - icon: fontawesome/solid/paper-plane
       link: mailto:correaleyval@gmail.com
