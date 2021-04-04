@@ -37,9 +37,9 @@ extra:
   disqus: "correaleyval"
   manifest: manifest.json
   social:
-    # - icon: fontawesome/brands/linkedin
-    #   link: https://www.linkedin.com/in/luis-antonio-correa-leyva-605a251a4/
-    #   name: LinkedIn
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/luisciber
+      name: LinkedIn
     
     - icon: fontawesome/brands/github
       link: https://github.com/correaleyval

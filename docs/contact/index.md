@@ -12,11 +12,11 @@ Hi, you can contact me and learn more about my projects and publications in the 
 
 <p align="center">
   
-  <!-- <a href="https://www.linkedin.com/in/luis-antonio-correa-leyva-605a251a4/" target="blank">
+  <a href="https://www.linkedin.com/in/luisciber" target="blank">
     <img align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/linkedin.svg" alt="luis_ciber" height="48" width="48" />
   </a>
   
-  &nbsp;&nbsp;&nbsp;&nbsp; -->
+  &nbsp;&nbsp;&nbsp;&nbsp;
 
   <a href="https://github.com/correaleyval" target="blank">
     <img align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/github.svg" alt="luis_ciber" height="48" width="48" />
