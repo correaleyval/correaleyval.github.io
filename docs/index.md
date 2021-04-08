@@ -1,11 +1,11 @@
 ---
 disqus: ""
-description: Hi! 👋 I'm Luis Antonio Correa Leyva. Computer Scientist. 💻 Software Developer. 🚀 Deep Working.
+description: Hi! 👋 I'm Luis Antonio Correa Leyva 🧑‍💻. Computer Scientist. 💻 Software Developer. 🚀 Deep Working.
 
 og_image: /assets/images/avatar.jpg
 ---
 
-# Hi! 👋 I'm Luis Antonio Correa Leyva
+# Hi! 👋 I'm Luis Antonio Correa Leyva 🧑‍💻
 
 ### Computer Scientist. 💻 Software Developer. 🚀 Deep Working.
 

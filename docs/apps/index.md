@@ -8,6 +8,14 @@ og_image: header.jpg
 
 ---
 
+## [Flutter Odoo Chat Package](https://github.com/correaleyval/odoochat_flutter){:target="\_blank"}
+
+Flutter package to comunicate with Odoo Conversation module
+
+[![Github Card](https://github-readme-stats.vercel.app/api/pin/?username=correaleyval&repo=odoochat_flutter)](https://github.com/correaleyval/odoochat_flutter){:target="\_blank"}
+
+---
+
 ## [Telezon S3](https://github.com/correaleyval/Telezon-S3){:target="\_blank"}
 
 Amazon S3 clone with Telegram file storage.
