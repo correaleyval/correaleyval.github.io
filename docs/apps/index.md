@@ -8,11 +8,11 @@ og_image: header.jpg
 
 ---
 
-## [Flutter Odoo Chat Package](https://github.com/correaleyval/odoochat_flutter){:target="\_blank"}
+## [Flutter Odoo Chat Package](https://pub.dev/packages/odoochat){:target="\_blank"}
 
 Flutter package to comunicate with Odoo Conversation module
 
-[![Github Card](https://github-readme-stats.vercel.app/api/pin/?username=correaleyval&repo=odoochat_flutter)](https://github.com/correaleyval/odoochat_flutter){:target="\_blank"}
+<!-- [![Github Card](https://github-readme-stats.vercel.app/api/pin/?username=correaleyval&repo=odoochat_flutter)](https://github.com/correaleyval/odoochat_flutter){:target="\_blank"} -->
 
 ---
 
