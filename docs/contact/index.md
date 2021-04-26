@@ -42,11 +42,11 @@ Hi, you can contact me and learn more about my projects and publications in the 
   
   &nbsp;&nbsp;&nbsp;&nbsp; -->
   
-  <!-- <a href="https://t.me/luis_ciber" target="blank">
+  <a href="https://t.me/luis_ciber" target="blank">
     <img align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/telegram.svg" alt="luis_ciber" height="48" width="48"/>
   </a>
 
-  &nbsp;&nbsp;&nbsp;&nbsp; -->
+  &nbsp;&nbsp;&nbsp;&nbsp;
 
   <a href="mailto:correaleyval@gmail.com">
     <img align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/gmail.svg" alt="luis_ciber" height="48" width="48"/>

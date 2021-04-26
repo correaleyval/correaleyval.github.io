@@ -57,9 +57,9 @@ extra:
     #   link: https://twitter.com/luis__ciber
     #   name: Twitter
 
-    # - icon: fontawesome/brands/telegram
-    #   link: https://t.me/luis_ciber
-    #   name: Telegram
+    - icon: fontawesome/brands/telegram
+      link: https://t.me/luis_ciber
+      name: Telegram
 
     - icon: fontawesome/solid/paper-plane
       link: mailto:correaleyval@gmail.com
