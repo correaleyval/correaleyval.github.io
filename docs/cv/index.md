@@ -1,6 +1,6 @@
 ---
 disqus: ""
-description: Hi! 👋 I'm Luis Antonio Correa Leyva. Computer Scientist. 💻 Software Developer. 🚀 Deep Working. This is my Coder CV.
+description: Hola! 👋 Soy Luis Correa @luis_ciber 🧑‍💻. Computer Scientist. 💻 Desarrollador de software. 🚀 "Ciber Emprendedor". This is my Coder CV.
 og_image: header.png
 ---
 

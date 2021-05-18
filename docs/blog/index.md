@@ -1,10 +1,10 @@
 ---
 disqus: ""
-description: Hi! 👋 I'm Luis Antonio Correa Leyva. Computer Scientist. 💻 Software Developer. 🚀 Deep Working. These are my latests posts.
+description: Hola! 👋 Soy Luis Correa @luis_ciber 🧑‍💻. Computer Scientist. 💻 Desarrollador de software. 🚀 "Ciber Emprendedor". Aquí están mis publicaciones más recientes.
 og_image: header.jpg
 ---
 
-# Latests posts
+# Publicaciones recientes
 ---
 
 ### [Desarrollo rápido en Flutter con GetX](2020/03/07/desarrollo-rápido-en-flutter-con-getx)

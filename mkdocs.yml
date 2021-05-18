@@ -1,5 +1,5 @@
 site_name: '@luis_ciber'
-site_description: Hi! 👋 I'm Luis Antonio Correa Leyva. Computer Scientist. 💻 Software Developer. 🚀 Deep Working.
+site_description: Hola! 👋 Soy Luis Correa @luis_ciber 🧑‍💻. Computer Scientist. 💻 Desarrollador de software. 🚀 "Ciber Emprendedor".
 site_url: https://luis-ciber.is-a.dev
 repo_url: https://github.com/correaleyval
 edit_uri: ""
@@ -15,8 +15,8 @@ extra_css:
 theme:
   name: material
   custom_dir: overrides
-  logo: assets/images/avatar.jpg
-  favicon: assets/images/avatar.jpg
+  logo: assets/images/face.png
+  favicon: assets/images/face.png
 
   features:
     - navigation.tabs
@@ -53,9 +53,9 @@ extra:
     #   link: https://profile.codersrank.io/user/correaleyval
     #   name: Codersrank
 
-    # - icon: fontawesome/brands/twitter
-    #   link: https://twitter.com/luis__ciber
-    #   name: Twitter
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/luis__ciber
+      name: Twitter
 
     - icon: fontawesome/brands/telegram
       link: https://t.me/luis_ciber
@@ -66,19 +66,19 @@ extra:
       name: Gmail
 
 nav:
-  - ⭐Start:
-      - 👋 Hello World!: index.md
-      - 📄 Latests posts: blog/index.md
-      - 💻 Applications and projects: apps/index.md
+  - ⭐ Start:
+      - 👋 git init: index.md
+      - 📄 Publicaciones recientes: blog/index.md
+      - 💻 Aplicaciones y proyectos: apps/index.md
       - 🗒 Notebooks: notebooks/index.md
-      - ℹ️ Contact: contact/index.md
+      - ℹ️ Contacto: contact/index.md
       - 🧑‍💻 Coder CV: cv/index.md
   - Blog: blog/index.md
-  - All posts: 
+  - Todos los posts: 
     - Desarrollo rápido en Flutter con GetX: blog/2020/03/07/desarrollo-rápido-en-flutter-con-getx/index.md
   - Notebooks: notebooks/index.md
-  - Applications and projects: apps/index.md
-  - Contact: contact/index.md
+  - Aplicaciones y proyectos: apps/index.md
+  - Contacto: contact/index.md
 
 plugins:
   - mkdocs-jupyter:
