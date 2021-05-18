@@ -49,9 +49,9 @@ extra:
     #   link: https://gitlab.com/correaleyval
     #   name: GitLab
     
-    # - icon: fontawesome/solid/code
-    #   link: https://profile.codersrank.io/user/correaleyval
-    #   name: Codersrank
+    - icon: fontawesome/solid/code
+      link: https://profile.codersrank.io/user/correaleyval
+      name: Codersrank
 
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/luis__ciber
