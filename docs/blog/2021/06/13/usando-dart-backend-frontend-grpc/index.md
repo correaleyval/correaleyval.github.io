@@ -458,3 +458,5 @@ Y con esto ya tienes básicamente todo lo que necesitas saber para usar gRPC con
 Hasta entonces "sigue el gradiente de la curiosidad". 👨‍💻 Happy Coding.
 
 > La tecnología que cambia el mundo generalmente no parece muy impresionante en su primera iteración, simplemente "intrigante". Suceden cosas buenas cuando sigues el gradiente de la curiosidad.
+
+Url del proyecto en Github: [https://github.com/correaleyval/pickup_grpc_server](https://github.com/correaleyval/pickup_grpc_server){:target="_blank"}
