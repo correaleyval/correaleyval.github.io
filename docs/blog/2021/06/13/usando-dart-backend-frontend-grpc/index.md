@@ -16,7 +16,7 @@ Durante un tiempo estuve programando en NodeJS y React y sentí esa sensación d
 
 ## ¿Puede ser Dart el nuevo lenguaje full stack que estoy buscando?
 
-Pues una vez que comencé a tener dominio del lenguaje comencé a experimentar con él para el desarrollo de servicios web y la verdad es que la experiencia al principio fué lo típico del niño que tiene un juguete nuevo, pero a la hora de realizar proyectos reales no fué para nada gratificante. Carece de frameworks que faciliten el trabajo, muy poca documentación sobre tareas típicas de un backend como conectarse a una base de datos, el manejo de las peticiones HTTP se puede tornar complejo cuando intentas contruir una API REST para un proyecto del mundo real y mantener una API REST escrita en Dart puede volverse costoso en tiempo, esfuerzo y puede costarte unos cuántos pelos de la cabeza cuando te topas con un bug.
+Pues una vez que comencé a tener dominio del lenguaje comencé a experimentar con él para el desarrollo de servicios web y la verdad es que la experiencia al principio fué lo típico del niño que tiene un juguete nuevo, pero a la hora de realizar proyectos reales no fué para nada gratificante. Carece de frameworks que faciliten el trabajo, muy poca documentación sobre tareas típicas de un backend como conectarse a una base de datos, el manejo de las peticiones HTTP se puede tornar complejo cuando intentas contruir una API REST para un proyecto del mundo real y mantener una API REST escrita en Dart puede volverse costoso en tiempo, esfuerzo y puede costarte unos cuantos pelos de la cabeza cuando te topas con un bug.
 
 Sin embargo recientemente conocí a [gRPC](https://grpc.io){:target="\_blank"} y mi idea sobre cómo se contruye un servicio web cambió por completo.
 
