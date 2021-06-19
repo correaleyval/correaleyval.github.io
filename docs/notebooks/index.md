@@ -4,4 +4,4 @@ description: Hola! 👋 Soy Luis Correa @luis_ciber 🧑‍💻. Computer Scient
 og_image: header.png
 ---
 
-### [ETECSA-Ofertas de conectividad para programadores de equipos de cómputo](ETECSA-Ofertas de conectividad para programadores de equipos de computo)
+### [Recomendadores y agrupamiento](Recomendadores y agrupamiento)
