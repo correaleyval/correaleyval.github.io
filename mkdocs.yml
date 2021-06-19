@@ -15,8 +15,8 @@ extra_css:
 theme:
   name: material
   custom_dir: overrides
-  logo: assets/images/face.png
-  favicon: assets/images/face.png
+  logo: assets/images/avatar.jpg
+  favicon: assets/images/avatar.jpg
 
   features:
     - navigation.tabs
