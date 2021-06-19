@@ -1,6 +1,6 @@
 ---
 disqus: ""
-description: Hola! 👋 Soy Luis Correa @luis_ciber 🧑‍💻. Computer Scientist. 💻 Desarrollador de software. 🚀 "Ciber Emprendedor".
+description: Hola! 👋 Soy Luis Antonio Correa Leyva @luis_ciber 🧑‍💻. Computer Scientist. 💻 Desarrollador de software. 🚀 "Ciber Emprendedor".
 
 og_image: /assets/images/ds.jpg
 ---
