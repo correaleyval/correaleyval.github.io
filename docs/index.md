@@ -13,5 +13,5 @@ Me apasiona todo lo relacionado con la tecnología, en especial el campo de la i
 
 En este blog publico mis ideas, estudios y proyectos relacionados con las Ciencias de la Computación en general, el Desarrollo de Software y la creación de productos o servicios que utilizan software en su núcleo e inteligencia artificial.
 
-<codersrank-activity username="correaleyval" labels legend tooltip branding=false></codersrank-activity>
-<script src="https://unpkg.com/@codersrank/activity@x.x.x/codersrank-activity.min.js"></script>
+<!-- <codersrank-activity username="correaleyval" labels legend tooltip branding=false></codersrank-activity>
+<script src="https://unpkg.com/@codersrank/activity@x.x.x/codersrank-activity.min.js"></script> -->

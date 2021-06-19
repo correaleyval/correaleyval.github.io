@@ -77,6 +77,7 @@ nav:
   - Todos los posts: 
     - Desarrollo rápido en Flutter con GetX: blog/2021/03/07/desarrollo-rápido-en-flutter-con-getx/index.md
     - Usando Dart en Backend y Frontend con gRPC: blog/2021/06/13/usando-dart-backend-frontend-grpc/index.md
+    - Usando Dart en Backend con gRPC (Users CRUD): blog/2021/06/15/dart-grpc-backend-crud/index.md
   - Notebooks: notebooks/index.md
   - Aplicaciones y proyectos: apps/index.md
   - Contacto: contact/index.md
