@@ -688,3 +688,80 @@ Y finalmente dentro de las operaciones de **READ** tenemos a `count` que no nece
 ```
 
 ### UPDATE
+
+Esta función sería la encargada de actualizar los datos. Sin embargo me topé con algunos problemas mientras la implementaba. Al enviar un nuevo **documento** con la información actualizada en algunos campos al usar `update` se perdían los campos anteriores que había dejado vacíos, como es el caso de `createdDate` y `password`. Para resolver esto lo que se hace es que antes de actualizar se realiza un `find` para obtener primero el **documento** anterior y conservar estos campos agregándolos en el nuevo documento. Estoy seguro de que debe existir una forma más eficiente de hacer esto pero esta fue la solución más rápida que pude encontrar en el momento. El resto de la implementación no tiene mayor complejidad y es similar a lo que hemos hecho con la función `insertOne` y `findOne`.
+
+```dart
+  @override
+  Future<IdResponse> update(ServiceCall call, UpdateUserRequest request) async {
+    try {
+      final selector = fixId(request.selector);
+
+      final userRaw = await users.findOne(request.selector);
+
+      if (userRaw == null) {
+        return IdResponse(
+          error: Error(message: 'User not found'),
+        );
+      }
+
+      final user = User()
+        ..mergeFromProto3Json(
+          userRaw,
+          ignoreUnknownFields: true,
+        );
+
+      request.user.createdDate = user.createdDate;
+
+      request.user.updatedDate =
+          google.Timestamp.fromDateTime(DateTime.now().toUtc());
+
+      request.user.password = user.password;
+
+      await users.update(
+        selector,
+        request.user.toProto3Json() as Map<String, dynamic>,
+      );
+
+      return IdResponse(
+        id: '1',
+      );
+    } catch (e) {
+      return IdResponse(
+        error: Error(
+          message: e.toString(),
+        ),
+      );
+    }
+  }
+```
+
+### DELETE
+
+Muy poco que explicar realmente, esta función es la encargada de eliminar documentos de la base de datos.
+
+```dart
+  @override
+  Future<IdResponse> deleteOne(ServiceCall call, Selector request) async {
+    try {
+      final selector = fixId(request.selector);
+      await users.deleteOne(selector);
+
+      return IdResponse(
+        id: '0',
+      );
+    } catch (e) {
+      return IdResponse(
+        error: Error(
+          message: e.toString(),
+        ),
+      );
+    }
+  }
+```
+
+## The End
+
+Con este simple ejemplo puedes guiarte para construir otros CRUD y almacenar otro tipo de documentos, objetos, etc. Como puedes ver todo el trabajo recae en la manera en que nos conectamos a la base de datos y cómo diseñamos la API, cómo declaramos los mensajes y servicios. Todo lo relacionado con la comunicación entre cliente y servidor, además de la implementación de los modelos es llevado a cabo por gRPC.
+
+Puedes revisar el código resultante de este proyecto en: [https://github.com/correaleyval/pickup_grpc_server](https://github.com/correaleyval/pickup_grpc_server){:target="_blank"}
