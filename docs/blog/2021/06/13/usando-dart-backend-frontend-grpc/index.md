@@ -40,7 +40,7 @@ gRPC además nos trae otras bondades como la utilización de HTTP/2 como protoco
 
 Esta infromación la puedes leer en la web oficial, en este post mi intención es mostrarte cómo utilizar gRPC para desarrollar un servicio web completo para una aplicación real, que será utilizada en un proyecto real, del mundo real, para aportarle valor a un negocio real. Insisto en el término real porque es muy fácil usar una tecnología nueva creando una simple ToDo List y ya decir que esa tecnología es lo máximo, no me gusta hacer ese tipo de cosas, sino sirve para proyectos grandes pues simplemente no sirve.
 
-Por la mediana complejidad del proyecto y la necesidad de ir explicando cada detalle iré dividiendo este post en varias partes, en esta primera parte comenzaremos por lo básico, partiremos desde la instalación de las herramientas necesarias hasta crear un primer servicio y conectar una app cliente (de consola en este caso) al servicio que hemos creado. Al finalizar la implementación de todo el backend dejaré publicado el código del servidor y de una app desarrollada en Flutter que consumirá el servicio.
+Por la mediana complejidad del proyecto y la necesidad de ir explicando cada detalle iré dividiendo este post en varias partes, en esta primera parte comenzaremos por lo básico, partiremos desde la instalación de las herramientas necesarias hasta crear un primer servicio y conectar una app cliente (de consola en este caso) al servicio que hemos creado.
 
 ## Terminó la charla, time to code 👨‍💻.
 
