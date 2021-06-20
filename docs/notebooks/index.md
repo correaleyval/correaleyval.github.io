@@ -7,3 +7,4 @@ og_image: header.png
 ### [Recomendadores y agrupamiento](Recomendadores y agrupamiento)
 ### [Recomendadores basados en memoria](Recomendadores basados en memoria)
 ### [Algoritmos de agrupamiento jerárquico](Algoritmos de agrupamiento jerárquico)
+### [Algoritmos de agrupamiento particionado](Algoritmos de agrupamiento particionado)
