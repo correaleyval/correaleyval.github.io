@@ -1,0 +1,18 @@
+{
+    "name": "@luis_ciber",
+    "short_name": "@luis_ciber",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#000000",
+    "description": "Website of Luis Antonio Correa Leyva (Luis Ciber)",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "assets/images/avatar.jpg",
+            "sizes": "72x72 96x96 128x128 256x256 512x512",
+            "type": "image/png"
+        }
+    ]
+}

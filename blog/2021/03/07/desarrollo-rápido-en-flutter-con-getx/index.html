@@ -1,0 +1,1734 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Desarrollo rápido en Flutter con GetX. En este post te mostraré como utilizo GetX para desarrollar aplicaciones móviles utilizando Flutter y terminar las aplicaciones en el menor tiempo posible. A modo de ejemplo desarrollaremos una aplicación que se conectará a The Rick and Morty API, para mostrar de una manera práctica lo que trato de explicar.">
+      
+      
+      
+      
+        <link rel="canonical" href="https://luis-ciber.is-a.dev/blog/2021/03/07/desarrollo-r%C3%A1pido-en-flutter-con-getx/">
+      
+      <link rel="icon" href="../../../../../assets/images/avatar.jpg">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.10">
+    
+    
+      
+        <title>Desarrollo rápido en Flutter con GetX - @luis_ciber</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.1fe995fd.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="manifest" href="../../../../../manifest.json" crossorigin="use-credentials">
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-HBW40C5MRJ"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", "G-HBW40C5MRJ");
+</script>
+
+
+                
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="@luis_ciber - Desarrollo rápido en Flutter con GetX" />
+<meta property="og:description" content="Desarrollo rápido en Flutter con GetX. En este post te mostraré como utilizo GetX para desarrollar aplicaciones móviles utilizando Flutter y terminar las aplicaciones en el menor tiempo posible. A modo de ejemplo desarrollaremos una aplicación que se conectará a The Rick and Morty API, para mostrar de una manera práctica lo que trato de explicar." />
+<meta property="og:url" content="https://luis-ciber.is-a.dev/blog/2021/03/07/desarrollo-r%C3%A1pido-en-flutter-con-getx/" />
+<meta property="og:image" content="header.jpg" />
+<meta property="og:image:type" content="image/png" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@luis__ciber" />
+<meta name="twitter:creator" content="@luis__ciber" />
+<meta name="twitter:title" content="@luis_ciber - Desarrollo rápido en Flutter con GetX" />
+<meta name="twitter:description" content="Desarrollo rápido en Flutter con GetX. En este post te mostraré como utilizo GetX para desarrollar aplicaciones móviles utilizando Flutter y terminar las aplicaciones en el menor tiempo posible. A modo de ejemplo desarrollaremos una aplicación que se conectará a The Rick and Morty API, para mostrar de una manera práctica lo que trato de explicar." />
+<meta name="twitter:image" content="https://luis-ciber.is-a.dev/blog/2021/03/07/desarrollo-r%C3%A1pido-en-flutter-con-getx/header.jpg" />
+
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../../../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#desarrollo-rapido-en-flutter-con-getx" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../../../.." title="@luis_ciber" class="md-header__button md-logo" aria-label="@luis_ciber" data-md-component="logo">
+      
+  <img src="../../../../../assets/images/avatar.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            @luis_ciber
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Desarrollo rápido en Flutter con GetX
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/correaleyval" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../.." class="md-tabs__link">
+        ⭐ Start
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../../" class="md-tabs__link">
+      Blog
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="./" class="md-tabs__link md-tabs__link--active">
+        Todos los posts
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../../../notebooks/" class="md-tabs__link">
+      Notebooks
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../../../apps/" class="md-tabs__link">
+      Aplicaciones y proyectos
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../../../contact/" class="md-tabs__link">
+      Contacto
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="@luis_ciber" class="md-nav__button md-logo" aria-label="@luis_ciber" data-md-component="logo">
+      
+  <img src="../../../../../assets/images/avatar.jpg" alt="logo">
+
+    </a>
+    @luis_ciber
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/correaleyval" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        ⭐ Start
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="⭐ Start" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          ⭐ Start
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        👋 git init
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../" class="md-nav__link">
+        📄 Publicaciones recientes
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../apps/" class="md-nav__link">
+        💻 Aplicaciones y proyectos
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../notebooks/" class="md-nav__link">
+        🗒 Notebooks
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../contact/" class="md-nav__link">
+        ℹ️ Contacto
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../cv/" class="md-nav__link">
+        🧑‍💻 Coder CV
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../" class="md-nav__link">
+        Blog
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3">
+        Todos los posts
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Todos los posts" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Todos los posts
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Desarrollo rápido en Flutter con GetX
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Desarrollo rápido en Flutter con GetX
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lo-primero-el-problema" class="md-nav__link">
+    Lo primero, "el problema"
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-getx" class="md-nav__link">
+    ¿Por qué GetX?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manos-a-la-app" class="md-nav__link">
+    Manos a la app
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hora-de-escribir-codigo" class="md-nav__link">
+    Hora de escribir código
+  </a>
+  
+    <nav class="md-nav" aria-label="Hora de escribir código">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#main" class="md-nav__link">
+    Main
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#home-view" class="md-nav__link">
+    Home View
+  </a>
+  
+    <nav class="md-nav" aria-label="Home View">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#un-vistazo" class="md-nav__link">
+    Un vistazo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accediendo-a-la-api" class="md-nav__link">
+    Accediendo a la API
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#charactersview" class="md-nav__link">
+    CharactersView
+  </a>
+  
+    <nav class="md-nav" aria-label="CharactersView">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#un-vistazo_1" class="md-nav__link">
+    Un vistazo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#characterdetailsview" class="md-nav__link">
+    CharacterDetailsView
+  </a>
+  
+    <nav class="md-nav" aria-label="CharacterDetailsView">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#un-vistazo_2" class="md-nav__link">
+    Un vistazo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tarea-para-la-casa" class="md-nav__link">
+    Tarea para la casa
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusiones" class="md-nav__link">
+    Conclusiones
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../06/13/usando-dart-backend-frontend-grpc/" class="md-nav__link">
+        Usando Dart en Backend y Frontend con gRPC
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../06/15/dart-grpc-backend-crud/" class="md-nav__link">
+        Usando Dart en Backend con gRPC (Users CRUD)
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../notebooks/" class="md-nav__link">
+        Notebooks
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../apps/" class="md-nav__link">
+        Aplicaciones y proyectos
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../contact/" class="md-nav__link">
+        Contacto
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lo-primero-el-problema" class="md-nav__link">
+    Lo primero, "el problema"
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-getx" class="md-nav__link">
+    ¿Por qué GetX?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manos-a-la-app" class="md-nav__link">
+    Manos a la app
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hora-de-escribir-codigo" class="md-nav__link">
+    Hora de escribir código
+  </a>
+  
+    <nav class="md-nav" aria-label="Hora de escribir código">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#main" class="md-nav__link">
+    Main
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#home-view" class="md-nav__link">
+    Home View
+  </a>
+  
+    <nav class="md-nav" aria-label="Home View">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#un-vistazo" class="md-nav__link">
+    Un vistazo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accediendo-a-la-api" class="md-nav__link">
+    Accediendo a la API
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#charactersview" class="md-nav__link">
+    CharactersView
+  </a>
+  
+    <nav class="md-nav" aria-label="CharactersView">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#un-vistazo_1" class="md-nav__link">
+    Un vistazo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#characterdetailsview" class="md-nav__link">
+    CharacterDetailsView
+  </a>
+  
+    <nav class="md-nav" aria-label="CharacterDetailsView">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#un-vistazo_2" class="md-nav__link">
+    Un vistazo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tarea-para-la-casa" class="md-nav__link">
+    Tarea para la casa
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusiones" class="md-nav__link">
+    Conclusiones
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+                
+                
+                
+                <h1 id="desarrollo-rapido-en-flutter-con-getx">Desarrollo rápido en Flutter con GetX<a class="headerlink" href="#desarrollo-rapido-en-flutter-con-getx" title="Permanent link">🔗</a></h1>
+<blockquote>
+<p>7 de marzo de 2021</p>
+</blockquote>
+<h2 id="lo-primero-el-problema">Lo primero, "el problema"<a class="headerlink" href="#lo-primero-el-problema" title="Permanent link">🔗</a></h2>
+<p>Recientemente he estado trabajando en muchos proyectos a la vez (algo que no me gusta hacer). Pero
+por necesidad he tenido que dividir mi tiempo para poder realizar mis proyectos personales y además
+cumplir con mis responsabilidades de estudio en la universidad.</p>
+<p>Por este motivo he estado pensando: </p>
+<ul>
+<li>¿Cómo puedo desarrollar más rápido? </li>
+<li>¿Qué tiempo me toma desarrollar cada proyecto y cómo puedo hacer para disminuir ese tiempo?</li>
+</ul>
+<p>En este post te mostraré como utilizo <a href="https://pub.dev/packages/get" target="_blank">GetX</a> para desarrollar aplicaciones móviles utilizando <a href="https://flutter.dev/" target="_blank">Flutter</a> y terminar las aplicaciones en el menor tiempo posible. A modo de ejemplo desarrollaremos una aplicación que se conectará a <a href="https://rickandmortyapi.com/" target="_blank">The Rick and Morty API</a>, para mostrar de una manera práctica lo que trato de explicar.</p>
+<p><img alt="Desarrollo rápido en Flutter con GetX" src="header.jpg" /></p>
+<h2 id="por-que-getx">¿Por qué GetX?<a class="headerlink" href="#por-que-getx" title="Permanent link">🔗</a></h2>
+<p>Primero quiero aclarar que no estoy tratando de defender el uso de un paquete u otro. Se que existe una "guerra santa" por determinar cuál es el mejor paquete para el manejo de estados en Flutter. Entre los cuáles se encuentra GetX. Pero no es mi objetivo defender a GetX en este aspecto, lo que quiero destacar es que GetX tiene todo lo que necesito para desarrollar una aplicación en Flutter <strong>rápido</strong>. </p>
+<p>GetX posee clases y funciones para:</p>
+<ul>
+<li>Manejo de estados.</li>
+<li>Administración de rutas (Navegación)</li>
+<li>Administración de dependencias (Inyección de dependencias)</li>
+<li>Cliente http para conexiones a API REST</li>
+</ul>
+<p>Todo estas clases y funciones escritas de un modo que son fáciles de usar y lo más importante "sin
+escribir tanto código", recuerda que lo que queremos es ahorrarnos tiempo, desarrollar <strong>rápido</strong>.</p>
+<h2 id="manos-a-la-app">Manos a la app<a class="headerlink" href="#manos-a-la-app" title="Permanent link">🔗</a></h2>
+<p>Como mencioné tiempo libre no es un recurso que tenga en abundancia así que he tomado prestado todo el diseño, los assets y los widgets de esta app <a href="https://github.com/KathirvelChandrasekaran/rick_and_morty_flutter" target="_blank">Rick and Morty</a>. Tampoco podré abarcar en este post todos los aspectos relacionados con la utilización de GetX pero puedes revisar la documentación oficial de <a href="https://pub.dev/packages/get" target="_blank">GetX</a> en español en este <a href="https://github.com/jonataslaw/getx/tree/master/documentation/es_ES" target="_blank">link</a>. Al igual que la documentación de <a href="https://rickandmortyapi.com/" target="_blank">The Rick and Morty API</a>.</p>
+<p>Mi objetivo principal será reimplementar la app utilizando todo el ecosistema de GetX. <strong>¡Comencemos!</strong></p>
+<p>Lo primero es crear el proyecto, ya sabes:</p>
+<div class="highlight"><pre><span></span><code>&gt; flutter create rick_and_morty
+</code></pre></div>
+<p><strong>¡PUES NO!</strong></p>
+<p>Sucede que GetX también tiene un cli: <a href="https://pub.dev/packages/get_cli" target="_blank">get_cli</a>, que nos permite generar código automáticamente para nuestra aplicación y este es un punto clave para reducir el tiempo de desarrollo. Contar con un generador de código es crucial para automatizar procesos como la creación de archivos, estructurar el proyecto, escribir lo que siempre escribimos cada vez que vamos a crear una página o widget, o establecer una conexión con una API.</p>
+<blockquote>
+<p>El desarrollador no debería tener que preocuparse por esas cosas, pienso que en la actualidad todos los frameworks deberían contar con generadores de código. Luego trataré de crear mis propios generadores de códigos para las herramientas que más utilizo e iré documentando el proceso en este blog.</p>
+</blockquote>
+<p>Así que lo primero será instalar <a href="https://pub.dev/packages/get_cli" target="_blank">get_cli</a>:</p>
+<div class="highlight"><pre><span></span><code>&gt; flutter pub global activate get_cli 
+</code></pre></div>
+<p>Ahora sí creamos el proyecto:</p>
+<div class="highlight"><pre><span></span><code>&gt; get create project
+</code></pre></div>
+<p><img alt="Creando projecto" src="images/get_cli_create.png" />
+<img alt="Seleccionando patrón" src="images/get_cli_pattern.png" /></p>
+<blockquote>
+<p>Si estoy usando Windows 😅; cosas de la uni. Pero mi <a href="https://www.manjaro.org/downloads/community/i3/" target="_blank">Manjaro i3</a> sigue aquí en mi PC listo para la acción.</p>
+</blockquote>
+<p>Esta es la estructura inicial que nos genera el cli</p>
+<p><img alt="Estructura de directorios" src="images/dirs.png" /></p>
+<p>Como se puede ver un sólo comando nos ha generado la vista inicial, el controlador para el manejo de estados, el binding para la inyección de dependencias, y los archivos <code>app_pages.dart</code> y <code>app_routes.dart</code> con la declaración de las rutas de las vistas. Todo muy bien estructurado para mantener la organización del proyecto.</p>
+<blockquote>
+<p>Si no entiendes que es <strong>Vista</strong>, <strong>Controlador</strong>, <strong>Binding</strong>, <strong>Inyección de dependencias</strong>, <strong>Declaración de rutas</strong> es porque debes revisar la documentación de <a href="https://pub.dev/packages/get" target="_blank">GetX</a>. Además te recomiendo investigar más sobre <a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html" target="_blank">Clean Architecture</a> y como se aplica al desarrollo con Flutter.</p>
+</blockquote>
+<h2 id="hora-de-escribir-codigo">Hora de escribir código<a class="headerlink" href="#hora-de-escribir-codigo" title="Permanent link">🔗</a></h2>
+<h3 id="main">Main<a class="headerlink" href="#main" title="Permanent link">🔗</a></h3>
+<p><code>lib/main.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="s1">&#39;package:get/get.dart&#39;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="s1">&#39;app/routes/app_pages.dart&#39;</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">runApp</span><span class="p">(</span>
+    <span class="n">GetMaterialApp</span><span class="p">(</span>
+      <span class="nl">title:</span> <span class="s2">&quot;Application&quot;</span><span class="p">,</span>
+      <span class="nl">initialRoute:</span> <span class="n">AppPages</span><span class="p">.</span><span class="n">INITIAL</span><span class="p">,</span>
+      <span class="nl">getPages:</span> <span class="n">AppPages</span><span class="p">.</span><span class="n">routes</span><span class="p">,</span>
+      <span class="nl">theme:</span> <span class="n">ThemeData</span><span class="p">(</span>
+        <span class="nl">fontFamily:</span> <span class="s1">&#39;Rick and Morty&#39;</span><span class="p">,</span>
+        <span class="nl">brightness:</span> <span class="n">Brightness</span><span class="p">.</span><span class="n">dark</span><span class="p">,</span>
+      <span class="p">),</span>
+      <span class="nl">debugShowCheckedModeBanner:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nl">defaultTransition:</span> <span class="n">Transition</span><span class="p">.</span><span class="n">cupertino</span><span class="p">,</span>
+    <span class="p">),</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Todo este código inicial ha sido generado por el cli, la única modificación que he tenido que hacer es establecer <code>theme</code> para cambiar las fuentes y que la app se vea por defecto en <strong>modo dark</strong>, además de cambiar el tipo de transición por defecto y quitar el banner que se muestra cuando las apps están en modo debug. No he tenido que tocar nada en <code>pubspec.yaml</code> para instalar nuevas dependencias, tampoco he tenido que modificar la plantilla que genera por defecto Flutter para añadir GetX al proyecto y todo esto es tiempo de desarrollo que me ahorra el cli al no tener que escribir código que realmente no es característico de mi aplicación sino del proceso de incluir y configurar los paquetes.</p>
+<h3 id="home-view">Home View<a class="headerlink" href="#home-view" title="Permanent link">🔗</a></h3>
+<p><code>lib/app/modules/home/views/home_view.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="s1">&#39;package:get/get.dart&#39;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="s1">&#39;../controllers/home_controller.dart&#39;</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">HomeView</span> <span class="kd">extends</span> <span class="n">GetView</span><span class="o">&lt;</span><span class="n">HomeController</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="nd">@override</span>
+  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">view</span><span class="p">;</span>
+
+  <span class="n">Widget</span> <span class="kd">get</span> <span class="n">view</span> <span class="o">=&gt;</span> <span class="n">Scaffold</span><span class="p">(</span>
+        <span class="nl">appBar:</span> <span class="n">appBar</span><span class="p">,</span>
+        <span class="nl">body:</span> <span class="n">body</span><span class="p">,</span>
+      <span class="p">);</span>
+
+  <span class="n">Widget</span> <span class="kd">get</span> <span class="n">appBar</span> <span class="o">=&gt;</span> <span class="n">AppBar</span><span class="p">(</span>
+        <span class="nl">title:</span> <span class="n">Text</span><span class="p">(</span><span class="s1">&#39;RMDB&#39;</span><span class="p">),</span>
+      <span class="p">);</span>
+
+  <span class="n">Widget</span> <span class="kd">get</span> <span class="n">body</span> <span class="o">=&gt;</span> <span class="n">Center</span><span class="p">(</span>
+        <span class="nl">child:</span> <span class="n">Column</span><span class="p">(</span>
+          <span class="nl">mainAxisAlignment:</span> <span class="n">MainAxisAlignment</span><span class="p">.</span><span class="n">spaceEvenly</span><span class="p">,</span>
+          <span class="nl">children:</span> <span class="o">&lt;</span><span class="n">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+            <span class="n">getColumnWithImageAndText</span><span class="p">(</span>
+              <span class="nl">imageAsset:</span> <span class="s1">&#39;assets/images/characters.png&#39;</span><span class="p">,</span>
+              <span class="nl">title:</span> <span class="s1">&#39;Characters&#39;</span><span class="p">,</span>
+              <span class="nl">onTap:</span> <span class="p">()</span> <span class="p">{},</span>
+            <span class="p">),</span>
+            <span class="n">getColumnWithImageAndText</span><span class="p">(</span>
+              <span class="nl">imageAsset:</span> <span class="s1">&#39;assets/images/locations.png&#39;</span><span class="p">,</span>
+              <span class="nl">title:</span> <span class="s1">&#39;Locations&#39;</span><span class="p">,</span>
+              <span class="nl">onTap:</span> <span class="p">()</span> <span class="p">{},</span>
+            <span class="p">),</span>
+            <span class="n">getColumnWithImageAndText</span><span class="p">(</span>
+              <span class="nl">imageAsset:</span> <span class="s1">&#39;assets/images/episodes.png&#39;</span><span class="p">,</span>
+              <span class="nl">title:</span> <span class="s1">&#39;Episodes&#39;</span><span class="p">,</span>
+              <span class="nl">onTap:</span> <span class="p">()</span> <span class="p">{},</span>
+            <span class="p">),</span>
+          <span class="p">],</span>
+        <span class="p">),</span>
+      <span class="p">);</span>
+
+  <span class="n">Widget</span> <span class="n">getColumnWithImageAndText</span><span class="p">({</span>
+    <span class="kt">String</span> <span class="n">imageAsset</span><span class="p">,</span>
+    <span class="kt">String</span> <span class="n">title</span><span class="p">,</span>
+    <span class="kt">Function</span> <span class="n">onTap</span><span class="p">,</span>
+  <span class="p">})</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">GestureDetector</span><span class="p">(</span>
+      <span class="nl">onTap:</span> <span class="n">onTap</span><span class="p">,</span>
+      <span class="nl">child:</span> <span class="n">Column</span><span class="p">(</span>
+        <span class="nl">children:</span> <span class="o">&lt;</span><span class="n">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+          <span class="n">Image</span><span class="p">.</span><span class="n">asset</span><span class="p">(</span>
+            <span class="n">imageAsset</span><span class="p">,</span>
+            <span class="nl">width:</span> <span class="m">120</span><span class="p">,</span>
+            <span class="nl">height:</span> <span class="m">120</span><span class="p">,</span>
+          <span class="p">),</span>
+          <span class="n">Text</span><span class="p">(</span>
+            <span class="n">title</span><span class="p">,</span>
+            <span class="nl">style:</span> <span class="n">TextStyle</span><span class="p">(</span><span class="nl">fontSize:</span> <span class="m">48</span><span class="p">),</span>
+          <span class="p">)</span>
+        <span class="p">],</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esta sería la pantalla incial. Al usar <code>GetView&lt;HomeController&gt;</code> para la clase de la vista (en lugar de <code>StatelessWidget</code> o <code>StatefulWidget</code>). La vista automáticamente posee la propiedad <code>controller</code> que es una instancia de <code>HomeController</code> y es la utilizada para manejar el estado de la vista. Gracias al archivo <code>lib/app/modules/home/bindings/home_binding.dart</code> el controlador es "inyectado" o inicializado automáticamente para que esté listo para ser usado en la vista.</p>
+<blockquote>
+<p>No mostraré el código de este archivo ya que no he tenido necesidad de modificarlo, ha sido generado automáticamente por el cli, solo mostraré código de los archivos que tengan modificaciones. Al final del post dejaré el link del repo en github para que puedas descargar la app y revisar todo el código.</p>
+</blockquote>
+<h4 id="un-vistazo">Un vistazo<a class="headerlink" href="#un-vistazo" title="Permanent link">🔗</a></h4>
+<p><img alt="Home View" src="images/HomeView.png" width="360px" /></p>
+<p>Ya puedes ir entendiendo la lógica de lo que queremos hacer, ahora debemos generar tres páginas una para cada función de la app. Sería bastante pesado tener que escribir todos los archivos necesarios para solamente tener la plantilla de cada una de estas páginas y tomaría un tiempo valiosísimo. Una vez más get cli viene al rescate.</p>
+<div class="highlight"><pre><span></span><code>&gt; get create page:characters
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&gt; get create page:locations
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&gt; get create page:episodes
+</code></pre></div>
+<p>Sin ni siquiera tener que revisar el código generado por get cli, puedes completar las funciones <code>onTap</code> de cada elemento para que al tocarlos la app nos dirija hacia la página correspondiente.</p>
+<div class="highlight"><pre><span></span><code>    <span class="p">...</span>
+    <span class="k">import</span> <span class="s1">&#39;package:rick_and_morty/app/routes/app_pages.dart&#39;</span><span class="p">;</span>
+    <span class="p">...</span>
+    <span class="n">Widget</span> <span class="kd">get</span> <span class="n">body</span> <span class="o">=&gt;</span> <span class="n">Center</span><span class="p">(</span>
+        <span class="nl">child:</span> <span class="n">Column</span><span class="p">(</span>
+          <span class="nl">mainAxisAlignment:</span> <span class="n">MainAxisAlignment</span><span class="p">.</span><span class="n">spaceEvenly</span><span class="p">,</span>
+          <span class="nl">children:</span> <span class="o">&lt;</span><span class="n">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+            <span class="n">getColumnWithImageAndText</span><span class="p">(</span>
+              <span class="nl">imageAsset:</span> <span class="s1">&#39;assets/images/characters.png&#39;</span><span class="p">,</span>
+              <span class="nl">title:</span> <span class="s1">&#39;Characters&#39;</span><span class="p">,</span>
+              <span class="nl">onTap:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">Get</span><span class="p">.</span><span class="n">toNamed</span><span class="p">(</span><span class="n">Routes</span><span class="p">.</span><span class="n">CHARACTERS</span><span class="p">),</span>
+            <span class="p">),</span>
+            <span class="n">getColumnWithImageAndText</span><span class="p">(</span>
+              <span class="nl">imageAsset:</span> <span class="s1">&#39;assets/images/locations.png&#39;</span><span class="p">,</span>
+              <span class="nl">title:</span> <span class="s1">&#39;Locations&#39;</span><span class="p">,</span>
+              <span class="nl">onTap:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">Get</span><span class="p">.</span><span class="n">toNamed</span><span class="p">(</span><span class="n">Routes</span><span class="p">.</span><span class="n">LOCATIONS</span><span class="p">),</span>
+            <span class="p">),</span>
+            <span class="n">getColumnWithImageAndText</span><span class="p">(</span>
+              <span class="nl">imageAsset:</span> <span class="s1">&#39;assets/images/episodes.png&#39;</span><span class="p">,</span>
+              <span class="nl">title:</span> <span class="s1">&#39;Episodes&#39;</span><span class="p">,</span>
+              <span class="nl">onTap:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">Get</span><span class="p">.</span><span class="n">toNamed</span><span class="p">(</span><span class="n">Routes</span><span class="p">.</span><span class="n">EPISODES</span><span class="p">),</span>
+            <span class="p">),</span>
+          <span class="p">],</span>
+        <span class="p">),</span>
+      <span class="p">);</span>
+    <span class="p">...</span>
+</code></pre></div>
+<p>Tres simples instrucciones es todo lo que se necesita y GetX cumple con su función y nos facilita la gestión de rutas y la navegación.</p>
+<p>Ahora debemos implementar la UI para estas páginas. Pero .... primero hay que traer de la API los datos que van a mostrar.</p>
+<h3 id="accediendo-a-la-api">Accediendo a la API<a class="headerlink" href="#accediendo-a-la-api" title="Permanent link">🔗</a></h3>
+<p>Comenzaremos con el módulo de <strong>Characters</strong>. Lo primero es identificar el endpoint al que vamos a acceder y ver que datos nos devuelve. Este es el endpoint que utilizaremos <code>https://rickandmortyapi.com/api/character/</code> nos devuelve información sobre el endpoint más una lista de <em>characters</em>, pero ahora lo que queremos es identificar cuál es la estructura de cada <em>character</em> para poder crear el modelo y el servicio que vamos a usar para acceder a esos datos; así que utilizaremos este <code>https://rickandmortyapi.com/api/character/1</code> que nos devuelve un solo <em>character</em> y revisaremos su estructura.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Rick Sanchez&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="s2">&quot;Alive&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;species&quot;</span><span class="p">:</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;gender&quot;</span><span class="p">:</span><span class="s2">&quot;Male&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;origin&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Earth (C-137)&quot;</span><span class="p">,</span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;https://rickandmortyapi.com/api/location/1&quot;</span><span class="p">},</span>
+    <span class="nt">&quot;location&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Earth (Replacement Dimension)&quot;</span><span class="p">,</span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;https://rickandmortyapi.com/api/location/20&quot;</span><span class="p">},</span><span class="nt">&quot;image&quot;</span><span class="p">:</span><span class="s2">&quot;https://rickandmortyapi.com/api/character/avatar/1.jpeg&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;episode&quot;</span><span class="p">:[</span>
+        <span class="s2">&quot;https://rickandmortyapi.com/api/episode/1&quot;</span><span class="p">,</span><span class="s2">&quot;https://rickandmortyapi.com/api/episode/2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://rickandmortyapi.com/api/episode/3&quot;</span><span class="p">,</span><span class="s2">&quot;https://rickandmortyapi.com/api/episode/4&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://rickandmortyapi.com/api/episode/5&quot;</span><span class="p">,</span><span class="s2">&quot;https://rickandmortyapi.com/api/episode/6&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://rickandmortyapi.com/api/episode/7&quot;</span><span class="p">,</span><span class="s2">&quot;https://rickandmortyapi.com/api/episode/8&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://rickandmortyapi.com/api/episode/9&quot;</span><span class="p">,</span><span class="s2">&quot;https://rickandmortyapi.com/api/episode/10&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://rickandmortyapi.com/api/episode/11&quot;</span><span class="p">,</span><span class="s2">&quot;https://rickandmortyapi.com/api/episode/12&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://rickandmortyapi.com/api/episode/13&quot;</span><span class="p">,</span><span class="s2">&quot;https://rickandmortyapi.com/api/episode/14&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://rickandmortyapi.com/api/episode/15&quot;</span><span class="p">,</span><span class="s2">&quot;https://rickandmortyapi.com/api/episode/16&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://rickandmortyapi.com/api/episode/17&quot;</span><span class="p">,</span><span class="s2">&quot;https://rickandmortyapi.com/api/episode/18&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://rickandmortyapi.com/api/episode/19&quot;</span><span class="p">,</span><span class="s2">&quot;https://rickandmortyapi.com/api/episode/20&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://rickandmortyapi.com/api/episode/21&quot;</span><span class="p">,</span><span class="s2">&quot;https://rickandmortyapi.com/api/episode/22&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://rickandmortyapi.com/api/episode/23&quot;</span><span class="p">,</span><span class="s2">&quot;https://rickandmortyapi.com/api/episode/24&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://rickandmortyapi.com/api/episode/25&quot;</span><span class="p">,</span><span class="s2">&quot;https://rickandmortyapi.com/api/episode/26&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://rickandmortyapi.com/api/episode/27&quot;</span><span class="p">,</span><span class="s2">&quot;https://rickandmortyapi.com/api/episode/28&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://rickandmortyapi.com/api/episode/29&quot;</span><span class="p">,</span><span class="s2">&quot;https://rickandmortyapi.com/api/episode/30&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://rickandmortyapi.com/api/episode/31&quot;</span><span class="p">,</span><span class="s2">&quot;https://rickandmortyapi.com/api/episode/32&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://rickandmortyapi.com/api/episode/33&quot;</span><span class="p">,</span><span class="s2">&quot;https://rickandmortyapi.com/api/episode/34&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://rickandmortyapi.com/api/episode/35&quot;</span><span class="p">,</span><span class="s2">&quot;https://rickandmortyapi.com/api/episode/36&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://rickandmortyapi.com/api/episode/37&quot;</span><span class="p">,</span><span class="s2">&quot;https://rickandmortyapi.com/api/episode/38&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://rickandmortyapi.com/api/episode/39&quot;</span><span class="p">,</span><span class="s2">&quot;https://rickandmortyapi.com/api/episode/40&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://rickandmortyapi.com/api/episode/41&quot;</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;https://rickandmortyapi.com/api/character/1&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;created&quot;</span><span class="p">:</span><span class="s2">&quot;2017-11-04T18:48:46.250Z&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Es bastante información que procesar, solo fíjate en cuántos campos debe tener ese modelo, y luego debes escribir las funciones para obtener los datos de la API y parsear el json. Pero no haremos eso, porque queremos ahorrar tiempo, realizar estas acciones suele volverse un proceso mecánico, algo que podemos automatizar, y get cli lo hace.</p>
+<p>Primero descargaremos exactamente la información que nos devolvió la API y la guardaremos en una carpeta, en mi caso yo la guardaré en <code>assets/models/character.json</code>. Luego viene la magia:</p>
+<div class="highlight"><pre><span></span><code>&gt; get generate model with assets/models/character.json`
+</code></pre></div>
+<p>El cli nos genera automáticamente los archivos <code>lib/app/data/models/character_model.dart</code> y <code>lib/app/data/providers/character_provider.dart</code>. Esta vez si mostraré el código de estos archivos aunque no haya tenido que tocarlos para nada. Sólo para que puedas ver la <em>magia</em>.</p>
+<p><code>lib/app/data/models/character_model.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Character</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">id</span><span class="p">;</span>
+  <span class="kt">String</span> <span class="n">name</span><span class="p">;</span>
+  <span class="kt">String</span> <span class="n">status</span><span class="p">;</span>
+  <span class="kt">String</span> <span class="n">species</span><span class="p">;</span>
+  <span class="kt">String</span> <span class="n">type</span><span class="p">;</span>
+  <span class="kt">String</span> <span class="n">gender</span><span class="p">;</span>
+  <span class="n">Origin</span> <span class="n">origin</span><span class="p">;</span>
+  <span class="n">Origin</span> <span class="n">location</span><span class="p">;</span>
+  <span class="kt">String</span> <span class="n">image</span><span class="p">;</span>
+  <span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span> <span class="n">episode</span><span class="p">;</span>
+  <span class="kt">String</span> <span class="n">url</span><span class="p">;</span>
+  <span class="kt">String</span> <span class="n">created</span><span class="p">;</span>
+
+  <span class="n">Character</span><span class="p">(</span>
+      <span class="p">{</span><span class="n">id</span><span class="p">,</span>
+      <span class="n">name</span><span class="p">,</span>
+      <span class="n">status</span><span class="p">,</span>
+      <span class="n">species</span><span class="p">,</span>
+      <span class="n">type</span><span class="p">,</span>
+      <span class="n">gender</span><span class="p">,</span>
+      <span class="n">origin</span><span class="p">,</span>
+      <span class="n">location</span><span class="p">,</span>
+      <span class="n">image</span><span class="p">,</span>
+      <span class="n">episode</span><span class="p">,</span>
+      <span class="n">url</span><span class="p">,</span>
+      <span class="n">created</span><span class="p">});</span>
+
+  <span class="n">Character</span><span class="p">.</span><span class="n">fromJson</span><span class="p">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;</span> <span class="n">json</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">id</span> <span class="o">=</span> <span class="n">json</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">];</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">json</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">];</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">json</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">];</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="n">json</span><span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">];</span>
+    <span class="n">type</span> <span class="o">=</span> <span class="n">json</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">];</span>
+    <span class="n">gender</span> <span class="o">=</span> <span class="n">json</span><span class="p">[</span><span class="s1">&#39;gender&#39;</span><span class="p">];</span>
+    <span class="n">origin</span> <span class="o">=</span> <span class="n">json</span><span class="p">[</span><span class="s1">&#39;origin&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">Origin</span><span class="p">.</span><span class="n">fromJson</span><span class="p">(</span><span class="n">json</span><span class="p">[</span><span class="s1">&#39;origin&#39;</span><span class="p">])</span> <span class="o">:</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="n">location</span> <span class="o">=</span>
+        <span class="n">json</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">Origin</span><span class="p">.</span><span class="n">fromJson</span><span class="p">(</span><span class="n">json</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">])</span> <span class="o">:</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">json</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">];</span>
+    <span class="n">episode</span> <span class="o">=</span> <span class="n">json</span><span class="p">[</span><span class="s1">&#39;episode&#39;</span><span class="p">].</span><span class="n">cast</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">json</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">];</span>
+    <span class="n">created</span> <span class="o">=</span> <span class="n">json</span><span class="p">[</span><span class="s1">&#39;created&#39;</span><span class="p">];</span>
+  <span class="p">}</span>
+
+  <span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;</span> <span class="n">toJson</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">final</span> <span class="n">data</span> <span class="o">=</span> <span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;</span><span class="p">{};</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">id</span><span class="p">;</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">status</span><span class="p">;</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">species</span><span class="p">;</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">type</span><span class="p">;</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;gender&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gender</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">origin</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">data</span><span class="p">[</span><span class="s1">&#39;origin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">origin</span><span class="p">.</span><span class="n">toJson</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">location</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">data</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">location</span><span class="p">.</span><span class="n">toJson</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">image</span><span class="p">;</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;episode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">episode</span><span class="p">;</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">url</span><span class="p">;</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;created&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">created</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">data</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Origin</span> <span class="p">{</span>
+  <span class="kt">String</span> <span class="n">name</span><span class="p">;</span>
+  <span class="kt">String</span> <span class="n">url</span><span class="p">;</span>
+
+  <span class="n">Origin</span><span class="p">({</span><span class="n">name</span><span class="p">,</span> <span class="n">url</span><span class="p">});</span>
+
+  <span class="n">Origin</span><span class="p">.</span><span class="n">fromJson</span><span class="p">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;</span> <span class="n">json</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">json</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">];</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">json</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">];</span>
+  <span class="p">}</span>
+
+  <span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;</span> <span class="n">toJson</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">final</span> <span class="n">data</span> <span class="o">=</span> <span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;</span><span class="p">{};</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">url</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">data</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>lib/app/data/providers/character_provider.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;package:get/get.dart&#39;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="s1">&#39;../models/character_model.dart&#39;</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">CharacterProvider</span> <span class="kd">extends</span> <span class="n">GetConnect</span> <span class="p">{</span>
+  <span class="nd">@override</span>
+  <span class="kt">void</span> <span class="n">onInit</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">httpClient</span><span class="p">.</span><span class="n">defaultDecoder</span> <span class="o">=</span> <span class="p">(</span><span class="n">map</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">Character</span><span class="p">.</span><span class="n">fromJson</span><span class="p">(</span><span class="n">map</span><span class="p">);</span>
+    <span class="n">httpClient</span><span class="p">.</span><span class="n">baseUrl</span> <span class="o">=</span> <span class="s1">&#39;YOUR-API-URL&#39;</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">Response</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;&gt;</span> <span class="n">getCharacter</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">)</span> <span class="kd">async</span> <span class="o">=&gt;</span>
+      <span class="kd">await</span> <span class="kd">get</span><span class="p">(</span><span class="s1">&#39;character/</span><span class="si">$</span><span class="n">id</span><span class="s1">&#39;</span><span class="p">);</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">Response</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;&gt;</span> <span class="n">postCharacter</span><span class="p">(</span><span class="n">Character</span> <span class="n">character</span><span class="p">)</span> <span class="kd">async</span> <span class="o">=&gt;</span>
+      <span class="kd">await</span> <span class="n">post</span><span class="p">(</span><span class="s1">&#39;character&#39;</span><span class="p">,</span> <span class="n">character</span><span class="p">);</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">Response</span><span class="o">&gt;</span> <span class="n">deleteCharacter</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">)</span> <span class="kd">async</span> <span class="o">=&gt;</span>
+      <span class="kd">await</span> <span class="n">delete</span><span class="p">(</span><span class="s1">&#39;character/</span><span class="si">$</span><span class="n">id</span><span class="s1">&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Creo que estamos de acuerdo en que este simple comando nos ha ahorrado muchísimo tiempo y esfuerzo, tiempo que ahora aprovecharemos para enfocarnos en la UI y el manejo de estado de la app. Pero primero hay que hacerle modificaciones al provider, get cli no es adivino, debemos especificar la url de la API y además agregar una función extra para poder obtener una lista de <em>characters</em>, esta API también tiene paginación y esto es algo que debemos tener en cuenta.</p>
+<p><code>lib/api.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">API</span> <span class="p">{</span>
+  <span class="kd">static</span> <span class="k">const</span> <span class="n">BASE_URL</span> <span class="o">=</span> <span class="s1">&#39;https://rickandmortyapi.com/api/&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Me gusta utilizar una clase para almacenar los distintos endpoints que utilizo en la app u otros valores constantes, en este caso guardamos la url base de la API.</p>
+<p>Ahora vamos a modificar el <code>CharacterProvider</code> para configurar la url de la API y demás agregarle una función que nos permita obtener una lista de <code>Characters</code> con paginación. Quedaría de esta forma:</p>
+<p><code>lib/app/data/providers/character_provider.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;package:get/get.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:rick_and_morty/api.dart&#39;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="s1">&#39;../models/character_model.dart&#39;</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">CharacterProvider</span> <span class="kd">extends</span> <span class="n">GetConnect</span> <span class="p">{</span>
+  <span class="nd">@override</span>
+  <span class="kt">void</span> <span class="n">onInit</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">httpClient</span><span class="p">.</span><span class="n">defaultDecoder</span> <span class="o">=</span> <span class="p">(</span><span class="n">map</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">Character</span><span class="p">.</span><span class="n">fromJson</span><span class="p">(</span><span class="n">map</span><span class="p">);</span>
+    <span class="n">httpClient</span><span class="p">.</span><span class="n">baseUrl</span> <span class="o">=</span> <span class="n">API</span><span class="p">.</span><span class="n">BASE_URL</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">Response</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;&gt;&gt;</span> <span class="n">getCharacterPage</span><span class="p">({</span>
+    <span class="kt">int</span> <span class="n">pageNumber</span><span class="p">,</span>
+  <span class="p">})</span> <span class="kd">async</span> <span class="o">=&gt;</span>
+      <span class="kd">await</span> <span class="kd">get</span><span class="p">(</span>
+        <span class="s1">&#39;character/&#39;</span><span class="p">,</span>
+        <span class="nl">query:</span> <span class="p">{</span>
+          <span class="s1">&#39;page&#39;</span><span class="o">:</span> <span class="s1">&#39;</span><span class="si">$</span><span class="n">pageNumber</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="nl">decoder:</span> <span class="p">(</span><span class="n">list</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">list</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span>
+            <span class="p">.</span><span class="n">map</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span><span class="p">((</span><span class="n">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">Character</span><span class="p">.</span><span class="n">fromJson</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+            <span class="p">.</span><span class="n">toList</span><span class="p">(),</span>
+      <span class="p">);</span>
+
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">Response</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;&gt;</span> <span class="n">getCharacter</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">)</span> <span class="kd">async</span> <span class="o">=&gt;</span>
+      <span class="kd">await</span> <span class="kd">get</span><span class="p">(</span><span class="s1">&#39;character/</span><span class="si">$</span><span class="n">id</span><span class="s1">&#39;</span><span class="p">);</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">Response</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;&gt;</span> <span class="n">postCharacter</span><span class="p">(</span><span class="n">Character</span> <span class="n">character</span><span class="p">)</span> <span class="kd">async</span> <span class="o">=&gt;</span>
+      <span class="kd">await</span> <span class="n">post</span><span class="p">(</span><span class="s1">&#39;character&#39;</span><span class="p">,</span> <span class="n">character</span><span class="p">);</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">Response</span><span class="o">&gt;</span> <span class="n">deleteCharacter</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">)</span> <span class="kd">async</span> <span class="o">=&gt;</span>
+      <span class="kd">await</span> <span class="n">delete</span><span class="p">(</span><span class="s1">&#39;character/</span><span class="si">$</span><span class="n">id</span><span class="s1">&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="charactersview">CharactersView<a class="headerlink" href="#charactersview" title="Permanent link">🔗</a></h3>
+<p>Lo que corresponde ahora es modificar el controllador de <code>CharactersView</code> para que utilice el provider y obtenga los datos de la API.</p>
+<p><code>lib/app/modules/characters/controllers/characters_controller.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;package:get/get.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:rick_and_morty/app/data/models/character_model.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:rick_and_morty/app/data/providers/character_provider.dart&#39;</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">CharactersController</span> <span class="kd">extends</span> <span class="n">GetxController</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="n">page</span> <span class="o">=</span> <span class="m">0.</span><span class="n">obs</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="n">isLoading</span> <span class="o">=</span> <span class="kc">false</span><span class="p">.</span><span class="n">obs</span><span class="p">;</span>
+
+  <span class="kd">final</span> <span class="n">_characters</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span><span class="p">[].</span><span class="n">obs</span><span class="p">;</span>
+  <span class="n">List</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="kd">get</span> <span class="n">characters</span> <span class="o">=&gt;</span> <span class="n">_characters</span><span class="p">.</span><span class="n">toList</span><span class="p">();</span>
+
+  <span class="kd">final</span> <span class="n">CharacterProvider</span> <span class="n">characterProvider</span><span class="p">;</span>
+
+  <span class="n">CharactersController</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">characterProvider</span><span class="p">);</span>
+
+  <span class="nd">@override</span>
+  <span class="kt">void</span> <span class="n">onInit</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">ever</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">_getAllCharacters</span><span class="p">());</span>
+    <span class="n">page</span><span class="o">++</span><span class="p">;</span>
+    <span class="k">super</span><span class="p">.</span><span class="n">onInit</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="n">Future</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span> <span class="n">_getAllCharacters</span><span class="p">()</span> <span class="kd">async</span> <span class="p">{</span>
+    <span class="n">isLoading</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">final</span> <span class="n">response</span> <span class="o">=</span>
+          <span class="kd">await</span> <span class="n">characterProvider</span><span class="p">.</span><span class="n">getCharacterPage</span><span class="p">(</span><span class="nl">pageNumber:</span> <span class="n">page</span><span class="p">.</span><span class="n">value</span><span class="p">);</span>
+
+      <span class="n">_characters</span><span class="p">.</span><span class="n">addAll</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">body</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">print</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">isLoading</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">next</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="n">page</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>¿Qué estamos haciendo aquí?</strong></p>
+<p>Básicamente estamos utlizando <code>GetController</code> para almacenar el estado de la vista de manera reactiva, <code>GetController</code> tiene varias formas de hacer esto una vez más te recuerdo que si quieres conocer más sobre el tema es mejor leer la documentación oficial.</p>
+<p>El controlador almacena el número de página que estamos visitando y la lista de elementos obtenidos de la API, utilizamos la función <code>ever</code> para activar la función <code>_getAllCharacters</code> cada vez que se realice un cambio en <code>page</code>. Una vez más GetX nos facilita las cosas para no tener que escribir "tanto código"; y la función <code>_getAllCharacters</code> simplemente obtiene los datos de la API utilizando el provider y los va agregando a la lista. Al utilizar el manejo de estados reactivo de GetX, cada modificación que se realiza en el controlador automáticamente actualiza la interfaz gráfica, nada de <code>setState</code> ni <code>StatefulWidget</code>, que son mecanismos que funcionan correctamente y son completamente válidos pero lo que estamos buscando es escribir menos código y ahorrar más tiempo.</p>
+<p>Ahora ¿recuerdas cuando dije que la vista automáticamente carga su controlador al heredar de <code>GetView</code>? Pero ahora el controlador está recibiendo un parámetro que es el provider que necesita para acceder a la API. Pues vuelvo a otra pregunta: ¿recuerdas cuando hablé de inyección de dependencias?. Para eso son los dichosos <strong>bindings</strong> de GetX.</p>
+<p><code>lib/app/modules/characters/bindings/characters_binding.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;package:get/get.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:rick_and_morty/app/data/providers/character_provider.dart&#39;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="s1">&#39;../controllers/characters_controller.dart&#39;</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">CharactersBinding</span> <span class="kd">extends</span> <span class="n">Bindings</span> <span class="p">{</span>
+  <span class="nd">@override</span>
+  <span class="kt">void</span> <span class="n">dependencies</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Get</span><span class="p">.</span><span class="n">lazyPut</span><span class="o">&lt;</span><span class="n">CharacterProvider</span><span class="o">&gt;</span><span class="p">(</span>
+      <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">CharacterProvider</span><span class="p">(),</span>
+    <span class="p">);</span>
+
+    <span class="n">Get</span><span class="p">.</span><span class="n">lazyPut</span><span class="o">&lt;</span><span class="n">CharactersController</span><span class="o">&gt;</span><span class="p">(</span>
+      <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">CharactersController</span><span class="p">(</span>
+        <span class="n">Get</span><span class="p">.</span><span class="n">find</span><span class="p">(),</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Para no ponernos técnicos los <strong>bindings</strong> se encargan de ir creando los objetos que necesita la app e ir colocándolos en su lugar. En cualquier parte de nuestro código podemos utilizar <code>Get.find()</code> para encontrar un objeto que necesitemos utilizar y que haya sido "inyectado" anteriormente, pero lo correcto para mantener nuestro código limpio es hacerlo de esta manera, cada objeto que necesite nuestra clase se declara que llegará a la clase como un parámetro en el constructor de la clase y luego utlizamos los bindings para ir contruyendo los objetos con los parámetros que necesitan.</p>
+<blockquote>
+<p>Sonó a trabalenguas, pero es mejor que se enrede la lengua y no el código. 😜</p>
+</blockquote>
+<p>Finalmente solo nos resta implementar la vista, primero instalaremos un paquete que nos va a facilitar crear el <em>infinite scroll</em></p>
+<div class="highlight"><pre><span></span><code>&gt; get install lazy_load_scrollview
+</code></pre></div>
+<blockquote>
+<p>Si, el get cli también instala paquetes, así que ya no es necesario que pierdas tiempo abriendo el <code>pubspec.yaml</code> y buscando la sección donde se declaran las dependencias para declarar el nuevo paquete y luego hacer <code>flutter pub get</code></p>
+</blockquote>
+<p>Con esto listo solo me resta mostrar el código: </p>
+<p><code>lib/app/modules/characters/views/characters_view.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="s1">&#39;package:get/get.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:lazy_load_scrollview/lazy_load_scrollview.dart&#39;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="s1">&#39;../controllers/characters_controller.dart&#39;</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">CharactersView</span> <span class="kd">extends</span> <span class="n">GetView</span><span class="o">&lt;</span><span class="n">CharactersController</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="nd">@override</span>
+  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">view</span><span class="p">;</span>
+
+  <span class="n">Widget</span> <span class="kd">get</span> <span class="n">view</span> <span class="o">=&gt;</span> <span class="n">Scaffold</span><span class="p">(</span>
+        <span class="nl">appBar:</span> <span class="n">appBar</span><span class="p">,</span>
+        <span class="nl">body:</span> <span class="n">body</span><span class="p">,</span>
+      <span class="p">);</span>
+
+  <span class="n">AppBar</span> <span class="kd">get</span> <span class="n">appBar</span> <span class="o">=&gt;</span> <span class="n">AppBar</span><span class="p">(</span><span class="nl">title:</span> <span class="n">Text</span><span class="p">(</span><span class="s1">&#39;Characters List&#39;</span><span class="p">));</span>
+
+  <span class="n">Widget</span> <span class="kd">get</span> <span class="n">body</span> <span class="o">=&gt;</span> <span class="n">Obx</span><span class="p">(</span>
+        <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">LazyLoadScrollView</span><span class="p">(</span>
+          <span class="nl">onEndOfPage:</span> <span class="n">controller</span><span class="p">.</span><span class="n">next</span><span class="p">,</span>
+          <span class="nl">isLoading:</span> <span class="n">controller</span><span class="p">.</span><span class="n">isLoading</span><span class="p">.</span><span class="n">value</span><span class="p">,</span>
+          <span class="nl">child:</span> <span class="n">ListView</span><span class="p">.</span><span class="n">builder</span><span class="p">(</span>
+            <span class="nl">itemCount:</span> <span class="n">controller</span><span class="p">.</span><span class="n">characters</span><span class="p">.</span><span class="n">length</span><span class="p">,</span>
+            <span class="nl">itemBuilder:</span> <span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+              <span class="kd">final</span> <span class="n">_character</span> <span class="o">=</span> <span class="n">controller</span><span class="p">.</span><span class="n">characters</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+
+              <span class="k">return</span> <span class="n">GestureDetector</span><span class="p">(</span>
+                <span class="nl">behavior:</span> <span class="n">HitTestBehavior</span><span class="p">.</span><span class="n">translucent</span><span class="p">,</span>
+                <span class="nl">onTap:</span> <span class="p">()</span> <span class="p">{},</span>
+                <span class="nl">child:</span> <span class="n">Container</span><span class="p">(</span>
+                  <span class="nl">margin:</span> <span class="n">EdgeInsets</span><span class="p">.</span><span class="n">fromLTRB</span><span class="p">(</span><span class="m">16</span><span class="p">,</span> <span class="m">16</span><span class="p">,</span> <span class="m">24</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span>
+                  <span class="nl">child:</span> <span class="n">Column</span><span class="p">(</span>
+                    <span class="nl">children:</span> <span class="o">&lt;</span><span class="n">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+                      <span class="n">Row</span><span class="p">(</span>
+                        <span class="nl">children:</span> <span class="o">&lt;</span><span class="n">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+                          <span class="n">Expanded</span><span class="p">(</span>
+                            <span class="nl">flex:</span> <span class="m">2</span><span class="p">,</span>
+                            <span class="nl">child:</span> <span class="n">Image</span><span class="p">.</span><span class="n">network</span><span class="p">(</span>
+                              <span class="n">_character</span><span class="p">.</span><span class="n">image</span><span class="p">,</span>
+                              <span class="nl">width:</span> <span class="m">64</span><span class="p">,</span>
+                              <span class="nl">height:</span> <span class="m">64</span><span class="p">,</span>
+                            <span class="p">),</span>
+                          <span class="p">),</span>
+                          <span class="n">SizedBox</span><span class="p">(</span>
+                            <span class="nl">width:</span> <span class="m">16</span><span class="p">,</span>
+                          <span class="p">),</span>
+                          <span class="n">Expanded</span><span class="p">(</span>
+                            <span class="nl">flex:</span> <span class="m">8</span><span class="p">,</span>
+                            <span class="nl">child:</span> <span class="n">Text</span><span class="p">(</span>
+                              <span class="n">_character</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+                              <span class="nl">style:</span> <span class="n">TextStyle</span><span class="p">(</span><span class="nl">fontSize:</span> <span class="m">24</span><span class="p">),</span>
+                            <span class="p">),</span>
+                          <span class="p">),</span>
+                        <span class="p">],</span>
+                      <span class="p">),</span>
+                      <span class="n">SizedBox</span><span class="p">(</span>
+                        <span class="nl">height:</span> <span class="m">12</span><span class="p">,</span>
+                      <span class="p">),</span>
+                      <span class="n">Divider</span><span class="p">(</span>
+                        <span class="nl">height:</span> <span class="m">12</span><span class="p">,</span>
+                      <span class="p">),</span>
+                    <span class="p">],</span>
+                  <span class="p">),</span>
+                <span class="p">),</span>
+              <span class="p">);</span>
+            <span class="p">},</span>
+          <span class="p">),</span>
+        <span class="p">),</span>
+      <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Aquí nada nuevo, a excepción de <code>Obx</code> que pertenece a GetX, se utiliza para el manejo de estado reactivo. Para más información "Go to the doc".</p>
+<h4 id="un-vistazo_1">Un vistazo<a class="headerlink" href="#un-vistazo_1" title="Permanent link">🔗</a></h4>
+<p><img alt="Home View" src="images/Characters.png" width="360px" /></p>
+<h3 id="characterdetailsview">CharacterDetailsView<a class="headerlink" href="#characterdetailsview" title="Permanent link">🔗</a></h3>
+<p>Ahora corresponde crear la vista de detalles para cada <em>character</em>. Esta vez no necesitamos crear toda una página con su controllador y binding, solamente necesitamos una vista que recibirá como <em>argumento</em> el <em>character</em> que queremos visualizar.</p>
+<div class="highlight"><pre><span></span><code>&gt; get create view:character_details on characters
+</code></pre></div>
+<p>Con esta instrucción generamos la vista, pero esta vez si tenemos que declararla en las rutas de la aplicación.</p>
+<p><code>lib/app/routes/app_routes.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">part of</span> <span class="s1">&#39;app_pages.dart&#39;</span><span class="p">;</span>
+<span class="c1">// DO NOT EDIT. This is code generated via package:get_cli/get_cli.dart</span>
+
+<span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Routes</span> <span class="p">{</span>
+  <span class="kd">static</span> <span class="k">const</span> <span class="n">HOME</span> <span class="o">=</span> <span class="n">_Paths</span><span class="p">.</span><span class="n">HOME</span><span class="p">;</span>
+  <span class="kd">static</span> <span class="k">const</span> <span class="n">CHARACTERS</span> <span class="o">=</span> <span class="n">_Paths</span><span class="p">.</span><span class="n">CHARACTERS</span><span class="p">;</span>
+  <span class="kd">static</span> <span class="k">const</span> <span class="n">CHARACTER_DETAILS</span> <span class="o">=</span> <span class="n">_Paths</span><span class="p">.</span><span class="n">CHARACTERS_DETAILS</span><span class="p">;</span>
+  <span class="kd">static</span> <span class="k">const</span> <span class="n">LOCATIONS</span> <span class="o">=</span> <span class="n">_Paths</span><span class="p">.</span><span class="n">LOCATIONS</span><span class="p">;</span>
+  <span class="kd">static</span> <span class="k">const</span> <span class="n">EPISODES</span> <span class="o">=</span> <span class="n">_Paths</span><span class="p">.</span><span class="n">EPISODES</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">_Paths</span> <span class="p">{</span>
+  <span class="kd">static</span> <span class="k">const</span> <span class="n">HOME</span> <span class="o">=</span> <span class="s1">&#39;/home&#39;</span><span class="p">;</span>
+  <span class="kd">static</span> <span class="k">const</span> <span class="n">CHARACTERS</span> <span class="o">=</span> <span class="s1">&#39;/characters&#39;</span><span class="p">;</span>
+  <span class="kd">static</span> <span class="k">const</span> <span class="n">CHARACTERS_DETAILS</span> <span class="o">=</span> <span class="s1">&#39;/characters/details&#39;</span><span class="p">;</span>
+  <span class="kd">static</span> <span class="k">const</span> <span class="n">LOCATIONS</span> <span class="o">=</span> <span class="s1">&#39;/locations&#39;</span><span class="p">;</span>
+  <span class="kd">static</span> <span class="k">const</span> <span class="n">EPISODES</span> <span class="o">=</span> <span class="s1">&#39;/episodes&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>lib/app/routes/app_pages.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;package:get/get.dart&#39;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="s1">&#39;package:rick_and_morty/app/modules/characters/bindings/characters_binding.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:rick_and_morty/app/modules/characters/views/character_details_view.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:rick_and_morty/app/modules/characters/views/characters_view.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:rick_and_morty/app/modules/episodes/bindings/episodes_binding.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:rick_and_morty/app/modules/episodes/views/episodes_view.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:rick_and_morty/app/modules/home/bindings/home_binding.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:rick_and_morty/app/modules/home/views/home_view.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:rick_and_morty/app/modules/locations/bindings/locations_binding.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:rick_and_morty/app/modules/locations/views/locations_view.dart&#39;</span><span class="p">;</span>
+
+<span class="k">part</span> <span class="s1">&#39;app_routes.dart&#39;</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">AppPages</span> <span class="p">{</span>
+  <span class="kd">static</span> <span class="k">const</span> <span class="n">INITIAL</span> <span class="o">=</span> <span class="n">Routes</span><span class="p">.</span><span class="n">HOME</span><span class="p">;</span>
+
+  <span class="kd">static</span> <span class="kd">final</span> <span class="n">routes</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">GetPage</span><span class="p">(</span>
+      <span class="nl">name:</span> <span class="n">_Paths</span><span class="p">.</span><span class="n">HOME</span><span class="p">,</span>
+      <span class="nl">page:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">HomeView</span><span class="p">(),</span>
+      <span class="nl">binding:</span> <span class="n">HomeBinding</span><span class="p">(),</span>
+    <span class="p">),</span>
+    <span class="n">GetPage</span><span class="p">(</span>
+      <span class="nl">name:</span> <span class="n">_Paths</span><span class="p">.</span><span class="n">CHARACTERS</span><span class="p">,</span>
+      <span class="nl">page:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">CharactersView</span><span class="p">(),</span>
+      <span class="nl">binding:</span> <span class="n">CharactersBinding</span><span class="p">(),</span>
+    <span class="p">),</span>
+    <span class="n">GetPage</span><span class="p">(</span>
+      <span class="nl">name:</span> <span class="n">_Paths</span><span class="p">.</span><span class="n">CHARACTERS_DETAILS</span><span class="p">,</span>
+      <span class="nl">page:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">CharacterDetailsView</span><span class="p">(),</span>
+    <span class="p">),</span>
+    <span class="n">GetPage</span><span class="p">(</span>
+      <span class="nl">name:</span> <span class="n">_Paths</span><span class="p">.</span><span class="n">LOCATIONS</span><span class="p">,</span>
+      <span class="nl">page:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">LocationsView</span><span class="p">(),</span>
+      <span class="nl">binding:</span> <span class="n">LocationsBinding</span><span class="p">(),</span>
+    <span class="p">),</span>
+    <span class="n">GetPage</span><span class="p">(</span>
+      <span class="nl">name:</span> <span class="n">_Paths</span><span class="p">.</span><span class="n">EPISODES</span><span class="p">,</span>
+      <span class="nl">page:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">EpisodesView</span><span class="p">(),</span>
+      <span class="nl">binding:</span> <span class="n">EpisodesBinding</span><span class="p">(),</span>
+    <span class="p">),</span>
+  <span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Así va quedando nuestra declaración de rutas, de manera similar a como se hacer con las aplicaciones web.</p>
+<p>Ahora podemos modificar el <code>onTap</code> que habíamos declarado vacío en <code>CharactersView</code> y hacer que cuando se haga <em>tap</em> en cada elemento nos dirija a la vista de detalles.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">final</span> <span class="n">_character</span> <span class="o">=</span> <span class="n">controller</span><span class="p">.</span><span class="n">characters</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+
+<span class="p">...</span>
+<span class="nl">onTap:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">Get</span><span class="p">.</span><span class="n">toNamed</span><span class="p">(</span>
+  <span class="n">Routes</span><span class="p">.</span><span class="n">CHARACTER_DETAILS</span><span class="p">,</span>
+  <span class="nl">arguments:</span> <span class="n">_character</span><span class="p">,</span>
+<span class="p">),</span>
+<span class="p">...</span>
+</code></pre></div>
+<p>Recuerda que estamos generando la lista de <em>characters</em> y que cada elemento de la lista se va guardando en <code>_character</code>, pues lo único que debemos hacer en este caso es llamar a la nueva vista y pasarle esta variable como argumento usando Get. Otra manera de hacerlo sería pasando la variable directamente en el constructor de la vista, pero no podríamos utilizar el <em>enrutamiento por nombres</em>.</p>
+<p>Ahora sí veamos el código de <code>CharacterDetailsView</code>:</p>
+<p><code>lib/app/modules/characters/views/character_details_view.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="s1">&#39;package:get/get.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:rick_and_morty/app/data/models/character_model.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:rick_and_morty/app/widgets/table_row.dart&#39;</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">CharacterDetailsView</span> <span class="kd">extends</span> <span class="n">GetView</span> <span class="p">{</span>
+  <span class="kd">final</span> <span class="n">Character</span> <span class="n">character</span> <span class="o">=</span> <span class="n">Get</span><span class="p">.</span><span class="n">arguments</span><span class="p">;</span>
+
+  <span class="nd">@override</span>
+  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">view</span><span class="p">;</span>
+
+  <span class="n">Widget</span> <span class="kd">get</span> <span class="n">view</span> <span class="o">=&gt;</span> <span class="n">Scaffold</span><span class="p">(</span>
+        <span class="nl">appBar:</span> <span class="n">appBar</span><span class="p">,</span>
+        <span class="nl">body:</span> <span class="n">body</span><span class="p">,</span>
+      <span class="p">);</span>
+
+  <span class="n">AppBar</span> <span class="kd">get</span> <span class="n">appBar</span> <span class="o">=&gt;</span> <span class="n">AppBar</span><span class="p">(</span>
+        <span class="nl">title:</span> <span class="n">Text</span><span class="p">(</span><span class="s1">&#39;Character Details&#39;</span><span class="p">),</span>
+      <span class="p">);</span>
+
+  <span class="n">Widget</span> <span class="kd">get</span> <span class="n">body</span> <span class="o">=&gt;</span> <span class="n">SingleChildScrollView</span><span class="p">(</span>
+        <span class="nl">child:</span> <span class="n">Container</span><span class="p">(</span>
+          <span class="nl">margin:</span> <span class="n">EdgeInsets</span><span class="p">.</span><span class="n">all</span><span class="p">(</span><span class="m">24</span><span class="p">),</span>
+          <span class="nl">child:</span> <span class="n">Column</span><span class="p">(</span>
+            <span class="nl">mainAxisAlignment:</span> <span class="n">MainAxisAlignment</span><span class="p">.</span><span class="n">start</span><span class="p">,</span>
+            <span class="nl">crossAxisAlignment:</span> <span class="n">CrossAxisAlignment</span><span class="p">.</span><span class="n">start</span><span class="p">,</span>
+            <span class="nl">children:</span> <span class="o">&lt;</span><span class="n">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+              <span class="n">Center</span><span class="p">(</span>
+                <span class="nl">child:</span> <span class="n">Image</span><span class="p">.</span><span class="n">network</span><span class="p">(</span>
+                  <span class="n">character</span><span class="p">.</span><span class="n">image</span><span class="p">,</span>
+                  <span class="nl">width:</span> <span class="m">160</span><span class="p">,</span>
+                  <span class="nl">height:</span> <span class="m">160</span><span class="p">,</span>
+                <span class="p">),</span>
+              <span class="p">),</span>
+              <span class="n">SizedBox</span><span class="p">(</span>
+                <span class="nl">height:</span> <span class="m">24</span><span class="p">,</span>
+              <span class="p">),</span>
+              <span class="n">Center</span><span class="p">(</span>
+                <span class="nl">child:</span> <span class="n">Text</span><span class="p">(</span>
+                  <span class="n">character</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+                  <span class="nl">style:</span> <span class="n">TextStyle</span><span class="p">(</span><span class="nl">fontSize:</span> <span class="m">32</span><span class="p">),</span>
+                <span class="p">),</span>
+              <span class="p">),</span>
+              <span class="n">SizedBox</span><span class="p">(</span>
+                <span class="nl">height:</span> <span class="m">16</span><span class="p">,</span>
+              <span class="p">),</span>
+              <span class="n">TableRowDetails</span><span class="p">(</span>
+                <span class="nl">title:</span> <span class="s1">&#39;Status&#39;</span><span class="p">,</span>
+                <span class="nl">value:</span> <span class="n">character</span><span class="p">.</span><span class="n">status</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">replaceAll</span><span class="p">(</span><span class="s1">&#39;Status.&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+              <span class="p">),</span>
+              <span class="n">TableRowDetails</span><span class="p">(</span>
+                <span class="nl">title:</span> <span class="s1">&#39;Species&#39;</span><span class="p">,</span>
+                <span class="nl">value:</span> <span class="n">character</span><span class="p">.</span><span class="n">species</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">replaceAll</span><span class="p">(</span><span class="s1">&#39;Species.&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+              <span class="p">),</span>
+              <span class="n">TableRowDetails</span><span class="p">(</span>
+                <span class="nl">title:</span> <span class="s1">&#39;Gender&#39;</span><span class="p">,</span>
+                <span class="nl">value:</span> <span class="n">character</span><span class="p">.</span><span class="n">gender</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">replaceAll</span><span class="p">(</span><span class="s1">&#39;Gender.&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+              <span class="p">),</span>
+              <span class="n">TableRowDetails</span><span class="p">(</span>
+                <span class="nl">title:</span> <span class="s1">&#39;Origin&#39;</span><span class="p">,</span>
+                <span class="nl">value:</span> <span class="n">character</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+              <span class="p">),</span>
+              <span class="n">TableRowDetails</span><span class="p">(</span>
+                <span class="nl">title:</span> <span class="s1">&#39;Last Location&#39;</span><span class="p">,</span>
+                <span class="nl">value:</span> <span class="n">character</span><span class="p">.</span><span class="n">location</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+              <span class="p">)</span>
+            <span class="p">],</span>
+          <span class="p">),</span>
+        <span class="p">),</span>
+      <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Mucho código pero nanda novedoso, solamente fíjate en esta línea:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">final</span> <span class="n">Character</span> <span class="n">character</span> <span class="o">=</span> <span class="n">Get</span><span class="p">.</span><span class="n">arguments</span><span class="p">;</span>
+</code></pre></div>
+<p>¿Recuerdas cuándo pasamos el <em>character</em> que queríamos visualizar como argumento de la vista? Pues así es como lo recuperamos.</p>
+<p>Este widget auxiliar lo copié tal cual del repo de <a href="https://github.com/KathirvelChandrasekaran/rick_and_morty_flutter" target="_blank">Rick and Morty</a>, recuerda que estamos reimplementando su app, puedes ir a dejarle una ⭐️ como muestra de agradecimiento, ya yo he dejado la mía.</p>
+<p><code>lib/app/widgets/table_row.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">TableRowDetails</span> <span class="kd">extends</span> <span class="n">StatelessWidget</span> <span class="p">{</span>
+  <span class="n">TableRowDetails</span><span class="p">({</span>
+    <span class="nd">@required</span> <span class="k">this</span><span class="p">.</span><span class="n">title</span><span class="p">,</span>
+    <span class="nd">@required</span> <span class="k">this</span><span class="p">.</span><span class="n">value</span><span class="p">,</span>
+  <span class="p">});</span>
+
+  <span class="kd">final</span> <span class="kt">String</span> <span class="n">title</span><span class="p">,</span> <span class="n">value</span><span class="p">;</span>
+
+  <span class="nd">@override</span>
+  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Row</span><span class="p">(</span>
+      <span class="nl">children:</span> <span class="o">&lt;</span><span class="n">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+        <span class="n">Expanded</span><span class="p">(</span>
+          <span class="nl">flex:</span> <span class="m">5</span><span class="p">,</span>
+          <span class="nl">child:</span> <span class="n">Container</span><span class="p">(</span>
+            <span class="nl">margin:</span> <span class="n">EdgeInsets</span><span class="p">.</span><span class="n">all</span><span class="p">(</span><span class="m">4</span><span class="p">),</span>
+            <span class="nl">padding:</span> <span class="n">EdgeInsets</span><span class="p">.</span><span class="n">all</span><span class="p">(</span><span class="m">16</span><span class="p">),</span>
+            <span class="nl">color:</span> <span class="n">Colors</span><span class="p">.</span><span class="n">blueGrey</span><span class="p">,</span>
+            <span class="nl">child:</span> <span class="n">Text</span><span class="p">(</span>
+              <span class="n">addNewLineCharacter</span><span class="p">(</span><span class="n">value</span><span class="p">),</span>
+              <span class="nl">style:</span> <span class="n">TextStyle</span><span class="p">(</span><span class="nl">fontSize:</span> <span class="m">24</span><span class="p">),</span>
+              <span class="nl">textAlign:</span> <span class="n">TextAlign</span><span class="p">.</span><span class="n">center</span><span class="p">,</span>
+              <span class="nl">maxLines:</span> <span class="m">2</span><span class="p">,</span>
+            <span class="p">),</span>
+          <span class="p">),</span>
+        <span class="p">),</span>
+        <span class="n">Expanded</span><span class="p">(</span>
+          <span class="nl">flex:</span> <span class="m">5</span><span class="p">,</span>
+          <span class="nl">child:</span> <span class="n">Container</span><span class="p">(</span>
+            <span class="nl">margin:</span> <span class="n">EdgeInsets</span><span class="p">.</span><span class="n">all</span><span class="p">(</span><span class="m">4</span><span class="p">),</span>
+            <span class="nl">padding:</span> <span class="n">EdgeInsets</span><span class="p">.</span><span class="n">all</span><span class="p">(</span><span class="m">16</span><span class="p">),</span>
+            <span class="nl">color:</span> <span class="n">Colors</span><span class="p">.</span><span class="n">blueGrey</span><span class="p">,</span>
+            <span class="nl">child:</span> <span class="n">Text</span><span class="p">(</span>
+              <span class="n">value</span><span class="p">,</span>
+              <span class="nl">style:</span> <span class="n">TextStyle</span><span class="p">(</span><span class="nl">fontSize:</span> <span class="m">24</span><span class="p">),</span>
+              <span class="nl">textAlign:</span> <span class="n">TextAlign</span><span class="p">.</span><span class="n">center</span><span class="p">,</span>
+              <span class="nl">maxLines:</span> <span class="m">2</span><span class="p">,</span>
+            <span class="p">),</span>
+          <span class="p">),</span>
+        <span class="p">),</span>
+      <span class="p">],</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">String</span> <span class="n">addNewLineCharacter</span><span class="p">(</span><span class="kt">String</span> <span class="n">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">length</span> <span class="o">&lt;=</span> <span class="m">23</span> <span class="o">&amp;&amp;</span> <span class="n">result</span><span class="p">.</span><span class="n">allMatches</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">).</span><span class="n">length</span> <span class="o">&lt;=</span> <span class="m">2</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">title</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">title</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="un-vistazo_2">Un vistazo<a class="headerlink" href="#un-vistazo_2" title="Permanent link">🔗</a></h4>
+<p><img alt="CharacterDetailsView" src="images/CharacterDetails.png" width="360px" /></p>
+<h3 id="tarea-para-la-casa">Tarea para la casa<a class="headerlink" href="#tarea-para-la-casa" title="Permanent link">🔗</a></h3>
+<p>Ahora corresponde continuar con el resto de las pantallas. Pero sería un proceso repetitivo y explicar nuevamente el proceso en un post se torna aburrido tanto para ti que me lees como para mí que estoy escribiendo. Así que haremos lo siguiente puedes terminar tu mismo el resto de la app y así prácticas lo aprendido. Aunque de todos modos dejaré el código de la app terminada al final del post y una pequeña sorpresa que comentaré al final, sigue leyendo.</p>
+<h3 id="conclusiones">Conclusiones<a class="headerlink" href="#conclusiones" title="Permanent link">🔗</a></h3>
+<p>El tiempo es lo más valioso que tenemos, incluso cuando lo aprovechamos en cosas productivas: como trabajar en nuestros proyectos personales, programar, estudiar, etc. Debemos asegurarnos de que lo estamos empleando de la mejor forma posible, los programadores somos adictos a optimizar procesos, de querer automatizar las cosas, de evitarle trabajo mecánico a las personas y dárselo a las máquinas, para que el ser humano tenga tiempo para el trabajo creativo. Si hacemos eso en distintas industrias, ayudando a personas de distintas profesiones, podemos hacerlo también para nosotros mismos, para optimizar nuestro tiempo, quitarnos de encima el trabajo mecánico y dedicarnos a la parte creativa de nuestros proyectos. </p>
+<p>Este ha sido sólo un pequeño esfuerzo que hago para compartir como trato de lograr esto, todavía me queda mucho por aprender pero estaré compartiendo todo lo que aprenda a través de este este blog, espero que te haya sido de utilidad este primer post y si conoces alguna forma de ahorrar más tiempo de desarrollo puedes dejar un comentario al final del post.</p>
+<hr />
+<p>Acá está el link para que puedas descargar todo el código terminado de la app desde Github:</p>
+<p><a href="https://github.com/correaleyval/rick_and_morty" target="_blank">https://github.com/correaleyval/rick_and_morty</a></p>
+<p>Y la sorpresa es que este proyecto ha sido desarrollado utilizando <a href="https://developers.googleblog.com/2021/03/announcing-flutter-2.html" target="_blank">Flutter 2.0</a>. Por lo que lo he compilado para web y puedes verlo funcionando en vivo desde este blog: 👇</p>
+<iframe src="https://flutter-rickandmorty.netlify.app/" width="360" height="600" frameBorder="0">
+</iframe>
+                
+                  
+                
+               
+              
+                
+
+
+  <h2 id="__comments">Comentarios</h2>
+  <div id="disqus_thread"></div>
+  <script>var disqus_config=function(){this.page.url="https://luis-ciber.is-a.dev/blog/2021/03/07/desarrollo-r%C3%A1pido-en-flutter-con-getx/",this.page.identifier="blog/2021/03/07/desarrollo-r%C3%A1pido-en-flutter-con-getx/"};window.addEventListener("load",function(){var e=document,i=e.createElement("script");i.src="//correaleyval.disqus.com/embed.js",i.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(i)})</script>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Pie">
+      
+        
+        <a href="../../../../" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Blog" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              Blog
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../../06/13/usando-dart-backend-frontend-grpc/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Usando Dart en Backend y Frontend con gRPC" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              Usando Dart en Backend y Frontend con gRPC
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; Luis Correa Leyva
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://www.linkedin.com/in/luisciber" target="_blank" rel="noopener" title="LinkedIn" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://github.com/correaleyval" target="_blank" rel="noopener" title="GitHub" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://profile.codersrank.io/user/correaleyval" target="_blank" rel="noopener" title="Codersrank" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="m278.9 511.5-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2 43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6 144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://twitter.com/luis__ciber" target="_blank" rel="noopener" title="Twitter" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://t.me/luis_ciber" target="_blank" rel="noopener" title="Telegram" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm121.8 169.9-40.7 191.8c-3 13.6-11.1 16.9-22.4 10.5l-62-45.7-29.9 28.8c-3.3 3.3-6.1 6.1-12.5 6.1l4.4-63.1 114.9-103.8c5-4.4-1.1-6.9-7.7-2.5l-142 89.4-61.2-19.1c-13.3-4.2-13.6-13.3 2.8-19.7l239.1-92.2c11.1-4 20.8 2.7 17.2 19.5z"/></svg>
+      </a>
+    
+      
+      
+      <a href="mailto:correaleyval@gmail.com" target="_blank" rel="noopener" title="Gmail" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M476 3.2 12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": ["navigation.tabs"], "translations": {"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.term.missing": "Falta", "select.version.title": "Select version"}, "search": "../../../../../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+      
+        <script src="../../../../../javascripts/config.js"></script>
+      
+    
+  </body>
+</html>

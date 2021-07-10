@@ -1,0 +1,1232 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Esto es demasiado fácil de usar como para no usarlo. Esto me va a permitir usar Dart en el backend sin realizar prácticamente ningún esfuerzo, y en las apps que implemente con Flutter es sólo llamar a las funciones, adios serialización de json y llamadas POST, GET, PUT, etc a urls distintas, es sólo llamar a una función.">
+      
+      
+      
+      
+        <link rel="canonical" href="https://luis-ciber.is-a.dev/blog/2021/06/13/usando-dart-backend-frontend-grpc/">
+      
+      <link rel="icon" href="../../../../../assets/images/avatar.jpg">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.10">
+    
+    
+      
+        <title>Usando Dart en Backend y Frontend con gRPC - @luis_ciber</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.1fe995fd.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="manifest" href="../../../../../manifest.json" crossorigin="use-credentials">
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-HBW40C5MRJ"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", "G-HBW40C5MRJ");
+</script>
+
+
+                
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="@luis_ciber - Usando Dart en Backend y Frontend con gRPC" />
+<meta property="og:description" content="Esto es demasiado fácil de usar como para no usarlo. Esto me va a permitir usar Dart en el backend sin realizar prácticamente ningún esfuerzo, y en las apps que implemente con Flutter es sólo llamar a las funciones, adios serialización de json y llamadas POST, GET, PUT, etc a urls distintas, es sólo llamar a una función." />
+<meta property="og:url" content="https://luis-ciber.is-a.dev/blog/2021/06/13/usando-dart-backend-frontend-grpc/" />
+<meta property="og:image" content="header.png" />
+<meta property="og:image:type" content="image/png" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@luis__ciber" />
+<meta name="twitter:creator" content="@luis__ciber" />
+<meta name="twitter:title" content="@luis_ciber - Usando Dart en Backend y Frontend con gRPC" />
+<meta name="twitter:description" content="Esto es demasiado fácil de usar como para no usarlo. Esto me va a permitir usar Dart en el backend sin realizar prácticamente ningún esfuerzo, y en las apps que implemente con Flutter es sólo llamar a las funciones, adios serialización de json y llamadas POST, GET, PUT, etc a urls distintas, es sólo llamar a una función." />
+<meta name="twitter:image" content="https://luis-ciber.is-a.dev/blog/2021/06/13/usando-dart-backend-frontend-grpc/header.png" />
+
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../../../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#usando-dart-en-backend-y-frontend-con-grpc" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../../../.." title="@luis_ciber" class="md-header__button md-logo" aria-label="@luis_ciber" data-md-component="logo">
+      
+  <img src="../../../../../assets/images/avatar.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            @luis_ciber
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Usando Dart en Backend y Frontend con gRPC
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/correaleyval" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../.." class="md-tabs__link">
+        ⭐ Start
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../../" class="md-tabs__link">
+      Blog
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../03/07/desarrollo-r%C3%A1pido-en-flutter-con-getx/" class="md-tabs__link md-tabs__link--active">
+        Todos los posts
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../../../notebooks/" class="md-tabs__link">
+      Notebooks
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../../../apps/" class="md-tabs__link">
+      Aplicaciones y proyectos
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../../../contact/" class="md-tabs__link">
+      Contacto
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="@luis_ciber" class="md-nav__button md-logo" aria-label="@luis_ciber" data-md-component="logo">
+      
+  <img src="../../../../../assets/images/avatar.jpg" alt="logo">
+
+    </a>
+    @luis_ciber
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/correaleyval" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        ⭐ Start
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="⭐ Start" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          ⭐ Start
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        👋 git init
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../" class="md-nav__link">
+        📄 Publicaciones recientes
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../apps/" class="md-nav__link">
+        💻 Aplicaciones y proyectos
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../notebooks/" class="md-nav__link">
+        🗒 Notebooks
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../contact/" class="md-nav__link">
+        ℹ️ Contacto
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../cv/" class="md-nav__link">
+        🧑‍💻 Coder CV
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../" class="md-nav__link">
+        Blog
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3">
+        Todos los posts
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Todos los posts" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Todos los posts
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03/07/desarrollo-r%C3%A1pido-en-flutter-con-getx/" class="md-nav__link">
+        Desarrollo rápido en Flutter con GetX
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Usando Dart en Backend y Frontend con gRPC
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Usando Dart en Backend y Frontend con gRPC
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lo-primero-el-problema" class="md-nav__link">
+    Lo primero, "el problema" 😉
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#puede-ser-dart-el-nuevo-lenguaje-full-stack-que-estoy-buscando" class="md-nav__link">
+    ¿Puede ser Dart el nuevo lenguaje full stack que estoy buscando?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conociendo-mas-a-grpc" class="md-nav__link">
+    Conociendo más a gRPC
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#termino-la-charla-time-to-code" class="md-nav__link">
+    Terminó la charla, time to code 👨‍💻.
+  </a>
+  
+    <nav class="md-nav" aria-label="Terminó la charla, time to code 👨‍💻.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lo-primero-instalar-protoc" class="md-nav__link">
+    Lo primero, instalar protoc
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crear-proyecto-de-dart" class="md-nav__link">
+    Crear proyecto de Dart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definiendo-los-servicios-con-protobuf" class="md-nav__link">
+    Definiendo los servicios con protobuf.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#traducir-e-implementar" class="md-nav__link">
+    Traducir e implementar 🛠
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurar-y-cargar-el-servidor" class="md-nav__link">
+    Configurar y cargar el servidor
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mientras-tanto-del-lado-del-cliente" class="md-nav__link">
+    Mientras tanto... Del lado del cliente 📺
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../15/dart-grpc-backend-crud/" class="md-nav__link">
+        Usando Dart en Backend con gRPC (Users CRUD)
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../notebooks/" class="md-nav__link">
+        Notebooks
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../apps/" class="md-nav__link">
+        Aplicaciones y proyectos
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../contact/" class="md-nav__link">
+        Contacto
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lo-primero-el-problema" class="md-nav__link">
+    Lo primero, "el problema" 😉
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#puede-ser-dart-el-nuevo-lenguaje-full-stack-que-estoy-buscando" class="md-nav__link">
+    ¿Puede ser Dart el nuevo lenguaje full stack que estoy buscando?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conociendo-mas-a-grpc" class="md-nav__link">
+    Conociendo más a gRPC
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#termino-la-charla-time-to-code" class="md-nav__link">
+    Terminó la charla, time to code 👨‍💻.
+  </a>
+  
+    <nav class="md-nav" aria-label="Terminó la charla, time to code 👨‍💻.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lo-primero-instalar-protoc" class="md-nav__link">
+    Lo primero, instalar protoc
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crear-proyecto-de-dart" class="md-nav__link">
+    Crear proyecto de Dart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definiendo-los-servicios-con-protobuf" class="md-nav__link">
+    Definiendo los servicios con protobuf.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#traducir-e-implementar" class="md-nav__link">
+    Traducir e implementar 🛠
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurar-y-cargar-el-servidor" class="md-nav__link">
+    Configurar y cargar el servidor
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mientras-tanto-del-lado-del-cliente" class="md-nav__link">
+    Mientras tanto... Del lado del cliente 📺
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+                
+                
+                
+                <h1 id="usando-dart-en-backend-y-frontend-con-grpc">Usando Dart en Backend y Frontend con gRPC<a class="headerlink" href="#usando-dart-en-backend-y-frontend-con-grpc" title="Permanent link">🔗</a></h1>
+<blockquote>
+<p>13 de junio de 2021</p>
+</blockquote>
+<h2 id="lo-primero-el-problema">Lo primero, "el problema" 😉<a class="headerlink" href="#lo-primero-el-problema" title="Permanent link">🔗</a></h2>
+<p>Pues esta vez no partiremos de un problema sino mas bien de un deseo. A todo desarrollador le gusta la idea de poder programar todo lo que pueda utilizando un solo lenguaje. La búsqueda de un lenguaje "full stack" con el que puedas hacer de todo es comparable con la búsqueda de la "teoría fundamental de la física", donde los físicos buscan una teoría que les permita unificar la teoría de la relatividad y la teoría cuántica, los programadores buscan un lenguaje que les permita desarrollar backend y frontend sin tener que cambiarse el chip mental de un lenguaje a otro.</p>
+<p>Durante un tiempo estuve programando en NodeJS y React y sentí esa sensación de haber encontrado en Javascript ese lenguaje full stack que me permitía hacer de todo, sin embargo luego de comenzar a trabajar con Dart y Flutter me enamoré del lenguaje, Dart es simplemente elegante, lo veo como un híbrido que toma lo mejor de Javacript, C#, Java e incluso C++ y a pesar de que las mezclas no son buenas, pues esta mezcla si que ha salido bien. Flutter cada día crece más como framework para el desarrollo frontend tanto de aplicaciones móviles como aplicaciones web y se ve un futuro prometedor para el desarrollo de aplicaciones de escritorio; y Dart es bien conocido por ser un lenguaje multiplataforma que se puede utilizar tanto para desarrollar apps con Flutter como para desarrollar aplicaciones de consola y servicios web, sin embargo esta última característica no ha sido tan explotada.</p>
+<h2 id="puede-ser-dart-el-nuevo-lenguaje-full-stack-que-estoy-buscando">¿Puede ser Dart el nuevo lenguaje full stack que estoy buscando?<a class="headerlink" href="#puede-ser-dart-el-nuevo-lenguaje-full-stack-que-estoy-buscando" title="Permanent link">🔗</a></h2>
+<p>Pues una vez que comencé a tener dominio del lenguaje comencé a experimentar con él para el desarrollo de servicios web y la verdad es que la experiencia al principio fue lo típico del niño que tiene un juguete nuevo, pero a la hora de realizar proyectos reales no fue para nada gratificante. Carece de frameworks que faciliten el trabajo, muy poca documentación sobre tareas típicas de un backend como conectarse a una base de datos, el manejo de las peticiones HTTP se puede tornar complejo cuando intentas contruir una API REST para un proyecto del mundo real y mantener una API REST escrita en Dart puede volverse costoso en tiempo, esfuerzo y puede costarte unos cuantos pelos de la cabeza cuando te topas con un bug.</p>
+<p>Sin embargo recientemente conocí a <a href="https://grpc.io" target="_blank">gRPC</a> y mi idea sobre cómo se contruye un servicio web cambió por completo.</p>
+<p><img alt="gRPC" src="header.png" /></p>
+<p>Veamos lo que dice la web oficial sobre gRPC:</p>
+<blockquote>
+<p>En gRPC, una aplicación cliente puede llamar directamente a un método en una aplicación de servidor en una máquina diferente como si fuera un objeto local, lo que facilita la creación de aplicaciones y servicios distribuidos. Como en muchos sistemas RPC, gRPC se basa en la idea de definir un servicio, especificando los métodos que se pueden llamar de forma remota con sus parámetros y tipos de retorno. En el lado del servidor, el servidor implementa esta interfaz y ejecuta un servidor gRPC para manejar las llamadas de los clientes. En el lado del cliente, el cliente tiene un código auxiliar (denominado simplemente cliente en algunos idiomas) que proporciona los mismos métodos que el servidor.</p>
+</blockquote>
+<p>Si usted entiende lo escrito anteriormente pues <strong>FELICITACIONES</strong> 🥳, porque yo no entendí nada cuando lo leí, así que fuí directamente a ver los ejemplos de código de cómo se implementaba esto; me encontré con que se podía implementar en distintos lenguajes; que tanto cliente como servidor podían estar implementados en lenguajes diferentes y comunicarse entre ellos, nada nuevo hasta ahora. Sin embargo noté que Dart se encontraba entre los lenguajes que se podía utilizar para implementar tanto servidor como cliente y vi una oportunidad de volver a probar con Dart para construir servicios web.</p>
+<h2 id="conociendo-mas-a-grpc">Conociendo más a gRPC<a class="headerlink" href="#conociendo-mas-a-grpc" title="Permanent link">🔗</a></h2>
+<p>Comencé a revisar código de ejemplos y los tutoriales de la web oficial y primeramente noto que todo el servicio se especifíca utilizando archivos <code>.proto</code>, donde se utiliza <a href="https://developers.google.com/protocol-buffers" target="_blank">Protocol Buffers</a> para definir primero los tipos de datos y los servicios y luego un compilador (transpilador) genera el código automáticamente tanto de cliente como de servidor para el lenguaje que escojas 🤯. Otra vez volví a sentir esa sensación de niño con juguete nuevo.</p>
+<p>Noto también que no hay que definir urls, ni controladores, ni middlewares, solo defines tu servicio en <code>.proto</code>, generas para el lenguaje que desees, implementas los servicios en el servidor y en el cliente es solamente llamar a las funciones que ya ha generado <code>protoc</code>. Así que pensé 🤔:</p>
+<blockquote>
+<p>"Esto es demasiado fácil de usar como para no usarlo. Esto me va a permitir usar Dart en el backend sin realizar practicamente ningún esfuerzo, y en las apps que implemente con Flutter es sólo llamar a las funciones, adios serialización de json y llamadas POST, GET, PUT, etc a urls distintas, es sólo llamar a una función"</p>
+</blockquote>
+<p>gRPC además nos trae otras bondades como la utilización de HTTP/2 como protocolo de comunicación que permite una comunicación bidireccional y más efectiva; y al usar protobuf los datos entre cliente y servidor se envían en formato raw binario, disminuyendo el consumo de datos y la carga de la red.</p>
+<p>Esta infromación la puedes leer en la web oficial, en este post mi intención es mostrarte cómo utilizar gRPC para desarrollar un servicio web completo para una aplicación real, que será utilizada en un proyecto real, del mundo real, para aportarle valor a un negocio real. Insisto en el término real porque es muy fácil usar una tecnología nueva creando una simple ToDo List y ya decir que esa tecnología es lo máximo, no me gusta hacer ese tipo de cosas, sino sirve para proyectos grandes pues simplemente no sirve.</p>
+<p>Por la mediana complejidad del proyecto y la necesidad de ir explicando cada detalle iré dividiendo este post en varias partes, en esta primera parte comenzaremos por lo básico, partiremos desde la instalación de las herramientas necesarias hasta crear un primer servicio y conectar una app cliente (de consola en este caso) al servicio que hemos creado.</p>
+<h2 id="termino-la-charla-time-to-code">Terminó la charla, time to code 👨‍💻.<a class="headerlink" href="#termino-la-charla-time-to-code" title="Permanent link">🔗</a></h2>
+<h3 id="lo-primero-instalar-protoc">Lo primero, instalar <code>protoc</code><a class="headerlink" href="#lo-primero-instalar-protoc" title="Permanent link">🔗</a></h3>
+<p>Esto como siempre depende del sistema operativo que estés utilizando, las <a href="https://grpc.io/docs/protoc-installation/" target="_blank">instrucciones de instalación</a> puedes encontrarlas en la web oficial de <a href="https://grpc.io/docs/protoc-installation/" target="_blank">gRPC</a>.</p>
+<ul>
+<li>Linux, using apt or apt-get, for example:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>$ sudo apt install -y protobuf-compiler
+</code></pre></div>
+<ul>
+<li>MacOS, using <a href="https://brew.sh/" target="_blank">Homebrew</a>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>$ brew install protobuf
+</code></pre></div>
+<p>También puedes descargarte el último release desde <a href="https://github.com/protocolbuffers/protobuf/releases" target="_blank">Github</a></p>
+<p>Una vez tienes <code>protoc</code> instalado y te asegures de que puedes ejecutarlo desde la consola:</p>
+<p><img alt="protoc" src="images/protoc.png" /></p>
+<p>Lo que debes hacer es instalar el plugin de <code>protoc</code> para Dart, por defecto ya viene con los plugins de C++, Java, C#, etc. Pero para Dart aún debemos instalar el plugin para este lenguaje:</p>
+<div class="highlight"><pre><span></span><code>$ dart pub global activate protoc_plugin
+</code></pre></div>
+<p><img alt="protoc_plugin" src="images/protoc_plugin.png" /></p>
+<p>Por supuesto he asumido que ya tenías Dart o Flutter instalado y configurado en el <code>PATH</code>.</p>
+<h3 id="crear-proyecto-de-dart">Crear proyecto de Dart<a class="headerlink" href="#crear-proyecto-de-dart" title="Permanent link">🔗</a></h3>
+<div class="highlight"><pre><span></span><code>dart create pickup_grpc_server
+</code></pre></div>
+<blockquote>
+<p>Lo que está despues de <code>create</code> es el nombre del proyecto</p>
+</blockquote>
+<p><img alt="project" src="images/project.png" /></p>
+<p>Abres el proyecto con tu editor de código favorito (VSCode 😉) y debes tener una estuctura de archivos como esta:</p>
+<p><img alt="tree1" src="images/tree1.png" /></p>
+<p>Agregaremos unas carpetas más y archivos que utilizaremos luego a medida que vayamos implementando el sistema.</p>
+<ul>
+<li>
+<p>Primero una carpeta que llamaremos <code>grpc</code> donde irán los archivos <code>.proto</code> que definen nuestro servicio API. En muchos tutoriales que he visto e incluso en la documentación oficial nombran esta carpeta como <code>protos</code> el nombre de la carpeta no es realmente importante, puedes usar cualquiera sin embargo prefiero llamarle grpc porque luego ese mismo nombre se utiliza para localizar los archivos que son generados por <code>protoc</code>.</p>
+</li>
+<li>
+<p>Una carpeta <code>lib/src/services</code> donde irá la implementación de nuestros servicios, con gRPC solamente nos preocupamos por implementar los servicios que se encargarán de obtener los datos y enviarlos al cliente a través de funciones simples del lenguaje, más adelante veremos cómo.</p>
+</li>
+<li>
+<p>Tres archivos:</p>
+</li>
+</ul>
+<p><code>lib/src/server.dart</code>: donde irá el punto de entrada encargado de levantar el servidor gRPC.</p>
+<p><code>lib/src/environment.dart</code>: donde implementaremos una clase encargada de cargar el entorno de desarrollo o de producción, esta clase tendrá variables que almacenarán cosas como número del puerto en que corre el server, dirección de la base de datos que se va a utilizar, llaves secretas para encriptado de contraseñas, etc.</p>
+<p><code>lib/src/config.dart</code>: en este archivo implementaremos una función que se va a encargar de configurar todo el entorno y de la inyección de dependencias.</p>
+<ul>
+<li>
+<p>Un archivo <code>.env</code>, el clásico <code>.env</code> que se utiliza para declarar variables de entorno, vamos a recordar que Dart puede ser compilado en un archivo autoejecutable, o sea al estilo C, que lo compilas y lo corres en cualquier sistema incluso si no tiene Dart instalado. Entonces usando este archivo <code>.env</code> nos aseguramos de poder cambiar algunos parámetros del sistema sin necesidad de modificar el código.</p>
+</li>
+<li>
+<p>Un archivo <code>Makefile</code> será utilizado para poder ejecutar el comando encargado de generar los archivos desde proto sin necesidad de estar escribiendo todo el comando completo, además de otros comandos de utilidad. Es más sencillo si automatizamos un poco usando <code>make</code>.</p>
+</li>
+</ul>
+<p>Como puedes ver no nos tomaremos el diseño del sistema a la ligera ya que queremos construir algo que pueda ser escalable y sostenible en el tiempo. Queremos contruir un sistema robusto utilizando Dart como se haría con cualquier otro lenguaje y framework de renombre como ASP.NET, Django, Ruby on Rails, etc.</p>
+<p>Esta sería la nueva estructura de archivos que nos va quedando.</p>
+<p><img alt="tree2" src="images/tree2.png" /></p>
+<h3 id="definiendo-los-servicios-con-protobuf">Definiendo los servicios con <code>protobuf</code>.<a class="headerlink" href="#definiendo-los-servicios-con-protobuf" title="Permanent link">🔗</a></h3>
+<p>Para este proyecto iremos definiendo varios servicios en distintos archivos, pero como este es el primer post y aún no hemos visto nada de código para crear el server comenzaremos con algo básico y práctico. Implementaremos un servicio que nos devolverá información sobre el estado del sistema.</p>
+<p>Para ello utilizaremos el paquete de Dart: <a href="https://pub.dev/packages/system_info" target="_blank">system_info</a></p>
+<div class="highlight"><pre><span></span><code>$ dart pub add system_info
+</code></pre></div>
+<p>Y vamos a crear el archivo <code>grpc/system.proto</code>:</p>
+<blockquote>
+<p>Si usas VSCode te recomiendo instalar la extensión <a href="https://marketplace.visualstudio.com/items?itemName=zxh404.vscode-proto3" target="_blank"><code>vscode-proto3</code></a></p>
+</blockquote>
+<p><img alt="vscode-proto3" src="images/vscode-proto3.png" /></p>
+<p><code>grpc/system.proto</code></p>
+<div class="highlight"><pre><span></span><code>syntax = &quot;proto3&quot;;
+
+message Status {
+  string kernelArchitecture = 1;
+  string kernelName = 2;
+  string kernelVersion = 3;
+  string operatingSystemName = 4;
+  string operatingSystemVersion = 5;
+  repeated Processor processors = 6;
+  double totalPhysicalMemory = 7;
+  double freePhysicalMemory = 8;
+  double totalVirtualMemory = 9;
+  double freeVirtualMemory = 10;
+  double virtualMemorySize = 11;
+}
+
+message Processor {
+  string architecture = 1;
+  string name = 2;
+  string socket = 3;
+  string vendor = 4;
+}
+</code></pre></div>
+<p>Esto es lo primero que vamos a escribir en nuestro archivo <code>.proto</code>, comenzamos por definir los tipos de datos, en gRPC cada <code>message</code> que definimos será traducido en un tipo de clase del lenguaje que seleccionemos, los objetos de estas clases son los que almacenarán la información que se va a transmitir entre el servidor y el cliente, una analogía sería cuando definimos los modelos en una API REST usando un framework, en este caso los <code>messages</code> son nuestros modelos. En este caso en particular tenemos un <code>message Status</code> que contiene varios atributos de tipo string y double, algo que nos resulta completamente familiar, también tenemos un atributo de tipo <code>repeated Processor</code>, la palabra <code>repeated</code> se utiliza para representar arreglos o listas, y luego tenemos otro <code>message Processor</code> que básicamente almacena la infromación de un procesador y como podemos ver <code>Status</code> podrá contener información sobre varios procesadores.</p>
+<p>Fíjese que cada instrucción debe terminar con el clásico <code>;</code> y que a cada atributo se le asigna un número positivo, no es necesario que se asignen en orden aunque es recomendable, estos números son utilizados para la codificación y descodificación de los mensajes. A diferencia de json, protobuf no envía información sobre el nombre de los atributos sino que solo envía su número asignado y su valor, el código que se genera se encarga automaticamente de codificar y descodificar esta información. Tenga en cuenta esto ya que esto le permite cambiar fácilmente el nombre de cualquier campo sin que esto afecte el funcionamiento del sistema, sin embargo una vez que el sistema se encuentre en producción no podrá cambiar los valores numéricos asignados a cada campo.</p>
+<p>Finalmente esta instrucción <code>syntax = "proto3";</code> es solo para decir la versión de protobuf que queremos utilizar, hasta el momento de escribir este post proto3 es la última versión y recomendada.</p>
+<p>Ahora pasaremos a definir el servicio que devolverá la información del sistema. Lo definimos dentro del mismo archivo:</p>
+<p><code>grpc/system.proto</code></p>
+<div class="highlight"><pre><span></span><code>syntax = &quot;proto3&quot;;
+
+message Status {
+  string kernelArchitecture = 1;
+  string kernelName = 2;
+  string kernelVersion = 3;
+  string operatingSystemName = 4;
+  string operatingSystemVersion = 5;
+  repeated Processor processors = 6;
+  double totalPhysicalMemory = 7;
+  double freePhysicalMemory = 8;
+  double totalVirtualMemory = 9;
+  double freeVirtualMemory = 10;
+  double virtualMemorySize = 11;
+}
+
+message Processor {
+  string architecture = 1;
+  string name = 2;
+  string socket = 3;
+  string vendor = 4;
+}
+
+message Memory {
+  double totalPhysicalMemory = 7;
+  double freePhysicalMemory = 8;
+  double totalVirtualMemory = 9;
+  double freeVirtualMemory = 10;
+  double virtualMemorySize = 11;
+}
+
+service SystemService {
+  rpc getSystemInfo(NoParams) returns (Status);
+  rpc getMemoryStatus (NoParams) returns (Memory);
+}
+
+message NoParams {}
+</code></pre></div>
+<p>Decidí agregar otro <code>message Memory</code> para poder mostrar que un servicio puede contener más de una función o método. En este caso hemos definido el servicio <code>SystemService</code> que posee dos métodos, uno para obtener el estado general del sistema: <code>getSystemInfo</code> y otro para obtener solamente el estado de la memoria <code>getMemoryStatus</code>. La definición de cada método comienza con la palabra <code>rpc</code> seguida de su nombre y entre paréntesis el parámetro de la función que debe ser un <code>message</code>, si te fijas he tenido que definir otro <code>message NoParams</code> para poder especificar que estos métodos no van a recibir ningún parámetro; aquí no tenemos algo como <code>void</code> pero podemos declarar un <code>message</code> vacío para simularlo. Después viene la palabra <code>returns</code> y entre paréntesis especificamos el tipo de <code>message</code> que se va a devolver. Una vez más el <code>;</code> está presente después de cada declaración y puedes ver que se utiliza <code>service</code> para definir un servicio algo similar a como mismo utilizamos <code>class</code> para definir una clase en la mayoria de los lenguajes de POO.</p>
+<p>Ya con esto tenemos nuestro primer servicio definido, ahora es momento de generar el código para Dart e implementar el servicio, si te fijas esto solo define el servicio y los tipos de datos, aún nos falta implementar esas funciones y construir los objetos que tendrán esa información.</p>
+<h3 id="traducir-e-implementar">Traducir e implementar 🛠<a class="headerlink" href="#traducir-e-implementar" title="Permanent link">🔗</a></h3>
+<p>Una imagen dice más que las palabras.</p>
+<p><img alt="grpc_generate" src="images/grpc_generate.png" /></p>
+<ul>
+<li>Instalar el paquete <code>grpc</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code>$ dart pub add grpc
+</code></pre></div>
+<ul>
+<li>Generar archivos para el lenguaje Dart:</li>
+</ul>
+<p>Se utiliza este comando:</p>
+<div class="highlight"><pre><span></span><code>$ protoc -I ./ grpc/* --dart_out<span class="o">=</span>grpc:lib/src
+</code></pre></div>
+<p>Pero lo que hemos hecho es poner esto en el archivo Makefile, para luego poder usar:</p>
+<div class="highlight"><pre><span></span><code>$ make generate
+</code></pre></div>
+<p>Y como se puede ver en la imagen se nos han generado cuatro archivos en la carpeta <code>lib/src/grpc</code>, el contenido de cada archivo no es relevante para nosotros, lo que debemos saber es que ahí se encuentra la implementación de los <code>messages</code> que hemos declarado en el archivo <code>system.proto</code> y la definición de el servicio <code>SystemService</code>, ahora nos corresponde implementar el servicio.</p>
+<p><code>lib/src/services/system.service.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;package:grpc/src/server/call.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:pickup_grpc_server/src/grpc/system.pbgrpc.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:system_info/system_info.dart&#39;</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">SystemService</span> <span class="kd">extends</span> <span class="n">SystemServiceBase</span> <span class="p">{</span>
+  <span class="kd">final</span> <span class="kt">int</span> <span class="n">MEGABYTE</span> <span class="o">=</span> <span class="m">1024</span> <span class="o">*</span> <span class="m">1024</span><span class="p">;</span>
+
+  <span class="nd">@override</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">Memory</span><span class="o">&gt;</span> <span class="n">getMemoryStatus</span><span class="p">(</span><span class="n">ServiceCall</span> <span class="n">call</span><span class="p">,</span> <span class="n">NoParams</span> <span class="n">request</span><span class="p">)</span> <span class="kd">async</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Memory</span><span class="p">(</span>
+      <span class="nl">totalPhysicalMemory:</span> <span class="n">SysInfo</span><span class="p">.</span><span class="n">getTotalPhysicalMemory</span><span class="p">()</span> <span class="o">/</span> <span class="n">MEGABYTE</span><span class="p">,</span>
+      <span class="nl">freePhysicalMemory:</span> <span class="n">SysInfo</span><span class="p">.</span><span class="n">getFreePhysicalMemory</span><span class="p">()</span> <span class="o">/</span> <span class="n">MEGABYTE</span><span class="p">,</span>
+      <span class="nl">totalVirtualMemory:</span> <span class="n">SysInfo</span><span class="p">.</span><span class="n">getTotalVirtualMemory</span><span class="p">()</span> <span class="o">/</span> <span class="n">MEGABYTE</span><span class="p">,</span>
+      <span class="nl">freeVirtualMemory:</span> <span class="n">SysInfo</span><span class="p">.</span><span class="n">getFreeVirtualMemory</span><span class="p">()</span> <span class="o">/</span> <span class="n">MEGABYTE</span><span class="p">,</span>
+      <span class="nl">virtualMemorySize:</span> <span class="n">SysInfo</span><span class="p">.</span><span class="n">getVirtualMemorySize</span><span class="p">()</span> <span class="o">/</span> <span class="n">MEGABYTE</span><span class="p">,</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nd">@override</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">Status</span><span class="o">&gt;</span> <span class="n">getSystemInfo</span><span class="p">(</span><span class="n">ServiceCall</span> <span class="n">call</span><span class="p">,</span> <span class="n">NoParams</span> <span class="n">request</span><span class="p">)</span> <span class="kd">async</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Status</span><span class="p">(</span>
+      <span class="nl">kernelArchitecture:</span> <span class="n">SysInfo</span><span class="p">.</span><span class="n">kernelArchitecture</span><span class="p">,</span>
+      <span class="nl">kernelName:</span> <span class="n">SysInfo</span><span class="p">.</span><span class="n">kernelName</span><span class="p">,</span>
+      <span class="nl">kernelVersion:</span> <span class="n">SysInfo</span><span class="p">.</span><span class="n">kernelVersion</span><span class="p">,</span>
+      <span class="nl">operatingSystemName:</span> <span class="n">SysInfo</span><span class="p">.</span><span class="n">operatingSystemName</span><span class="p">,</span>
+      <span class="nl">operatingSystemVersion:</span> <span class="n">SysInfo</span><span class="p">.</span><span class="n">operatingSystemVersion</span><span class="p">,</span>
+      <span class="nl">processors:</span> <span class="n">SysInfo</span><span class="p">.</span><span class="n">processors</span><span class="p">.</span><span class="n">map</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">Processor</span><span class="p">(</span>
+          <span class="nl">architecture:</span> <span class="n">p</span><span class="p">.</span><span class="n">architecture</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+          <span class="nl">name:</span> <span class="n">p</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+          <span class="nl">socket:</span> <span class="n">p</span><span class="p">.</span><span class="n">socket</span><span class="p">.</span><span class="n">toString</span><span class="p">(),</span>
+          <span class="nl">vendor:</span> <span class="n">p</span><span class="p">.</span><span class="n">vendor</span><span class="p">,</span>
+        <span class="p">),</span>
+      <span class="p">),</span>
+      <span class="nl">totalPhysicalMemory:</span> <span class="n">SysInfo</span><span class="p">.</span><span class="n">getTotalPhysicalMemory</span><span class="p">()</span> <span class="o">/</span> <span class="n">MEGABYTE</span><span class="p">,</span>
+      <span class="nl">freePhysicalMemory:</span> <span class="n">SysInfo</span><span class="p">.</span><span class="n">getFreePhysicalMemory</span><span class="p">()</span> <span class="o">/</span> <span class="n">MEGABYTE</span><span class="p">,</span>
+      <span class="nl">totalVirtualMemory:</span> <span class="n">SysInfo</span><span class="p">.</span><span class="n">getTotalVirtualMemory</span><span class="p">()</span> <span class="o">/</span> <span class="n">MEGABYTE</span><span class="p">,</span>
+      <span class="nl">freeVirtualMemory:</span> <span class="n">SysInfo</span><span class="p">.</span><span class="n">getFreeVirtualMemory</span><span class="p">()</span> <span class="o">/</span> <span class="n">MEGABYTE</span><span class="p">,</span>
+      <span class="nl">virtualMemorySize:</span> <span class="n">SysInfo</span><span class="p">.</span><span class="n">getVirtualMemorySize</span><span class="p">()</span> <span class="o">/</span> <span class="n">MEGABYTE</span><span class="p">,</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Analizaremos esto rápidamente, hemos creado una clase <code>SystemService</code> que hereda de <code>SystemServiceBase</code>, la clase <code>SystemServiceBase</code> es una clase abstracta creada por <code>protoc</code> cuando generamos el código para Dart. Nuestra tarea en <code>SystemService</code> es implementar los métodos que ya hemos definido anteriormente en el archivo <code>system.proto</code> y que ahora han quedado definidos en la clase <code>SystemServiceBase</code> pero no han sido implementados. La implementación es básicamente retornar dentro de la función un objeto del tipo que hemos declarado con anterioridad que contenga la información que queremos enviar al cliente. Nada complicado, los "modelos" o <code>messages</code> que hemos declarado en el archivo <code>.proto</code> ya han sido implementados, solamente tenemos que usarlos para retornar la información deseada dentro de la función.</p>
+<p>Y ya con esto hemos creado nuestro primer servicio, ahora es momento de configurar los parámetros para cargar el servidor. Primero vamos a agregar el paquete <code>dotenv</code> que nos va a permitir cargar las variables de entorno desde el archivo <code>.env</code> y vamos a implementar otra clases que utilizaremos para la configuración del sistema.</p>
+<h3 id="configurar-y-cargar-el-servidor">Configurar y cargar el servidor<a class="headerlink" href="#configurar-y-cargar-el-servidor" title="Permanent link">🔗</a></h3>
+<p>Primeramente escribiremos el código que nos va a permitir configurar el sistema de una manera más elegante utilizando las variables de entorno, ya que es un código básico de configuración del sistema me limitaré solo a mostrarlo y luego pasamos a la explicación de cómo cargar el servidor gRPC.</p>
+<div class="highlight"><pre><span></span><code>$ dart pub add dotenv
+</code></pre></div>
+<p><code>.env</code></p>
+<div class="highlight"><pre><span></span><code><span class="nv">PORT</span><span class="o">=</span><span class="m">4444</span>
+</code></pre></div>
+<p><code>lib/src/environment.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;package:dotenv/dotenv.dart&#39;</span> <span class="k">show</span> <span class="n">load</span><span class="p">,</span> <span class="n">env</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">Environment</span> <span class="p">{</span>
+  <span class="kd">final</span> <span class="kt">int</span> <span class="n">PORT</span><span class="p">;</span>
+
+  <span class="n">Environment</span><span class="p">({</span>
+    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">PORT</span><span class="p">,</span>
+  <span class="p">});</span>
+
+  <span class="kd">factory</span> <span class="n">Environment</span><span class="p">.</span><span class="n">development</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">load</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">Environment</span><span class="p">(</span>
+      <span class="nl">PORT:</span> <span class="kt">int</span><span class="p">.</span><span class="n">parse</span><span class="p">(</span><span class="n">env</span><span class="p">[</span><span class="s1">&#39;PORT&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;9000&#39;</span><span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kd">factory</span> <span class="n">Environment</span><span class="p">.</span><span class="n">production</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">load</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">Environment</span><span class="p">(</span>
+      <span class="nl">PORT:</span> <span class="kt">int</span><span class="p">.</span><span class="n">parse</span><span class="p">(</span><span class="n">env</span><span class="p">[</span><span class="s1">&#39;PORT&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;9000&#39;</span><span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Por ahora la única variable de entorno que necesitamos es para especificar el puerto por el que va a escuchar nuestro servidor.</p>
+<div class="highlight"><pre><span></span><code>$ dart pub add get_it
+</code></pre></div>
+<p><code>lib/src/config.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;package:get_it/get_it.dart&#39;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="s1">&#39;environment.dart&#39;</span><span class="p">;</span>
+
+<span class="n">Future</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span> <span class="n">setup</span><span class="p">()</span> <span class="kd">async</span> <span class="p">{</span>
+  <span class="kd">final</span> <span class="n">getIt</span> <span class="o">=</span> <span class="n">GetIt</span><span class="p">.</span><span class="n">instance</span><span class="p">;</span>
+
+  <span class="kd">final</span> <span class="n">environment</span> <span class="o">=</span> <span class="n">Environment</span><span class="p">.</span><span class="n">development</span><span class="p">();</span>
+
+  <span class="n">getIt</span><span class="p">.</span><span class="n">registerSingleton</span><span class="o">&lt;</span><span class="n">Environment</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">environment</span><span class="p">,</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Básicamente realizar inyección de dependencias, en este caso solamente seleccionamos el entorno y registramos un singleton utilizando <a href="https://pub.dev/packages/get_it" target="_blank">get_it</a></p>
+<p>Momento de unir todo y cargar el servidor.</p>
+<p><code>lib/src/server.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;package:get_it/get_it.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:grpc/grpc.dart&#39;</span> <span class="k">as</span> <span class="n">grpc</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:pickup_grpc_server/src/services/system.service.dart&#39;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="s1">&#39;config.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;environment.dart&#39;</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">Server</span> <span class="p">{</span>
+  <span class="kd">static</span> <span class="kd">late</span> <span class="n">Environment</span> <span class="n">environment</span><span class="p">;</span>
+
+  <span class="kd">static</span> <span class="n">Future</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span> <span class="n">init</span><span class="p">()</span> <span class="kd">async</span> <span class="p">{</span>
+    <span class="kd">await</span> <span class="n">setup</span><span class="p">();</span>
+
+    <span class="n">environment</span> <span class="o">=</span> <span class="n">GetIt</span><span class="p">.</span><span class="n">I</span><span class="o">&lt;</span><span class="n">Environment</span><span class="o">&gt;</span><span class="p">();</span>
+
+    <span class="kd">final</span> <span class="n">server</span> <span class="o">=</span> <span class="n">grpc</span><span class="p">.</span><span class="n">Server</span><span class="p">([</span>
+      <span class="n">SystemService</span><span class="p">(),</span>
+    <span class="p">]);</span>
+
+    <span class="kd">await</span> <span class="n">server</span><span class="p">.</span><span class="n">serve</span><span class="p">(</span><span class="nl">port:</span> <span class="n">environment</span><span class="p">.</span><span class="n">PORT</span><span class="p">);</span>
+
+    <span class="n">print</span><span class="p">(</span><span class="s1">&#39;Server listening at port </span><span class="si">${</span><span class="n">server</span><span class="p">.</span><span class="n">port</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Ahora si toca explicar un poco. Creamos una clase <code>Server</code> que contiene un método <code>init</code> y un atributo de tipo <code>Environment</code>, dentro el método <code>init</code> primero llamamos a la función <code>setup</code> que definimos en el archivo <code>lib/src/config.dart</code> para que registre el entorno. Usted puede decir ahora: "Bueno pero hubiera sido más rápido cargar directamente el entorno dentro de la función", y tiene toda la razón, pero es probable que luego dentro de esa misma clase <code>Environment</code> tenga otras variables de entorno a las que quiera acceder luego en otros archivos y en ese caso si es mucho más eficiente tener un solo objeto de tipo <code>Environment</code> cargado en memoria al que puede acceder en cualquier momento desde cualquier parte de su código.</p>
+<p>Una vez hemos realizado la "inyección de dependencias" pues obtenemos el <code>environment</code> con <code>GetIt.I&lt;Environment&gt;();</code>, y por fin declaramos nuestro <code>server</code>. Tan simple como se vé es solo crear un objeto de tipo <code>Server</code> (fíjese que es <code>Server</code> del paquete <code>grpc</code>, ya que le hemos puesto a nuestra clase ese mismo nombre hay que diferenciarlos específicando el paquete que contiene a la clase). Al constructor de <code>grpc.Server</code> le damos como parámetro una lista de servicios, en este caso sólo hemos definido un servicio: <code>SystemService</code>. Y luego lo que queda es mandarlo a escuchar en el puerto que ha sido especificado en el entorno y mostramos un mensaje para saber que todo marcha bien y el servidor ya está escuchando en el puerto especificado.</p>
+<p>Un último ajuste y ya tenemos al servidor corriendo:</p>
+<p><code>bin/pickup_grpc_server.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;package:pickup_grpc_server/src/server.dart&#39;</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="n">main</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span> <span class="n">arguments</span><span class="p">)</span> <span class="kd">async</span> <span class="p">{</span>
+  <span class="kd">await</span> <span class="n">Server</span><span class="p">.</span><span class="n">init</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>LISTO</strong></p>
+<p><img alt="server_run" src="images/server_run.png" /></p>
+<h2 id="mientras-tanto-del-lado-del-cliente">Mientras tanto... Del lado del cliente 📺<a class="headerlink" href="#mientras-tanto-del-lado-del-cliente" title="Permanent link">🔗</a></h2>
+<p>Ahora vamos a crear un cliente sencillo que se va a conectar a nuestro servidor para obtener información sobre el sistema.</p>
+<p><code>bin/clients/test_client_1.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;package:grpc/grpc.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:pickup_grpc_server/src/grpc/system.pbgrpc.dart&#39;</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="n">main</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span> <span class="n">args</span><span class="p">)</span> <span class="kd">async</span> <span class="p">{</span>
+  <span class="kd">final</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">ClientChannel</span><span class="p">(</span>
+    <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span>
+    <span class="nl">port:</span> <span class="m">4444</span><span class="p">,</span>
+    <span class="nl">options:</span> <span class="n">ChannelOptions</span><span class="p">(</span>
+      <span class="nl">credentials:</span> <span class="n">ChannelCredentials</span><span class="p">.</span><span class="n">insecure</span><span class="p">(),</span>
+    <span class="p">),</span>
+  <span class="p">);</span>
+
+  <span class="kd">final</span> <span class="n">systemServiceClient</span> <span class="o">=</span> <span class="n">SystemServiceClient</span><span class="p">(</span><span class="n">channel</span><span class="p">);</span>
+
+  <span class="c1">// SystemInfo</span>
+  <span class="n">print</span><span class="p">(</span><span class="s1">&#39;SystemInfo&#39;</span><span class="p">);</span>
+  <span class="kd">final</span> <span class="n">resultSystemInfo</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">systemServiceClient</span><span class="p">.</span><span class="n">getSystemInfo</span><span class="p">(</span><span class="n">NoParams</span><span class="p">());</span>
+
+  <span class="n">print</span><span class="p">(</span><span class="n">resultSystemInfo</span><span class="p">);</span>
+
+  <span class="c1">// MemoryStatus</span>
+  <span class="n">print</span><span class="p">(</span><span class="s1">&#39;MemoryStatus&#39;</span><span class="p">);</span>
+  <span class="kd">final</span> <span class="n">resultMemoryStatus</span> <span class="o">=</span>
+      <span class="kd">await</span> <span class="n">systemServiceClient</span><span class="p">.</span><span class="n">getMemoryStatus</span><span class="p">(</span><span class="n">NoParams</span><span class="p">());</span>
+
+  <span class="n">print</span><span class="p">(</span><span class="n">resultMemoryStatus</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Comenzamos por definir un canal, en un canal se especifica la dirección IP del servidor (localhost en este caso), el puerto (4444), y el tipo de credenciales esto depende de como hayamos configurado el servidor por ejemplo podemos usar un certificado TLS, y para acceder a los servicios gRPC de Google se debe configurar un mecanismo de OAuth, en nuestro caso no tenemos credenciales de ningún tipo así que decimos que es <code>ChannelCredentials.insecure()</code>.</p>
+<p>Y luego viene la "magia", la clase <code>SystemServiceClient</code> ya fue implementada cuando generamos el código usando <code>protoc</code> es solo crear una instancia de esta clase y pasarle a través del constructor el canal que vamos a utilizar. Para obtener la información de cada método del servicio es simplemente llamar a la función correspondiente, que nos retornará un objeto del mismo tipo que hemos declarado, un objeto real de una clase del lenguaje, adios <code>json</code>, <code>toJson</code>, <code>fromJson</code>, adios peticiones de tipo <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code>. Simplemente llamar a una función, como si esa función estuviera corriendo en mi aplicación cliente que es la esencia de las API RPC, solo que con gRPC llegamos a otro nivel.</p>
+<blockquote>
+<p>I love this</p>
+</blockquote>
+<p><img alt="test_client_1" src="images/test_client_1.png" /></p>
+<p>Y con esto ya tienes básicamente todo lo que necesitas saber para usar gRPC con Dart tanto en el backend cómo en el frontend. Pero sucede que crear un backend no es solamente llamar a unas funciones y retornar objetos (bueno en realidad sí pero aún faltan cosas por hacer), todavía debemos ver cómo almacenar datos en una base de datos, cómo implemetar autenticación, cómo encryptar las contraseñas de los usuarios para no guardarlas en texto plano dentro de la base de datos. Este tipo de cosas normalmente se hacen con facilidad utilizando frameworks de otros lenguajes, pero ahora que gRPC nos ahorra muchísimo tiempo en la construcción de nuestros servicios web podemos dedicarle tiempo a implementar estas otras funcionalidades, en los próximos posts te mostraré cómo implementar un crud para guardar y manejar la información de los usuarios del sistema utilizando una base de datos. </p>
+<p>Hasta entonces "sigue el gradiente de la curiosidad". 👨‍💻 Happy Coding.</p>
+<blockquote>
+<p>La tecnología que cambia el mundo generalmente no parece muy impresionante en su primera iteración, simplemente "intrigante". Suceden cosas buenas cuando sigues el gradiente de la curiosidad.</p>
+</blockquote>
+<p>Url del proyecto en Github: <a href="https://github.com/correaleyval/pickup_grpc_server" target="_blank">https://github.com/correaleyval/pickup_grpc_server</a></p>
+                
+                  
+                
+               
+              
+                
+
+
+  <h2 id="__comments">Comentarios</h2>
+  <div id="disqus_thread"></div>
+  <script>var disqus_config=function(){this.page.url="https://luis-ciber.is-a.dev/blog/2021/06/13/usando-dart-backend-frontend-grpc/",this.page.identifier="blog/2021/06/13/usando-dart-backend-frontend-grpc/"};window.addEventListener("load",function(){var e=document,i=e.createElement("script");i.src="//correaleyval.disqus.com/embed.js",i.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(i)})</script>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Pie">
+      
+        
+        <a href="../../../03/07/desarrollo-r%C3%A1pido-en-flutter-con-getx/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Desarrollo rápido en Flutter con GetX" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              Desarrollo rápido en Flutter con GetX
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../15/dart-grpc-backend-crud/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Usando Dart en Backend con gRPC (Users CRUD)" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              Usando Dart en Backend con gRPC (Users CRUD)
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; Luis Correa Leyva
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://www.linkedin.com/in/luisciber" target="_blank" rel="noopener" title="LinkedIn" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://github.com/correaleyval" target="_blank" rel="noopener" title="GitHub" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://profile.codersrank.io/user/correaleyval" target="_blank" rel="noopener" title="Codersrank" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="m278.9 511.5-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2 43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6 144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://twitter.com/luis__ciber" target="_blank" rel="noopener" title="Twitter" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://t.me/luis_ciber" target="_blank" rel="noopener" title="Telegram" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm121.8 169.9-40.7 191.8c-3 13.6-11.1 16.9-22.4 10.5l-62-45.7-29.9 28.8c-3.3 3.3-6.1 6.1-12.5 6.1l4.4-63.1 114.9-103.8c5-4.4-1.1-6.9-7.7-2.5l-142 89.4-61.2-19.1c-13.3-4.2-13.6-13.3 2.8-19.7l239.1-92.2c11.1-4 20.8 2.7 17.2 19.5z"/></svg>
+      </a>
+    
+      
+      
+      <a href="mailto:correaleyval@gmail.com" target="_blank" rel="noopener" title="Gmail" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M476 3.2 12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": ["navigation.tabs"], "translations": {"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.term.missing": "Falta", "select.version.title": "Select version"}, "search": "../../../../../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+      
+        <script src="../../../../../javascripts/config.js"></script>
+      
+    
+  </body>
+</html>

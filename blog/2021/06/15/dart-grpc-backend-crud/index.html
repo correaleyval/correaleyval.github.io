@@ -1,0 +1,1530 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="gRPC lo ha logrado, ha logrado liberarnos de esa tarea pesada y aburrida de escribir el código de los modelos y las funciones para codificar y descodificar la información enviada entre cliente y servidor, ha logrado liberarnos de tener que definir distintas URLs con distintos métodos HTTP para poder especificarle al backend lo que queremos hacer. This is the future.">
+      
+      
+      
+      
+        <link rel="canonical" href="https://luis-ciber.is-a.dev/blog/2021/06/15/dart-grpc-backend-crud/">
+      
+      <link rel="icon" href="../../../../../assets/images/avatar.jpg">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.10">
+    
+    
+      
+        <title>Usando Dart en Backend con gRPC (Users CRUD) - @luis_ciber</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.1fe995fd.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="manifest" href="../../../../../manifest.json" crossorigin="use-credentials">
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-HBW40C5MRJ"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", "G-HBW40C5MRJ");
+</script>
+
+
+                
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="@luis_ciber - Usando Dart en Backend con gRPC (Users CRUD)" />
+<meta property="og:description" content="gRPC lo ha logrado, ha logrado liberarnos de esa tarea pesada y aburrida de escribir el código de los modelos y las funciones para codificar y descodificar la información enviada entre cliente y servidor, ha logrado liberarnos de tener que definir distintas URLs con distintos métodos HTTP para poder especificarle al backend lo que queremos hacer. This is the future." />
+<meta property="og:url" content="https://luis-ciber.is-a.dev/blog/2021/06/15/dart-grpc-backend-crud/" />
+<meta property="og:image" content="header.png" />
+<meta property="og:image:type" content="image/png" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@luis__ciber" />
+<meta name="twitter:creator" content="@luis__ciber" />
+<meta name="twitter:title" content="@luis_ciber - Usando Dart en Backend con gRPC (Users CRUD)" />
+<meta name="twitter:description" content="gRPC lo ha logrado, ha logrado liberarnos de esa tarea pesada y aburrida de escribir el código de los modelos y las funciones para codificar y descodificar la información enviada entre cliente y servidor, ha logrado liberarnos de tener que definir distintas URLs con distintos métodos HTTP para poder especificarle al backend lo que queremos hacer. This is the future." />
+<meta name="twitter:image" content="https://luis-ciber.is-a.dev/blog/2021/06/15/dart-grpc-backend-crud/header.png" />
+
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../../../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#usando-dart-en-backend-con-grpc-users-crud" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../../../.." title="@luis_ciber" class="md-header__button md-logo" aria-label="@luis_ciber" data-md-component="logo">
+      
+  <img src="../../../../../assets/images/avatar.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            @luis_ciber
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Usando Dart en Backend con gRPC (Users CRUD)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/correaleyval" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../.." class="md-tabs__link">
+        ⭐ Start
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../../" class="md-tabs__link">
+      Blog
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../03/07/desarrollo-r%C3%A1pido-en-flutter-con-getx/" class="md-tabs__link md-tabs__link--active">
+        Todos los posts
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../../../notebooks/" class="md-tabs__link">
+      Notebooks
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../../../apps/" class="md-tabs__link">
+      Aplicaciones y proyectos
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../../../contact/" class="md-tabs__link">
+      Contacto
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="@luis_ciber" class="md-nav__button md-logo" aria-label="@luis_ciber" data-md-component="logo">
+      
+  <img src="../../../../../assets/images/avatar.jpg" alt="logo">
+
+    </a>
+    @luis_ciber
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/correaleyval" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        ⭐ Start
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="⭐ Start" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          ⭐ Start
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        👋 git init
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../" class="md-nav__link">
+        📄 Publicaciones recientes
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../apps/" class="md-nav__link">
+        💻 Aplicaciones y proyectos
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../notebooks/" class="md-nav__link">
+        🗒 Notebooks
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../contact/" class="md-nav__link">
+        ℹ️ Contacto
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../cv/" class="md-nav__link">
+        🧑‍💻 Coder CV
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../" class="md-nav__link">
+        Blog
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3">
+        Todos los posts
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Todos los posts" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Todos los posts
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03/07/desarrollo-r%C3%A1pido-en-flutter-con-getx/" class="md-nav__link">
+        Desarrollo rápido en Flutter con GetX
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13/usando-dart-backend-frontend-grpc/" class="md-nav__link">
+        Usando Dart en Backend y Frontend con gRPC
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Usando Dart en Backend con gRPC (Users CRUD)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Usando Dart en Backend con gRPC (Users CRUD)
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lo-primero-remember" class="md-nav__link">
+    Lo primero, remember...
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seleccionando-la-base-de-datos" class="md-nav__link">
+    Seleccionando la base de datos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definiendo-messages-y-services" class="md-nav__link">
+    Definiendo messages y services
+  </a>
+  
+    <nav class="md-nav" aria-label="Definiendo messages y services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#make-generate" class="md-nav__link">
+    make generate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hands-to-code" class="md-nav__link">
+    Hands to code 👨‍💻
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mongodb-users-crud" class="md-nav__link">
+    MongoDB Users CRUD
+  </a>
+  
+    <nav class="md-nav" aria-label="MongoDB Users CRUD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create" class="md-nav__link">
+    CREATE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read" class="md-nav__link">
+    READ
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update" class="md-nav__link">
+    UPDATE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete" class="md-nav__link">
+    DELETE
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-end" class="md-nav__link">
+    The End
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../notebooks/" class="md-nav__link">
+        Notebooks
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../apps/" class="md-nav__link">
+        Aplicaciones y proyectos
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../contact/" class="md-nav__link">
+        Contacto
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lo-primero-remember" class="md-nav__link">
+    Lo primero, remember...
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seleccionando-la-base-de-datos" class="md-nav__link">
+    Seleccionando la base de datos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definiendo-messages-y-services" class="md-nav__link">
+    Definiendo messages y services
+  </a>
+  
+    <nav class="md-nav" aria-label="Definiendo messages y services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#make-generate" class="md-nav__link">
+    make generate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hands-to-code" class="md-nav__link">
+    Hands to code 👨‍💻
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mongodb-users-crud" class="md-nav__link">
+    MongoDB Users CRUD
+  </a>
+  
+    <nav class="md-nav" aria-label="MongoDB Users CRUD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create" class="md-nav__link">
+    CREATE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read" class="md-nav__link">
+    READ
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update" class="md-nav__link">
+    UPDATE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete" class="md-nav__link">
+    DELETE
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-end" class="md-nav__link">
+    The End
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+                
+                
+                
+                <h1 id="usando-dart-en-backend-con-grpc-users-crud">Usando Dart en Backend con gRPC (Users CRUD)<a class="headerlink" href="#usando-dart-en-backend-con-grpc-users-crud" title="Permanent link">🔗</a></h1>
+<blockquote>
+<p>15 de junio de 2021</p>
+</blockquote>
+<h2 id="lo-primero-remember">Lo primero, remember...<a class="headerlink" href="#lo-primero-remember" title="Permanent link">🔗</a></h2>
+<p>En el <a href="/blog/2021/06/13/usando-dart-backend-frontend-grpc">post anterior</a> implementamos un servidor gRPC utilizando Dart y creamos un servicio básico encargado de enviarnos información sobre el estado del sistema.</p>
+<p>Nuestra labor esta vez será crear un servicio que nos permita almacenar información sobre los usuarios del sistema, el típico CRUD.</p>
+<h2 id="seleccionando-la-base-de-datos">Seleccionando la base de datos<a class="headerlink" href="#seleccionando-la-base-de-datos" title="Permanent link">🔗</a></h2>
+<p>Estuve buscando información para determinar que gestor de base de datos utilizar en el sistema, finalmente seleccioné MongoDB para almacenar la información; nada en contra de las bases de datos relacionales, lo que sucede es que no encontré paquetes robustos y con buena documentación para establecer una conexión con otro tipo de base de datos. Para SQLite si hay muy buena documentación y paquetes debido a que SQLite se utiliza también en el desarrollo de aplicaciones móviles. Perfectamente se pudiera utilizar SQLite para desarrollar nuestro servicio web pero pienso que sería una mejor práctica utilizar un sistema de gestión de bases de datos que sea más popular en el desarrollo backend así que la mejor opción parece ser MongoDB.</p>
+<p>Para establecer una conexión con MongoDB usando Dart emplearemos el paquete <a href="https://pub.dev/packages/mongo_dart" target="_blank">mongo_dart</a>.</p>
+<div class="highlight"><pre><span></span><code>$ dart pub add mongo_dart
+</code></pre></div>
+<p>Este paquete cuenta con muy buena documentación en <a href="https://pub.dev/packages/mongo_dart" target="_blank">su página de pub.dev</a></p>
+<p>Como nos proponemos implementar un crud para el almacenamiento de datos de usuarios incluyendo contraseñas, de antemano sabemos que no es una buena práctica guardar contraseñas en nuestra base de datos usando texto plano; lo correcto es almacenar las contraseñas usando algún mecanismo de cifrado. Para lograr esto usaremos el paquete <a href="https://pub.dev/packages/crypto" target="_blank">crypto</a> que se describe como: "A set of cryptographic hashing functions implemented in pure Dart", justo lo que necesitamos.</p>
+<div class="highlight"><pre><span></span><code>$ dart pub add crypto
+</code></pre></div>
+<h2 id="definiendo-messages-y-services">Definiendo <code>messages</code> y <code>services</code><a class="headerlink" href="#definiendo-messages-y-services" title="Permanent link">🔗</a></h2>
+<p>Una vez más vamos a definir primero los <code>services</code> y <code>messages</code> utilizando los archivos <code>.proto</code>.</p>
+<p>Primero he creado un archivo <code>grpc/general_messages.proto</code> en este archivo colocaremos <code>messages</code> de uso general que serán luego utilizados en otros archivos.</p>
+<div class="highlight"><pre><span></span><code><span class="k">syntax</span> <span class="o">=</span> <span class="s">&quot;proto3&quot;</span><span class="p">;</span>
+
+<span class="kd">message</span> <span class="nc">NoParams</span> <span class="p">{}</span>
+
+<span class="kd">message</span> <span class="nc">Selector</span> <span class="p">{</span>
+  <span class="n">map</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="na">selector</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="kt">int32</span> <span class="na">skip</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="kt">int32</span> <span class="na">limit</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span> <span class="nc">Error</span> <span class="p">{</span>
+  <span class="kt">string</span> <span class="kd">message</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span> <span class="nc">IdResponse</span> <span class="p">{</span>
+  <span class="k">oneof</span> <span class="n">result</span> <span class="p">{</span>
+    <span class="kt">string</span> <span class="na">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">Error</span> <span class="na">error</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">message</span> <span class="nc">CountResponse</span> <span class="p">{</span>
+  <span class="k">oneof</span> <span class="n">result</span> <span class="p">{</span>
+    <span class="kt">int32</span> <span class="na">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">Error</span> <span class="na">error</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p>Esta manera de estructurar los mensajes y los archivos con los que definimos la API depende por completo de usted, no tiene que seguir de manera estricta la forma en que he organizado los archivos, esto es solo una propuesta que hago para que pueda comenzar a experimentar usted mismo y luego puede hacerle las modificaciones que estime convenientes.</p>
+</blockquote>
+<p><code>message NoParams</code>: Este ya lo conocemos del <a href="/blog/2021/06/13/usando-dart-backend-frontend-grpc">post anterior</a> se utiliza para especificar que un servicio no va a recibir datos.</p>
+<p><code>message Selector</code>: Este mensaje es muy importante, será utilizado para pasarle parámetros a las funciones encargadas de realizar búquedas en la base de datos. Primero tenemos un <code>map&lt;string, string&gt;</code> que será utilizado para el filtrado ej: <code>{'username': 'usergrpc'}</code>, con esto solicitamos información del usuario <strong>usergrpc</strong>, y así podemos filtrar cualquier tipo de información. Cuando vea la implementación de las funciones encargadas de realizar búquedas podrá ver por qué decidí crear este mensaje de esta forma. Luego tenemos un campo <code>skip</code> y un campo <code>limit</code> estos se utilizan para lograr la paginación de los datos.</p>
+<blockquote>
+<p>He decidido nombrar a los campos del mismo modo que se nombran en las consultas que se realizan a MongoDB, de este modo es más sencillo entender lo que se está haciendo y mapear una función del servicio API con operaciones específicas en la base de datos. Todo lo que muestro es el resultado de varia horas de experimentación, probando diferentes maneras de estructurar la API para facilitar la implementación y mejorar la eficiencia de los servicios.</p>
+</blockquote>
+<p><code>message Error</code>: Lo utilizaremos para enviar mensajes de error al cliente.</p>
+<p><code>message IdResponse</code>: Este mensaje es utilizado para esos casos donde solamente necesitamos retornar un <strong>id</strong>. Aquí si tenemos algo nuevo, la palabra clave <code>oneof</code>, esto nos permite definir que nuestro mensaje tiene uno de los campos que son especificados entre llaves, en este caso podemos retornar un <strong>id</strong> o un <strong>error</strong> (fíjese que se ha utilizado el <code>message Error</code> dentro de <code>IdResponse</code> <strong>proto</strong> admite composición de mensajes; esto se ve reflejado luego cuando generamos el código y nos facilita muchísimo trabajo),</p>
+<p><code>message CountResponse</code>: Similar a <code>IdResponse</code> pero lo utilizaremos para obtener la cantidad de documentos (registros) que tenga una colección (tabla) determinada.</p>
+<p><code>grpc/user.proto</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">syntax</span> <span class="o">=</span> <span class="s">&quot;proto3&quot;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="s">&quot;grpc/general_messages.proto&quot;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s">&quot;google/protobuf/timestamp.proto&quot;</span><span class="p">;</span>
+
+<span class="kd">message</span> <span class="nc">User</span> <span class="p">{</span>
+  <span class="kt">string</span> <span class="na">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="kt">string</span> <span class="na">name</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="kt">string</span> <span class="na">email</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="kt">string</span> <span class="na">phone</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+  <span class="kt">string</span> <span class="na">password</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="n">google.protobuf.Timestamp</span> <span class="na">created_date</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+  <span class="n">google.protobuf.Timestamp</span> <span class="na">updated_date</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span> <span class="nc">Users</span> <span class="p">{</span>
+  <span class="k">repeated</span> <span class="n">User</span> <span class="na">users</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="kt">int32</span> <span class="na">count</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">service</span> <span class="n">UserService</span> <span class="p">{</span>
+  <span class="k">rpc</span> <span class="n">find</span><span class="p">(</span><span class="n">Selector</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">UsersResponse</span><span class="p">);</span>
+  <span class="k">rpc</span> <span class="n">findOne</span><span class="p">(</span><span class="n">Selector</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">UserResponse</span><span class="p">);</span>
+  <span class="k">rpc</span> <span class="n">update</span><span class="p">(</span><span class="n">UpdateUserRequest</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">IdResponse</span><span class="p">);</span>
+  <span class="k">rpc</span> <span class="n">insertOne</span><span class="p">(</span><span class="n">User</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">IdResponse</span><span class="p">);</span>
+  <span class="k">rpc</span> <span class="n">deleteOne</span><span class="p">(</span><span class="n">Selector</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">IdResponse</span><span class="p">);</span>
+  <span class="k">rpc</span> <span class="n">count</span><span class="p">(</span><span class="n">Selector</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">CountResponse</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">message</span> <span class="nc">UsersResponse</span> <span class="p">{</span>
+  <span class="k">oneof</span> <span class="n">result</span> <span class="p">{</span>
+    <span class="n">Users</span> <span class="na">users</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">Error</span> <span class="na">error</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">message</span> <span class="nc">UserResponse</span> <span class="p">{</span>
+  <span class="k">oneof</span> <span class="n">result</span> <span class="p">{</span>
+    <span class="n">User</span> <span class="na">user</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">Error</span> <span class="na">error</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">message</span> <span class="nc">UpdateUserRequest</span> <span class="p">{</span>
+  <span class="n">map</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="na">selector</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">User</span> <span class="na">user</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>gRPC tiene una característica peculiar, los archivos que utilizamos para definir la API también pueden ser utilizados como documentación de la misma, resulta sencillo leer estos archivos y entender cómo funciona la API y que tipo de valores recibe cada método como parámetro y que tipo de valores retorna. Dicho esto, creo que resulta redundante volver a explicar lo que estamos haciendo aquí en este archivo, solamente voy a referirme a un detalle que si es nuevo:</p>
+<p><code>import "google/protobuf/timestamp.proto";</code></p>
+<p>Esta instrucción importa un archivo que contiene la definición de un <code>message</code> para crear campos de tipo <code>Timestamp</code>, el tipo de datos típico que utilizamos cuando queremos guardar información sobre la fecha y la hora en que se realiza una operación determinada en la base de datos. Podemos ver en el <code>message User</code> cómo utilizamos esta definición para los campos <code>created_date</code> y <code>updated_date</code>. Este archivo viene incluido junto con la instalación de protoc.</p>
+<p>Sin embargo utilizar este archivo implica que debemos realizar un cambio en <code>Makefile</code> para que nos genere el código correspondiente a esta nueva definición que hemos incluido.</p>
+<p><code>Makefile</code></p>
+<div class="highlight"><pre><span></span><code><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">generate</span>
+<span class="nf">generate</span><span class="o">:</span>
+    protoc -I ./ grpc/* --dart_out<span class="o">=</span>grpc:lib/src
+    protoc -I /Users/ragnar/opt/protoc-3/include/ /Users/ragnar/opt/protoc-3/include/google/protobuf/timestamp.proto --dart_out<span class="o">=</span>grpc:lib/src
+
+<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">run</span>
+<span class="nf">run</span><span class="o">:</span>
+    dart run
+</code></pre></div>
+<p>No he encontrado una mejor forma de hacer esto, tienes que encontrar en que carpeta se ha instalado protoc en tu sistema y cambiar <code>/Users/ragnar/opt/protoc-3</code> por la carpeta correspondiente, para que puedas generar el código correspondiente a esta definición.</p>
+<h3 id="make-generate">make generate<a class="headerlink" href="#make-generate" title="Permanent link">🔗</a></h3>
+<p>Hora de generar código:</p>
+<div class="highlight"><pre><span></span><code>$ make generate
+</code></pre></div>
+<blockquote>
+<p>Recuerda que estamos utilizando <code>make</code> para facilitarnos las cosas de lo contrario tendrías que escribir los dos comandos que son utilizados para generar el código y puede volverse un trabajo tedioso (además de aburrido).</p>
+</blockquote>
+<p><img alt="generate" src="images/generate.png" /></p>
+<p>Fíjate en la imagen que se han generado los nuevos archivos con la implementación de gRPC para las nuevas definiciones que hemos creado. Incluso los archivos de <code>Timestamp</code> que se han generado en una carpeta independiente: <code>google/protobuf</code>.</p>
+<h2 id="hands-to-code">Hands to code 👨‍💻<a class="headerlink" href="#hands-to-code" title="Permanent link">🔗</a></h2>
+<p>Pregunta de control: <strong>¿Qué es lo que tenemos que hacer una vez que generamos el código de los archivos <code>.proto</code>?</strong></p>
+<p>Implementar esto:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">service</span> <span class="n">UserService</span> <span class="p">{</span>
+  <span class="k">rpc</span> <span class="n">find</span><span class="p">(</span><span class="n">Selector</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">UsersResponse</span><span class="p">);</span>
+  <span class="k">rpc</span> <span class="n">findOne</span><span class="p">(</span><span class="n">Selector</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">UserResponse</span><span class="p">);</span>
+  <span class="k">rpc</span> <span class="n">update</span><span class="p">(</span><span class="n">UpdateUserRequest</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">IdResponse</span><span class="p">);</span>
+  <span class="k">rpc</span> <span class="n">insertOne</span><span class="p">(</span><span class="n">User</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">IdResponse</span><span class="p">);</span>
+  <span class="k">rpc</span> <span class="n">deleteOne</span><span class="p">(</span><span class="n">Selector</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">IdResponse</span><span class="p">);</span>
+  <span class="k">rpc</span> <span class="n">count</span><span class="p">(</span><span class="n">Selector</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">CountResponse</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Solamente implementar el servicio. Hemos definido varios mensajes en archivos diferentes, usamos una lib externa para representar fecha y hora y solamente tenemos que implementar las funciones del servicio que hemos declarado, todo lo demás ya está hecho, esta es una de las razones por la que me ha gustado tanto utilizar esta tecnología. Si leíste <a href="http://localhost:8000/blog/2021/03/07/desarrollo-rápido-en-flutter-con-getx/">mi primer post</a> verás la importancia que le doy a ahorrar tiempo de desarrollo al máximo y cómo me gusta utilizar generadores de código para evitar tener que escribir código que se torna monótono y repetitivo. gRPC lo ha logrado, ha logrado liberarnos de esa tarea pesada y aburrida de escribir el código de los modelos y las funciones para codificar y descodificar la información enviada entre cliente y servidor, ha logrado liberarnos de tener que definir distintas URLs con distintos métodos HTTP para poder especificarle al backend lo que queremos hacer. <strong>This is the future.</strong></p>
+<p>Terminado el discurso motivacional es momento de mostrar código:</p>
+<p><code>lib/src/service/user.service.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;package:pickup_grpc_server/src/grpc/general_messages.pb.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:grpc/src/server/call.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:pickup_grpc_server/src/grpc/user.pbgrpc.dart&#39;</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">UserService</span> <span class="kd">extends</span> <span class="n">UserServiceBase</span> <span class="p">{</span>
+  <span class="nd">@override</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">CountResponse</span><span class="o">&gt;</span> <span class="n">count</span><span class="p">(</span><span class="n">ServiceCall</span> <span class="n">call</span><span class="p">,</span> <span class="n">Selector</span> <span class="n">request</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// TODO: implement count</span>
+    <span class="k">throw</span> <span class="n">UnimplementedError</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="nd">@override</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">IdResponse</span><span class="o">&gt;</span> <span class="n">deleteOne</span><span class="p">(</span><span class="n">ServiceCall</span> <span class="n">call</span><span class="p">,</span> <span class="n">Selector</span> <span class="n">request</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// TODO: implement deleteOne</span>
+    <span class="k">throw</span> <span class="n">UnimplementedError</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="nd">@override</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">UsersResponse</span><span class="o">&gt;</span> <span class="n">find</span><span class="p">(</span><span class="n">ServiceCall</span> <span class="n">call</span><span class="p">,</span> <span class="n">Selector</span> <span class="n">request</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// TODO: implement find</span>
+    <span class="k">throw</span> <span class="n">UnimplementedError</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="nd">@override</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">UserResponse</span><span class="o">&gt;</span> <span class="n">findOne</span><span class="p">(</span><span class="n">ServiceCall</span> <span class="n">call</span><span class="p">,</span> <span class="n">Selector</span> <span class="n">request</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// TODO: implement findOne</span>
+    <span class="k">throw</span> <span class="n">UnimplementedError</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="nd">@override</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">IdResponse</span><span class="o">&gt;</span> <span class="n">insertOne</span><span class="p">(</span><span class="n">ServiceCall</span> <span class="n">call</span><span class="p">,</span> <span class="n">User</span> <span class="n">request</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// TODO: implement insertOne</span>
+    <span class="k">throw</span> <span class="n">UnimplementedError</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="nd">@override</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">IdResponse</span><span class="o">&gt;</span> <span class="n">update</span><span class="p">(</span><span class="n">ServiceCall</span> <span class="n">call</span><span class="p">,</span> <span class="n">UpdateUserRequest</span> <span class="n">request</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// TODO: implement update</span>
+    <span class="k">throw</span> <span class="n">UnimplementedError</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Nada interesante que mostrar aún, solo mantén la imagen de este código en tu mente porque luego iré mostrando solamente la implementación de cada una de las funciones que conforman a <code>UserService</code> por separado con una pequeña explicación.</p>
+<p>Pero primero hay que configurar la base de datos:</p>
+<p><code>.env</code></p>
+<div class="highlight"><pre><span></span><code>PORT=4444
+MONGODB_URI=mongodb://localhost:27017/pickup
+SECRET=secretkeytoencryptpasswords
+</code></pre></div>
+<p>Modificamos la clase <code>Environment</code> para que soporte las nuevas variables de entorno:</p>
+<p><code>lib/src/environment.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;package:dotenv/dotenv.dart&#39;</span> <span class="k">show</span> <span class="n">load</span><span class="p">,</span> <span class="n">env</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">Environment</span> <span class="p">{</span>
+  <span class="kd">final</span> <span class="kt">int</span> <span class="n">PORT</span><span class="p">;</span>
+  <span class="kd">final</span> <span class="kt">String</span> <span class="n">MONGODB_URI</span><span class="p">;</span>
+  <span class="kd">final</span> <span class="kt">String</span> <span class="n">SECRET</span><span class="p">;</span>
+
+  <span class="n">Environment</span><span class="p">({</span>
+    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">PORT</span><span class="p">,</span>
+    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">MONGODB_URI</span><span class="p">,</span>
+    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">SECRET</span><span class="p">,</span>
+  <span class="p">});</span>
+
+  <span class="kd">factory</span> <span class="n">Environment</span><span class="p">.</span><span class="n">development</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">load</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">Environment</span><span class="p">(</span>
+      <span class="nl">PORT:</span> <span class="kt">int</span><span class="p">.</span><span class="n">parse</span><span class="p">(</span><span class="n">env</span><span class="p">[</span><span class="s1">&#39;PORT&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;9000&#39;</span><span class="p">),</span>
+      <span class="nl">MONGODB_URI:</span> <span class="n">env</span><span class="p">[</span><span class="s1">&#39;MONGODB_URI&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;mongodb://localhost:27017/pickup_dev&#39;</span><span class="p">,</span>
+      <span class="nl">SECRET:</span> <span class="n">env</span><span class="p">[</span><span class="s1">&#39;SECRET&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;secret&#39;</span><span class="p">,</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kd">factory</span> <span class="n">Environment</span><span class="p">.</span><span class="n">production</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">load</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">Environment</span><span class="p">(</span>
+      <span class="nl">PORT:</span> <span class="kt">int</span><span class="p">.</span><span class="n">parse</span><span class="p">(</span><span class="n">env</span><span class="p">[</span><span class="s1">&#39;PORT&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;9000&#39;</span><span class="p">),</span>
+      <span class="nl">MONGODB_URI:</span> <span class="n">env</span><span class="p">[</span><span class="s1">&#39;MONGODB_URI&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;mongodb://localhost:27017/pickup_dev&#39;</span><span class="p">,</span>
+      <span class="nl">SECRET:</span> <span class="n">env</span><span class="p">[</span><span class="s1">&#39;SECRET&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;secret&#39;</span><span class="p">,</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Configuramos la base de datos:</p>
+<p><code>lib/src/config.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;package:get_it/get_it.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:mongo_dart/mongo_dart.dart&#39;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="s1">&#39;environment.dart&#39;</span><span class="p">;</span>
+
+<span class="n">Future</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span> <span class="n">setup</span><span class="p">()</span> <span class="kd">async</span> <span class="p">{</span>
+  <span class="kd">final</span> <span class="n">getIt</span> <span class="o">=</span> <span class="n">GetIt</span><span class="p">.</span><span class="n">instance</span><span class="p">;</span>
+
+  <span class="kd">final</span> <span class="n">environment</span> <span class="o">=</span> <span class="n">Environment</span><span class="p">.</span><span class="n">development</span><span class="p">();</span>
+
+  <span class="kd">final</span> <span class="n">db</span> <span class="o">=</span> <span class="n">Db</span><span class="p">(</span><span class="n">environment</span><span class="p">.</span><span class="n">MONGODB_URI</span><span class="p">);</span>
+  <span class="n">print</span><span class="p">(</span><span class="s1">&#39;Connecting DB to </span><span class="si">${</span><span class="n">environment</span><span class="p">.</span><span class="n">MONGODB_URI</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">);</span>
+  <span class="kd">await</span> <span class="n">db</span><span class="p">.</span><span class="n">open</span><span class="p">();</span>
+  <span class="n">print</span><span class="p">(</span><span class="s1">&#39;DB is connected&#39;</span><span class="p">);</span>
+
+  <span class="n">getIt</span><span class="p">.</span><span class="n">registerSingleton</span><span class="o">&lt;</span><span class="n">Environment</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">environment</span><span class="p">,</span>
+  <span class="p">);</span>
+
+  <span class="n">getIt</span><span class="p">.</span><span class="n">registerSingleton</span><span class="o">&lt;</span><span class="n">Db</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">db</span><span class="p">,</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Y agregamos el nuevo servicio que hemos creado al servidor gRPC:</p>
+<p><code>lib/src/server.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;package:get_it/get_it.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:grpc/grpc.dart&#39;</span> <span class="k">as</span> <span class="n">grpc</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:pickup_grpc_server/src/services/system.service.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:pickup_grpc_server/src/services/user.service.dart&#39;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="s1">&#39;config.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;environment.dart&#39;</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">Server</span> <span class="p">{</span>
+  <span class="kd">static</span> <span class="kd">late</span> <span class="n">Environment</span> <span class="n">environment</span><span class="p">;</span>
+
+  <span class="kd">static</span> <span class="n">Future</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span> <span class="n">init</span><span class="p">()</span> <span class="kd">async</span> <span class="p">{</span>
+    <span class="kd">await</span> <span class="n">setup</span><span class="p">();</span>
+
+    <span class="n">environment</span> <span class="o">=</span> <span class="n">GetIt</span><span class="p">.</span><span class="n">I</span><span class="o">&lt;</span><span class="n">Environment</span><span class="o">&gt;</span><span class="p">();</span>
+
+    <span class="kd">final</span> <span class="n">server</span> <span class="o">=</span> <span class="n">grpc</span><span class="p">.</span><span class="n">Server</span><span class="p">([</span>
+      <span class="n">SystemService</span><span class="p">(),</span>
+      <span class="n">UserService</span><span class="p">(),</span>
+    <span class="p">]);</span>
+
+    <span class="kd">await</span> <span class="n">server</span><span class="p">.</span><span class="n">serve</span><span class="p">(</span><span class="nl">port:</span> <span class="n">environment</span><span class="p">.</span><span class="n">PORT</span><span class="p">);</span>
+
+    <span class="n">print</span><span class="p">(</span><span class="s1">&#39;Server listening at port </span><span class="si">${</span><span class="n">server</span><span class="p">.</span><span class="n">port</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Como puede ver en la siguiente imagen, ya podemos conectarnos a la base de datos (tengo la base de datos instalada en local), y el servidor levanta correctamente. El único problema es que aún no hemos implementado las funciones de <code>UserService</code>, si intentamos llamarlas desde una app cliente obtendríamos un mensaje de <code>UnimplementedError</code>.</p>
+<p><img alt="running" src="images/run1.png" /></p>
+<p>Ahora que tenemos todo configurado vamos a enfocarnos solamente en acceder a la base de datos para realizar las operaciones solicitadas y devolver información.</p>
+<h2 id="mongodb-users-crud">MongoDB Users CRUD<a class="headerlink" href="#mongodb-users-crud" title="Permanent link">🔗</a></h2>
+<p>Creamos campos dentro de <code>UserService</code> para acceder a la base de datos y crear la collection <strong>users</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;package:get_it/get_it.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:mongo_dart/mongo_dart.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:pickup_grpc_server/src/grpc/general_messages.pb.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:grpc/src/server/call.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:pickup_grpc_server/src/grpc/user.pbgrpc.dart&#39;</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">UserService</span> <span class="kd">extends</span> <span class="n">UserServiceBase</span> <span class="p">{</span>
+  <span class="kd">final</span> <span class="n">Db</span> <span class="n">db</span> <span class="o">=</span> <span class="n">GetIt</span><span class="p">.</span><span class="n">I</span><span class="o">&lt;</span><span class="n">Db</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="kd">late</span> <span class="n">DbCollection</span> <span class="n">users</span><span class="p">;</span>
+
+  <span class="n">UserService</span><span class="p">()</span> <span class="o">:</span> <span class="k">super</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">users</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">collection</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+<span class="p">...</span>
+</code></pre></div>
+<h3 id="create">CREATE<a class="headerlink" href="#create" title="Permanent link">🔗</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;package:pickup_grpc_server/src/utils/utils.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:pickup_grpc_server/src/google/protobuf/timestamp.pb.dart&#39;</span> <span class="k">as</span> <span class="n">google</span><span class="p">;</span>
+  <span class="p">...</span>
+  <span class="nd">@override</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">IdResponse</span><span class="o">&gt;</span> <span class="n">insertOne</span><span class="p">(</span><span class="n">ServiceCall</span> <span class="n">call</span><span class="p">,</span> <span class="n">User</span> <span class="n">request</span><span class="p">)</span> <span class="kd">async</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">name</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">IdResponse</span><span class="p">(</span>
+          <span class="nl">error:</span> <span class="n">Error</span><span class="p">(</span><span class="nl">message:</span> <span class="s1">&#39;Field name is required&#39;</span><span class="p">),</span>
+        <span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="n">request</span><span class="p">.</span><span class="n">createdDate</span> <span class="o">=</span>
+          <span class="n">google</span><span class="p">.</span><span class="n">Timestamp</span><span class="p">.</span><span class="n">fromDateTime</span><span class="p">(</span><span class="n">DateTime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">toUtc</span><span class="p">());</span>
+      <span class="n">request</span><span class="p">.</span><span class="n">updatedDate</span> <span class="o">=</span>
+          <span class="n">google</span><span class="p">.</span><span class="n">Timestamp</span><span class="p">.</span><span class="n">fromDateTime</span><span class="p">(</span><span class="n">DateTime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">toUtc</span><span class="p">());</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">password</span><span class="p">.</span><span class="n">isNotEmpty</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">request</span><span class="p">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">hashPassword</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">password</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="kd">final</span> <span class="n">result</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">users</span><span class="p">.</span><span class="n">insertOne</span><span class="p">(</span>
+        <span class="n">request</span><span class="p">.</span><span class="n">toProto3Json</span><span class="p">()</span> <span class="k">as</span> <span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="p">);</span>
+
+      <span class="k">return</span> <span class="n">IdResponse</span><span class="p">(</span>
+        <span class="nl">id:</span> <span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">document</span><span class="o">?</span><span class="p">[</span><span class="s1">&#39;_id&#39;</span><span class="p">]</span> <span class="k">as</span> <span class="n">ObjectId</span><span class="p">).</span><span class="n">toHexString</span><span class="p">(),</span>
+      <span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">IdResponse</span><span class="p">(</span>
+        <span class="nl">error:</span> <span class="n">Error</span><span class="p">(</span>
+          <span class="nl">message:</span> <span class="n">e</span><span class="p">.</span><span class="n">toString</span><span class="p">(),</span>
+        <span class="p">),</span>
+      <span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="p">...</span>
+</code></pre></div>
+<p>Examinemos rápidamente esta función encargada de realizar la operación de crear un usuario.
+Primero fíjate en que request es un objeto de tipo <code>User</code>, como hemos especificado en el archivo <code>user.proto</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">service</span> <span class="n">UserService</span> <span class="p">{</span>
+  <span class="o">...</span>
+  <span class="k">rpc</span> <span class="n">insertOne</span><span class="p">(</span><span class="n">User</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">IdResponse</span><span class="p">);</span>
+  <span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Entonces comprobamos que el nombre de usuario no sea vacío, en caso de que sea vacío retornamos un error:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">name</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">IdResponse</span><span class="p">(</span>
+    <span class="nl">error:</span> <span class="n">Error</span><span class="p">(</span><span class="nl">message:</span> <span class="s1">&#39;Field name is required&#39;</span><span class="p">),</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Establecemos los valores de <code>createdDate</code> y <code>updatedDate</code> para este nuevo usuario que estamos creando:</p>
+<div class="highlight"><pre><span></span><code><span class="n">request</span><span class="p">.</span><span class="n">createdDate</span> <span class="o">=</span> <span class="n">google</span><span class="p">.</span><span class="n">Timestamp</span><span class="p">.</span><span class="n">fromDateTime</span><span class="p">(</span><span class="n">DateTime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">toUtc</span><span class="p">());</span>
+<span class="n">request</span><span class="p">.</span><span class="n">updatedDate</span> <span class="o">=</span> <span class="n">google</span><span class="p">.</span><span class="n">Timestamp</span><span class="p">.</span><span class="n">fromDateTime</span><span class="p">(</span><span class="n">DateTime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">toUtc</span><span class="p">());</span>
+</code></pre></div>
+<p>Ciframos la contraseña del usuario:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">password</span><span class="p">.</span><span class="n">isNotEmpty</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">request</span><span class="p">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">hashPassword</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">password</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Aquí si vamos a detenernos un momento, seguro te estás preguntando de donde salió <code>hashPassword</code>:</p>
+<p><code>lib/src/utils/utils.dart</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="s1">&#39;dart:convert&#39;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="s1">&#39;package:crypto/crypto.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:get_it/get_it.dart&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;package:mongo_dart/mongo_dart.dart&#39;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="s1">&#39;../environment.dart&#39;</span><span class="p">;</span>
+
+<span class="n">SelectorBuilder</span> <span class="n">fixId</span><span class="p">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;</span> <span class="n">map</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="n">selector</span> <span class="o">=</span> <span class="n">where</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">map</span><span class="p">[</span><span class="s1">&#39;_id&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">final</span> <span class="n">id</span> <span class="o">=</span> <span class="n">ObjectId</span><span class="p">.</span><span class="n">fromHexString</span><span class="p">(</span><span class="n">map</span><span class="p">[</span><span class="s1">&#39;_id&#39;</span><span class="p">]</span><span class="o">!</span><span class="p">);</span>
+    <span class="n">map</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;_id&#39;</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">map</span><span class="p">.</span><span class="n">keys</span><span class="p">.</span><span class="n">isNotEmpty</span><span class="p">)</span> <span class="n">selector</span> <span class="o">=</span> <span class="n">selector</span><span class="p">.</span><span class="n">raw</span><span class="p">(</span><span class="n">map</span><span class="p">);</span>
+
+    <span class="n">selector</span> <span class="o">=</span> <span class="n">selector</span><span class="p">.</span><span class="n">id</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">map</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">final</span> <span class="n">id</span> <span class="o">=</span> <span class="n">ObjectId</span><span class="p">.</span><span class="n">fromHexString</span><span class="p">(</span><span class="n">map</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">!</span><span class="p">);</span>
+    <span class="n">map</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">map</span><span class="p">.</span><span class="n">keys</span><span class="p">.</span><span class="n">isNotEmpty</span><span class="p">)</span> <span class="n">selector</span> <span class="o">=</span> <span class="n">selector</span><span class="p">.</span><span class="n">raw</span><span class="p">(</span><span class="n">map</span><span class="p">);</span>
+
+    <span class="n">selector</span> <span class="o">=</span> <span class="n">selector</span><span class="p">.</span><span class="n">id</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">selector</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">String</span> <span class="n">hashPassword</span><span class="p">(</span><span class="kt">String</span> <span class="n">password</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">final</span> <span class="n">environment</span> <span class="o">=</span> <span class="n">GetIt</span><span class="p">.</span><span class="n">I</span><span class="o">&lt;</span><span class="n">Environment</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="kd">final</span> <span class="n">secret</span> <span class="o">=</span> <span class="n">utf8</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="n">environment</span><span class="p">.</span><span class="n">SECRET</span><span class="p">);</span>
+  <span class="kd">final</span> <span class="n">pass</span> <span class="o">=</span> <span class="n">utf8</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="n">password</span><span class="p">);</span>
+
+  <span class="kd">final</span> <span class="n">hmacSha256</span> <span class="o">=</span> <span class="n">Hmac</span><span class="p">(</span><span class="n">sha256</span><span class="p">,</span> <span class="n">secret</span><span class="p">);</span>
+  <span class="kd">final</span> <span class="n">digest</span> <span class="o">=</span> <span class="n">hmacSha256</span><span class="p">.</span><span class="n">convert</span><span class="p">(</span><span class="n">pass</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="n">digest</span><span class="p">.</span><span class="n">toString</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Ahí está <code>hashPassord</code>, lo que hace es cifrar una cadena (string) usando <strong>sha256</strong> y una clave que ya hemos declarado en el environment. </p>
+<p>La primera función <code>fixId</code> la utilizaremos más adelante para el filtrado en las operaciones de <strong>READ</strong>, <strong>UPDATE</strong>, esta función es necesaria porque al utilizar MongoDB no podemos emplear el campo <code>id</code> sino que es <code>_id</code>, y no podemos simplemente pasarle una cadena sino que debe ser un <code>ObjectId</code>, esta función nos permite solicitar filtrado por <code>{'id': 'abcdefg'}</code> desde el cliente para que el cambio de <code>id</code> -&gt; <code>_id</code> sea transparente.</p>
+<p>Continuamos con el análisis de <code>UserService.insertOne</code>:</p>
+<div class="highlight"><pre><span></span><code>      <span class="kd">final</span> <span class="n">result</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">users</span><span class="p">.</span><span class="n">insertOne</span><span class="p">(</span>
+        <span class="n">request</span><span class="p">.</span><span class="n">toProto3Json</span><span class="p">()</span> <span class="k">as</span> <span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="p">);</span>
+
+      <span class="k">return</span> <span class="n">IdResponse</span><span class="p">(</span>
+        <span class="nl">id:</span> <span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">document</span><span class="o">?</span><span class="p">[</span><span class="s1">&#39;_id&#39;</span><span class="p">]</span> <span class="k">as</span> <span class="n">ObjectId</span><span class="p">).</span><span class="n">toHexString</span><span class="p">(),</span>
+      <span class="p">);</span>
+</code></pre></div>
+<p>Puedes percatarte de que el nombre de la función del servicio es el mismo nombre que se utiliza en MongoDB para realizar la misma operación, es un pequeño tip que te recomiendo para que te sea más fácil organizar todo y entender el código, cuando ejecutas estas funciones del lado del cliente puedes abstraerte de todo el mecanismo de gRPC y hacerte idea de que estas realizando operaciones directas en una base de datos MongoDB.</p>
+<p>La función <code>insertOne</code> requiere como parámetro un objeto similar a <code>json</code>, un <code>Map</code>; para lograr esto todo lo que tenemos que hacer es llamar a la función <code>toProto3Json</code> y hacerle un cast a <code>Map&lt;String, dynamic&gt;</code>. Esta función <code>toProto3Json</code> es generada por <code>protoc</code> y no es necesario que te preocupes por su implementación.</p>
+<p>Finalmente retornamos una respuesta con el <strong>id</strong> del nuevo usuario que hemos creado:</p>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">document</span><span class="o">?</span><span class="p">[</span><span class="s1">&#39;_id&#39;</span><span class="p">]</span> <span class="k">as</span> <span class="n">ObjectId</span><span class="p">).</span><span class="n">toHexString</span><span class="p">(),</span>
+</code></pre></div>
+<p>Esta operación es requerida porque como dije anteriormente MongoDB nos devuelve en ese campo <code>_id</code> un objeto de tipo <code>ObjectId</code>, lo que deseamos retornar no es el objeto sino su representación en cadena: <code>toHexString</code>.</p>
+<h3 id="read">READ<a class="headerlink" href="#read" title="Permanent link">🔗</a></h3>
+<p>La función <code>find</code> encargada de retornar una lista de usuarios:</p>
+<div class="highlight"><pre><span></span><code>  <span class="nd">@override</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">UsersResponse</span><span class="o">&gt;</span> <span class="n">find</span><span class="p">(</span><span class="n">ServiceCall</span> <span class="n">call</span><span class="p">,</span> <span class="n">Selector</span> <span class="n">request</span><span class="p">)</span> <span class="kd">async</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">final</span> <span class="n">selector</span> <span class="o">=</span> <span class="n">fixId</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">selector</span><span class="p">);</span>
+      <span class="kd">final</span> <span class="n">result</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">users</span>
+          <span class="p">.</span><span class="n">find</span><span class="p">(</span>
+            <span class="n">selector</span>
+                <span class="p">.</span><span class="n">excludeFields</span><span class="p">(</span>
+                  <span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">],</span>
+                <span class="p">)</span>
+                <span class="p">.</span><span class="n">skip</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">skip</span><span class="p">)</span>
+                <span class="p">.</span><span class="n">limit</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">limit</span><span class="p">),</span>
+          <span class="p">)</span>
+          <span class="p">.</span><span class="n">toList</span><span class="p">();</span>
+
+      <span class="kd">final</span> <span class="n">count</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">users</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">selector</span><span class="p">);</span>
+
+      <span class="k">return</span> <span class="n">UsersResponse</span><span class="p">(</span>
+        <span class="nl">users:</span> <span class="n">Users</span><span class="p">(</span>
+          <span class="nl">users:</span> <span class="n">result</span><span class="p">.</span><span class="n">map</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">User</span><span class="p">()</span>
+              <span class="p">..</span><span class="n">mergeFromProto3Json</span><span class="p">(</span>
+                <span class="n">e</span><span class="p">,</span>
+                <span class="nl">ignoreUnknownFields:</span> <span class="kc">true</span><span class="p">,</span>
+              <span class="p">)</span>
+              <span class="p">..</span><span class="n">id</span> <span class="o">=</span> <span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="s1">&#39;_id&#39;</span><span class="p">]</span> <span class="k">as</span> <span class="n">ObjectId</span><span class="p">).</span><span class="n">toHexString</span><span class="p">(),</span>
+          <span class="p">),</span>
+          <span class="nl">count:</span> <span class="n">count</span><span class="p">,</span>
+        <span class="p">),</span>
+      <span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">UsersResponse</span><span class="p">(</span>
+        <span class="nl">error:</span> <span class="n">Error</span><span class="p">(</span>
+          <span class="nl">message:</span> <span class="n">e</span><span class="p">.</span><span class="n">toString</span><span class="p">(),</span>
+        <span class="p">),</span>
+      <span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div>
+<p>Primero lidiar con el cambio de <strong>id</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">final</span> <span class="n">selector</span> <span class="o">=</span> <span class="n">fixId</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">selector</span><span class="p">);</span>
+</code></pre></div>
+<p>Realizar la consulta a la base de datos:</p>
+<div class="highlight"><pre><span></span><code>        <span class="kd">final</span> <span class="n">result</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">users</span>
+          <span class="p">.</span><span class="n">find</span><span class="p">(</span>
+            <span class="n">selector</span>
+                <span class="p">.</span><span class="n">excludeFields</span><span class="p">(</span>
+                  <span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">],</span>
+                <span class="p">)</span>
+                <span class="p">.</span><span class="n">skip</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">skip</span><span class="p">)</span>
+                <span class="p">.</span><span class="n">limit</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">limit</span><span class="p">),</span>
+          <span class="p">)</span>
+          <span class="p">.</span><span class="n">toList</span><span class="p">();</span>
+</code></pre></div>
+<p>Excluimos el campo <code>password</code> ya que el valor las contraseñas no debe ser retornado en una consulta a la base de datos; y te puede percatar que ya está programado el mecanismo necesario para tener paginación, utilizamos exactamente el mismo que se utiliza en MongoDB. Todas estas funciones pertenecen al paquete <a href="https://pub.dev/packages/mongo_dart" target="_blank">mongo_dart</a>. Lo que estamos taratando de hacer es simplemente mapear cada función de MongoDB con una función gRPC de nuestro servicio, ya en este punto todo depende del dominio que tengas para trabajar con la base de datos; gRPC sólo está actuando como un medio de comunicación entre el cliente y el servidor.</p>
+<p>Retornar los resultados:</p>
+<div class="highlight"><pre><span></span><code>      <span class="kd">final</span> <span class="n">count</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">users</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">selector</span><span class="p">);</span>
+
+      <span class="k">return</span> <span class="n">UsersResponse</span><span class="p">(</span>
+        <span class="nl">users:</span> <span class="n">Users</span><span class="p">(</span>
+          <span class="nl">users:</span> <span class="n">result</span><span class="p">.</span><span class="n">map</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">User</span><span class="p">()</span>
+              <span class="p">..</span><span class="n">mergeFromProto3Json</span><span class="p">(</span>
+                <span class="n">e</span><span class="p">,</span>
+                <span class="nl">ignoreUnknownFields:</span> <span class="kc">true</span><span class="p">,</span>
+              <span class="p">)</span>
+              <span class="p">..</span><span class="n">id</span> <span class="o">=</span> <span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="s1">&#39;_id&#39;</span><span class="p">]</span> <span class="k">as</span> <span class="n">ObjectId</span><span class="p">).</span><span class="n">toHexString</span><span class="p">(),</span>
+          <span class="p">),</span>
+          <span class="nl">count:</span> <span class="n">count</span><span class="p">,</span>
+        <span class="p">),</span>
+      <span class="p">);</span>
+</code></pre></div>
+<p>La función <code>count</code> nos dice cuántos registros cumplen con la condición, este valor lo retornamos dentro de la respuesta que enviamos al cliente para que lo pueda utilizar mostrando datos sobre la paginación que se está haciendo, cuando escriba el código del cliente mostraré más detalles.</p>
+<p>El resto es mapear la información que nos devuelve la base de datos como una lista de objetos tipo <code>User</code>, para esto nos valemos de la función <code>mergeFromProto3Json</code> que realiza la operación inversa de <code>toProto3Json</code>; y además le pasamos el parámetro <code>ignoreUnknownFields: true</code> para que no nos de un error al intentar ubicar el campo <code>_id</code> dentro del objeto <code>User</code>.</p>
+<p>La función <code>findOne</code> realiza una operación similar a <code>find</code> pero solamente retorna un usuario:</p>
+<div class="highlight"><pre><span></span><code>  <span class="nd">@override</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">UserResponse</span><span class="o">&gt;</span> <span class="n">findOne</span><span class="p">(</span><span class="n">ServiceCall</span> <span class="n">call</span><span class="p">,</span> <span class="n">Selector</span> <span class="n">request</span><span class="p">)</span> <span class="kd">async</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">final</span> <span class="n">selector</span> <span class="o">=</span> <span class="n">fixId</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">selector</span><span class="p">);</span>
+      <span class="kd">final</span> <span class="n">result</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">users</span><span class="p">.</span><span class="n">findOne</span><span class="p">(</span>
+        <span class="n">selector</span><span class="p">.</span><span class="n">excludeFields</span><span class="p">(</span>
+          <span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">],</span>
+        <span class="p">),</span>
+      <span class="p">);</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">UserResponse</span><span class="p">(</span>
+          <span class="nl">user:</span> <span class="n">User</span><span class="p">()</span>
+            <span class="p">..</span><span class="n">mergeFromProto3Json</span><span class="p">(</span>
+              <span class="n">result</span><span class="p">,</span>
+              <span class="nl">ignoreUnknownFields:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="p">..</span><span class="n">id</span> <span class="o">=</span> <span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;_id&#39;</span><span class="p">]</span> <span class="k">as</span> <span class="n">ObjectId</span><span class="p">).</span><span class="n">toHexString</span><span class="p">(),</span>
+        <span class="p">);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">UserResponse</span><span class="p">(</span>
+          <span class="nl">error:</span> <span class="n">Error</span><span class="p">(</span>
+            <span class="nl">message:</span> <span class="s1">&#39;User with selector: </span><span class="si">${</span><span class="n">request</span><span class="p">.</span><span class="n">selector</span><span class="si">}</span><span class="s1"> not found&#39;</span><span class="p">,</span>
+          <span class="p">),</span>
+        <span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">UserResponse</span><span class="p">(</span>
+        <span class="nl">error:</span> <span class="n">Error</span><span class="p">(</span>
+          <span class="nl">message:</span> <span class="n">e</span><span class="p">.</span><span class="n">toString</span><span class="p">(),</span>
+        <span class="p">),</span>
+      <span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div>
+<p>Y finalmente dentro de las operaciones de <strong>READ</strong> tenemos a <code>count</code> que no necesita explicación:</p>
+<div class="highlight"><pre><span></span><code>  <span class="nd">@override</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">CountResponse</span><span class="o">&gt;</span> <span class="n">count</span><span class="p">(</span><span class="n">ServiceCall</span> <span class="n">call</span><span class="p">,</span> <span class="n">Selector</span> <span class="n">request</span><span class="p">)</span> <span class="kd">async</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">final</span> <span class="n">selector</span> <span class="o">=</span> <span class="n">fixId</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">selector</span><span class="p">);</span>
+      <span class="kd">final</span> <span class="n">result</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">users</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">selector</span><span class="p">);</span>
+
+      <span class="k">return</span> <span class="n">CountResponse</span><span class="p">(</span>
+        <span class="nl">count:</span> <span class="n">result</span><span class="p">,</span>
+      <span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">CountResponse</span><span class="p">(</span>
+        <span class="nl">error:</span> <span class="n">Error</span><span class="p">(</span>
+          <span class="nl">message:</span> <span class="n">e</span><span class="p">.</span><span class="n">toString</span><span class="p">(),</span>
+        <span class="p">),</span>
+      <span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div>
+<h3 id="update">UPDATE<a class="headerlink" href="#update" title="Permanent link">🔗</a></h3>
+<p>Esta función sería la encargada de actualizar los datos. Sin embargo me topé con algunos problemas mientras la implementaba. Al enviar un nuevo <strong>documento</strong> con la información actualizada en algunos campos al usar <code>update</code> se perdían los campos anteriores que había dejado vacíos, como es el caso de <code>createdDate</code> y <code>password</code>. Para resolver esto lo que se hace es que antes de actualizar se realiza un <code>find</code> para obtener primero el <strong>documento</strong> anterior y conservar estos campos agregándolos en el nuevo documento. Estoy seguro de que debe existir una forma más eficiente de hacer esto pero esta fue la solución más rápida que pude encontrar en el momento. El resto de la implementación no tiene mayor complejidad y es similar a lo que hemos hecho con la función <code>insertOne</code> y <code>findOne</code>.</p>
+<div class="highlight"><pre><span></span><code>  <span class="nd">@override</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">IdResponse</span><span class="o">&gt;</span> <span class="n">update</span><span class="p">(</span><span class="n">ServiceCall</span> <span class="n">call</span><span class="p">,</span> <span class="n">UpdateUserRequest</span> <span class="n">request</span><span class="p">)</span> <span class="kd">async</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">final</span> <span class="n">selector</span> <span class="o">=</span> <span class="n">fixId</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">selector</span><span class="p">);</span>
+
+      <span class="kd">final</span> <span class="n">userRaw</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">users</span><span class="p">.</span><span class="n">findOne</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">selector</span><span class="p">);</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="n">userRaw</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">IdResponse</span><span class="p">(</span>
+          <span class="nl">error:</span> <span class="n">Error</span><span class="p">(</span><span class="nl">message:</span> <span class="s1">&#39;User not found&#39;</span><span class="p">),</span>
+        <span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="kd">final</span> <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">()</span>
+        <span class="p">..</span><span class="n">mergeFromProto3Json</span><span class="p">(</span>
+          <span class="n">userRaw</span><span class="p">,</span>
+          <span class="nl">ignoreUnknownFields:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="p">);</span>
+
+      <span class="n">request</span><span class="p">.</span><span class="n">user</span><span class="p">.</span><span class="n">createdDate</span> <span class="o">=</span> <span class="n">user</span><span class="p">.</span><span class="n">createdDate</span><span class="p">;</span>
+
+      <span class="n">request</span><span class="p">.</span><span class="n">user</span><span class="p">.</span><span class="n">updatedDate</span> <span class="o">=</span>
+          <span class="n">google</span><span class="p">.</span><span class="n">Timestamp</span><span class="p">.</span><span class="n">fromDateTime</span><span class="p">(</span><span class="n">DateTime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">toUtc</span><span class="p">());</span>
+
+      <span class="n">request</span><span class="p">.</span><span class="n">user</span><span class="p">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">user</span><span class="p">.</span><span class="n">password</span><span class="p">;</span>
+
+      <span class="kd">await</span> <span class="n">users</span><span class="p">.</span><span class="n">update</span><span class="p">(</span>
+        <span class="n">selector</span><span class="p">,</span>
+        <span class="n">request</span><span class="p">.</span><span class="n">user</span><span class="p">.</span><span class="n">toProto3Json</span><span class="p">()</span> <span class="k">as</span> <span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="p">);</span>
+
+      <span class="k">return</span> <span class="n">IdResponse</span><span class="p">(</span>
+        <span class="nl">id:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+      <span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">IdResponse</span><span class="p">(</span>
+        <span class="nl">error:</span> <span class="n">Error</span><span class="p">(</span>
+          <span class="nl">message:</span> <span class="n">e</span><span class="p">.</span><span class="n">toString</span><span class="p">(),</span>
+        <span class="p">),</span>
+      <span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div>
+<h3 id="delete">DELETE<a class="headerlink" href="#delete" title="Permanent link">🔗</a></h3>
+<p>Muy poco que explicar realmente, esta función es la encargada de eliminar documentos de la base de datos.</p>
+<div class="highlight"><pre><span></span><code>  <span class="nd">@override</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">IdResponse</span><span class="o">&gt;</span> <span class="n">deleteOne</span><span class="p">(</span><span class="n">ServiceCall</span> <span class="n">call</span><span class="p">,</span> <span class="n">Selector</span> <span class="n">request</span><span class="p">)</span> <span class="kd">async</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">final</span> <span class="n">selector</span> <span class="o">=</span> <span class="n">fixId</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">selector</span><span class="p">);</span>
+      <span class="kd">await</span> <span class="n">users</span><span class="p">.</span><span class="n">deleteOne</span><span class="p">(</span><span class="n">selector</span><span class="p">);</span>
+
+      <span class="k">return</span> <span class="n">IdResponse</span><span class="p">(</span>
+        <span class="nl">id:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
+      <span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">IdResponse</span><span class="p">(</span>
+        <span class="nl">error:</span> <span class="n">Error</span><span class="p">(</span>
+          <span class="nl">message:</span> <span class="n">e</span><span class="p">.</span><span class="n">toString</span><span class="p">(),</span>
+        <span class="p">),</span>
+      <span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div>
+<h2 id="the-end">The End<a class="headerlink" href="#the-end" title="Permanent link">🔗</a></h2>
+<p>Con este simple ejemplo puedes guiarte para construir otros CRUD y almacenar otro tipo de documentos, objetos, etc. Como puedes ver todo el trabajo recae en la manera en que nos conectamos a la base de datos y cómo diseñamos la API, cómo declaramos los mensajes y servicios. Todo lo relacionado con la comunicación entre cliente y servidor, además de la implementación de los modelos es llevado a cabo por gRPC.</p>
+<p>Puedes revisar el código resultante de este proyecto en: <a href="https://github.com/correaleyval/pickup_grpc_server" target="_blank">https://github.com/correaleyval/pickup_grpc_server</a></p>
+                
+                  
+                
+               
+              
+                
+
+
+  <h2 id="__comments">Comentarios</h2>
+  <div id="disqus_thread"></div>
+  <script>var disqus_config=function(){this.page.url="https://luis-ciber.is-a.dev/blog/2021/06/15/dart-grpc-backend-crud/",this.page.identifier="blog/2021/06/15/dart-grpc-backend-crud/"};window.addEventListener("load",function(){var e=document,i=e.createElement("script");i.src="//correaleyval.disqus.com/embed.js",i.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(i)})</script>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Pie">
+      
+        
+        <a href="../../13/usando-dart-backend-frontend-grpc/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Usando Dart en Backend y Frontend con gRPC" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              Usando Dart en Backend y Frontend con gRPC
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../../../../notebooks/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Notebooks" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              Notebooks
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; Luis Correa Leyva
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://www.linkedin.com/in/luisciber" target="_blank" rel="noopener" title="LinkedIn" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://github.com/correaleyval" target="_blank" rel="noopener" title="GitHub" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://profile.codersrank.io/user/correaleyval" target="_blank" rel="noopener" title="Codersrank" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="m278.9 511.5-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2 43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6 144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://twitter.com/luis__ciber" target="_blank" rel="noopener" title="Twitter" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://t.me/luis_ciber" target="_blank" rel="noopener" title="Telegram" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm121.8 169.9-40.7 191.8c-3 13.6-11.1 16.9-22.4 10.5l-62-45.7-29.9 28.8c-3.3 3.3-6.1 6.1-12.5 6.1l4.4-63.1 114.9-103.8c5-4.4-1.1-6.9-7.7-2.5l-142 89.4-61.2-19.1c-13.3-4.2-13.6-13.3 2.8-19.7l239.1-92.2c11.1-4 20.8 2.7 17.2 19.5z"/></svg>
+      </a>
+    
+      
+      
+      <a href="mailto:correaleyval@gmail.com" target="_blank" rel="noopener" title="Gmail" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M476 3.2 12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": ["navigation.tabs"], "translations": {"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.term.missing": "Falta", "select.version.title": "Select version"}, "search": "../../../../../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+      
+        <script src="../../../../../javascripts/config.js"></script>
+      
+    
+  </body>
+</html>
